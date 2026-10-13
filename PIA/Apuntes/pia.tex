@@ -85,6 +85,75 @@ Un \textbf{buen programador} debe tener ciertos conocimientos básicos y reunir 
 	\item \textbf{Capacidad de Trabajo en Equipo}: habilidad para colaborar con otros programadores, estableciendo canales de comunicación adecuados, sabiendo defender propuestas y reconociendo el talento. Todo ello articulado gracias al uso de \textbf{software de control de versiones}.
 \end{itemize} 
 
+\subsubsection{Clasificación de los Lenguajes de Programación}
+Un \textbf{lenguaje de programación} es un conjunto de reglas y sintaxis que permite a los programadores comunicarse con un ordenador para darle instrucciones y realizar tareas específicas. Esta compuesto de un conjunto de palabras clave, estructuras y convenciones que permiten implementar programas de software de forma organizada y eficiente.
+
+Los lenguajes de programación se utilizan para construir todo de tipo de aplicaciones y soluciones tecnológicas. Cada lenguaje de programación tiene sus características, ventajas y desventaja, pudiendo ser utilizados para resolver diferentes tipos de problemas y desarrollar diferentes tipos de aplicaciones.
+
+Los lenguajes de programación de pueden \textbf{clasificar} atendiendo a una variedad de propiedades y características que podemos resumir en las siguientes:
+
+\begin{enumerate}
+	\item \textbf{Nivel de Abstracción}:
+		\begin{itemize}
+			\item \textbf{Lenguajes de Bajo Nivel}: son aquellos cuya sintaxis está mas cercana al lenguaje máquina y son muy dependientes del hardware donde se ejecutará el programa. Algunos ejemplos pueden ser \textbf{MIPS} y \textbf{Motorola 68000}, aunque también hay otros lenguajes más conocidos como \textbf{C} o \textbf{C++}. 
+			
+			\item \textbf{Lenguajes de Alto Nivel}: son lenguajes cuyo sintaxis se parece más al lenguaje natural que al lenguaje máquina, ofreciendo un nivel mayor de abstracción, lo que los hace más fáciles de entender y usar. Permiten un desarrollo más rápido a costa de menor eficiencia. Algunos ejemplos de estos lenguajes son \textbf{Python}, \textbf{Java} o \textbf{Javascript}.
+		\end{itemize}
+		
+		\item \textbf{Modo de Ejecución}:
+		\begin{itemize}
+			\item \textbf{Lenguajes Compilados}: el código fuente escrito en estos programas se traduce a lenguaje máquina antes de su ejecución. Este proceso de traducción se realiza mediante un compilador, que genera un archivo ejecutable que puede ser ejecutado directamente por la computadora. Gracias a este proceso, estos lenguajes de programación suelen tener un tiempo de ejecución más rápido y mejor rendimiento. Algunos ejemplos son \textbf{C}, \textbf{C++}, \textbf{Rust} y \textbf{Swift}.
+					
+			\item \textbf{Lenguajes Interpretados}: en estos lenguajes el código fuente es interpretado y ejecutado línea por línea mediante un intérprete en tiempo de ejecución. El interprete lee y ejecuta el código sin necesidad de generar un ejecutable. Este tipo de lenguajes dependen menos del hardware donde se ejecutan, siendo más portables y flexibles.  Algunos lenguajes interpretados son \textbf{Python}, \textbf{R}, \textbf{Perl} o \textbf{PHP}.
+			
+			\item \textbf{Lenguajes Híbridos}: algunos lenguajes pueden reunir características de estos dos tipos. Por ejemplo, \textbf{Java} se compila a un código intermedio llamado bytecode que posteriormente se ejecuta en la máquina virtual (JVM).
+		\end{itemize}
+		
+		\item \textbf{Paradigma de Programación}:
+		\begin{itemize}
+			\item \textbf{Lenguajes de Programación Imperativa}: estos lenguajes se centran en describir como debe realizarse las operaciones paso a paso, como \textbf{C} o \textbf{Python}.
+			\item \textbf{Lenguajes de Programación Declarativa}: estos lenguajes se centran en describir que debe hacerse, sin especificar el cómo. El mayor ejemplo de este paradigma es \textbf{Prolog}, y aunque no sean lenguajes de programación, \textbf{SQL}, \textbf{CSS} o \textbf{HTML}.
+			\item \textbf{Lenguajes de Programación Orientada a Objetos}: estos lenguajes organizan el software en objetos, que son unidades que pueden contener los datos y métodos. Pueden usar características como la herencia o el polimorfismo. Algunos ejemplos son \textbf{Java}, \textbf{C++} o \textbf{Ruby}.
+			\item \textbf{Lenguajes de Programación Orientada a Eventos}: estos lenguajes están basados en el manejo de eventos y en la respuesta a acciones que lleva a cabo el usuario, por ejemplo como \textbf{VistualBasic}.
+			\item \textbf{Lenguajes de Programación Funcional}: es un caso específico de la programación declarativa basado en el uso de verdaderas funciones matemáticas y que hace use intensivo del cálculo lambda \cite{wiki01}. Algunos ejemplos son \textbf{Haskell}, \textbf{Lisp} o \textbf{Erlang}.
+			\item \textbf{Lenguajes Multiparadigma}: son lenguajes que pueden admiten múltiples paradigmas de programación, dejando que sea el programador que decida cual es el enfoque más adecuado. Ejemplos son \textbf{Python}, \textbf{Javascript} o \textbf{C++}
+		\end{itemize} 
+		
+		\item \textbf{Propósito del Lenguaje}: 
+		\begin{itemize}
+			\item \textbf{Lenguajes de Uso Específico}: son lenguajes que están diseñados para propósitos específicos, como le procesamiento de datos (\textbf{R}) o el desarrollo web (\textbf{CSS}/\textbf{HTML}).
+			\item \textbf{Lenguajes de Uso General}: son lenguajes que se pueden emplear para desarrollar diferentes tipos de aplicaciones, como \textbf{Java}, \textbf{Python} o \textbf{C}. 
+		\end{itemize}
+
+		\item \textbf{Sistema de Tipado}:
+		\begin{itemize}
+			\item \textbf{Lenguajes de Tipado Estático}: en estos lenguajes el tipo de cada variables debe ser declarado explícitamente y verificado antes de que el programa se ejecute, verificándose dichos tipos en tiempo de compilación. Esto hace que estos lenguajes sean más robustos y seguros. Algunos ejemplos son \textbf{C} o \textbf{Java}.
+			\item \textbf{Lenguajes de Tipado Dinámico}: en estos lenguajes la variables pueden tomar cualquier valor tipo de dato en cualquier momento, pudiendo cambiar de tipo durante la ejecución, ya que los tipos se verifican en tiempo de ejecución. Este tipo de lenguajes ofrecen mayor simplicidad y flexibilidad en el desarrollo. Algunos ejemplos son \textbf{Python}, \textbf{Ruby} o \textbf{Javascript}.
+		\end{itemize}
+		
+		\item \textbf{Rigidez del Tipado}: 
+		\begin{itemize}
+			\item \textbf{Lenguajes de Tipado Fuerte}: los lenguajes de tipado fuerte establecen fuertes restricciones sobre como se pueden hacer la conversión de tipos y se requiere una conciencia exacta de los tipos para las operaciones. Son ejemplos \textbf{Java} o \textbf{C} donde las conversiones de tipo deben declararse explícitamente.
+			\item \textbf{Lenguajes de Tipado Débil}: en los lenguajes de tipado débil las conversiones entre tipos son menos estrictas, permitiendo la conversión implícita entre diferentes tipos de datos y la conversión automática en determinadas circunstancias. Algunos ejemplos son \textbf{Javascript} o \textbf{PHP}.
+		\end{itemize}
+\end{enumerate}
+
+Como vemos, hay una gran variedad de lenguajes de programación cada uno con sus características. La \textbf{elección de un lenguaje} es un aspecto crucial para que un proyecto llegue a buen termino y que dependerá, entre otros factores, de al naturaleza del proyecto, la experiencia del equipo o de la plataforma donde se implantará el software.
+
+\subsubsection{Ciclo de Desarrollo del Software}
+El \textbf{desarrollo de software} es el proceso de crear aplicaciones informáticas utilizando un proceso sistemático. En un campo fundamental de la informática que abarca diversas actividades orientadas a construir soluciones informáticas que satisfagan las necesidades específicas de los usuarios u organizaciones. 
+
+Este proceso, se compone de \textbf{diferentes etapas} que vamos a pasar a enumerar a continuación:
+
+\begin{enumerate}
+	\item \textbf{Definición del Problema}: esta primera fase consiste en definir, de forma clara y precisa, el problema que se pretende resolver, definiendo el marco del problema y los objetivos a alcanzar.
+	\item \textbf{Análisis de Requisitos}: en esta fase de identifican y documentan los requisitos del software. Esto implica conocer las necesidades de los usuarios finales y definir las funcionalidades y características que debe tener el software. Se creará un listado exhaustivo con todos los requisitos que representa un contrato entre cliente y desarrollador, a la vez que permite al cliente que lo revise y valide, antes de pasar a otras fase.
+	\item \textbf{Planificación del Desarrollo}: consiste en la planificación del resto de fases del proceso de desarrollo. Se identifican las tareas a realizar, teniendo en cuenta las dependencias entre tareas y se estiman los tiempos de desarrollo, identificando los recursos y personal necesarios. Esta fase se apoya en \textbf{Diagramas de Pert} y \textbf{Gantt}.
+\end{enumerate}
+
+
+
+
 \newpage
 
 \bibliography{citas}
