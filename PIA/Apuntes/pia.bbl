@@ -4,4 +4,8 @@
 {Wikipedia - Programación Funcional}.
 \newblock \\\url{https://es.wikipedia.org/wiki/Programaci\%C3\%B3n\_funcional}.
 
+\bibitem{aws01}
+{AWS - MLOps}.
+\newblock \\\url{https://aws.amazon.com/es/what-is/mlops/}.
+
 \end{thebibliography}

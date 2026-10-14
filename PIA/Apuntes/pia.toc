@@ -3,5 +3,9 @@
 \contentsline {subsection}{\numberline {1.1}Introducción a la Programación}{4}{subsection.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.1}Clasificación de los Lenguajes de Programación}{5}{subsubsection.1.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.2}Ciclo de Desarrollo del Software}{7}{subsubsection.1.1.2}%
-\contentsline {section}{\nonumberline Referencias}{8}{section*.1}%
+\contentsline {paragraph}{\numberline {1.1.2.1}Machine Learning}{9}{paragraph.1.1.2.1}%
+\contentsline {subsection}{\numberline {1.2}Programación de Inteligencia Artificial}{10}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Elección del Lenguaje de Programación para IA}{11}{subsubsection.1.2.1}%
+\contentsline {section}{Glosario}{13}{section*.1}%
+\contentsline {section}{\nonumberline Referencias}{14}{section*.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

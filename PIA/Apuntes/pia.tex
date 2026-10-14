@@ -31,7 +31,7 @@
 \begin{center}
     \begin{tabular}{l l}
         \textbf{Centro}: & IES Zaidin-Vergeles \\
-        \textbf{Curso de Especialización}: & Inteligencia Artificial y Big Data\\
+        \textbf{Curso}: & Inteligencia Artificial y Big Data\\
         \textbf{Asignatura}: & Programación de Inteligencia Artificial\\
     \end{tabular}
 \end{center}
@@ -106,7 +106,7 @@ Los lenguajes de programación de pueden \textbf{clasificar} atendiendo a una va
 					
 			\item \textbf{Lenguajes Interpretados}: en estos lenguajes el código fuente es interpretado y ejecutado línea por línea mediante un intérprete en tiempo de ejecución. El interprete lee y ejecuta el código sin necesidad de generar un ejecutable. Este tipo de lenguajes dependen menos del hardware donde se ejecutan, siendo más portables y flexibles.  Algunos lenguajes interpretados son \textbf{Python}, \textbf{R}, \textbf{Perl} o \textbf{PHP}.
 			
-			\item \textbf{Lenguajes Híbridos}: algunos lenguajes pueden reunir características de estos dos tipos. Por ejemplo, \textbf{Java} se compila a un código intermedio llamado bytecode que posteriormente se ejecuta en la máquina virtual (JVM).
+			\item \textbf{Lenguajes Híbridos}: algunos lenguajes pueden reunir características de estos dos tipos. Por ejemplo, \textbf{Java} se compila a un código intermedio llamado \gls{bytecode} que posteriormente se ejecuta en la máquina virtual (JVM).
 		\end{itemize}
 		
 		\item \textbf{Paradigma de Programación}:
@@ -149,10 +149,110 @@ Este proceso, se compone de \textbf{diferentes etapas} que vamos a pasar a enume
 	\item \textbf{Definición del Problema}: esta primera fase consiste en definir, de forma clara y precisa, el problema que se pretende resolver, definiendo el marco del problema y los objetivos a alcanzar.
 	\item \textbf{Análisis de Requisitos}: en esta fase de identifican y documentan los requisitos del software. Esto implica conocer las necesidades de los usuarios finales y definir las funcionalidades y características que debe tener el software. Se creará un listado exhaustivo con todos los requisitos que representa un contrato entre cliente y desarrollador, a la vez que permite al cliente que lo revise y valide, antes de pasar a otras fase.
 	\item \textbf{Planificación del Desarrollo}: consiste en la planificación del resto de fases del proceso de desarrollo. Se identifican las tareas a realizar, teniendo en cuenta las dependencias entre tareas y se estiman los tiempos de desarrollo, identificando los recursos y personal necesarios. Esta fase se apoya en \textbf{Diagramas de Pert} y \textbf{Gantt}.
+	\item \textbf{Diseño del Software}: durante esta parte se crea una arquitectura y un diseño para el software en base a los requisitos que se han definido. Esto incluye los modulos, la interfaz de usuario y los componentes, así como las relaciones entre estos. En esta fase hay que tener en cuenta la reducción de la complejidad, facilidad de mantenimiento, reducción de acoplamiento, ... y todas las decisiones de diseño que contribuyan a tener un software de calidad.
+	\item \textbf{Codificación}: en esta fase los desarrolladores escriben el código fuente para implementar el diseño y funcionalidades que se han especificado. El código debe ser claro, eficiente y fácil de mantener. 
+	\item \textbf{Depuración y Pruebas}: después de implementarlo el software se somete a pruebas para identificar errores, problemas de rendimiento o comportamiento inesperados. Los tipos de pruebas que se pueden realizar en el software son la siguientes:
+	\begin{itemize}
+		\item \textbf{Pruebas Unitarias}: se analizan elementos como clases, funciones, componentes o procesos, de forma individual e independiente del resto del sistema.
+		\item \textbf{Pruebas de Integración}: estas pruebas verifican que dos o más componentes funcionan correctamente entre ellos, evaluando sus interacciones.
+		\item \textbf{Pruebas de Sistema}: verifican que el sistema cumple con todos requisitos especificados. Se realizan en un entorno que simula el entorno de producción para validar el correcto funcionamiento del sistema.
+		\item \textbf{Pruebas de Rendimiento}: evalúa el sistema en condiciones de carga reales para garantizar la estabilidad y eficiencia deseadas.
+		\item \textbf{Pruebas de Seguridad}: se centran en identificar vulnerabilidades y posibles brechas en el software. Se realizan pruebas de penetración, análisis de vulnerabilidades y evaluación de riesgos para proteger al sistema contra amenazas internar y externas.
+		\item \textbf{Pruebas de Aceptación}: se realizan para validar que el software cumpla con los criterios de aceptación del cliente o el usuario final, centrándose en los requisitos de rendimiento y amigabilidad de la interfaz.
+	\end{itemize}
+	
+	\item \textbf{Despliegue}: una vez que el software ha sido probado y validado, se despliega en el entorno donde vaya a ejecutarse o se distribuye a los usuarios finales.
+	\item \textbf{Mantenimiento}: después del despliegue, el software entra en fase de mantenimiento, durante la que se realizan actualizaciones, corrigen errores o añaden nuevas funcionalidades si esta previsto. Esta fase garantiza que el software siga siendo útil y funcional a lo largo del tiempo.
 \end{enumerate}
 
+En la siguiente imagen podemos ver de una forma más gráfica todas estas etapas y su conexión:
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.70]{ciclo-software.png}
+	\caption{Ciclo de desarrollo del software}
+\end{figure}
 
+Como vemos, el desarrollo del software se realiza de forma muy estructurada y siguiendo un procedimiento establecido que garantiza la calidad del software y que estandariza el proceso de desarrollo. 
+
+Actualmente también podemos encontrar otros tipos de ciclos de desarrollo, que modifican ciertas etapas, como los que podemos encontrar en modelos como el \textbf{desarrollo ágil}, entre los que podemos encontrar \textbf{Scrum} o \textbf{Extreme Programming}.
+
+Mención especial requiere el \textbf{machine learning} y su proceso de desarrollo, como vemos en el siguiente punto, que difiere un poco del proceso de desarrollo tradicional.
+
+\paragraph{Machine Learning}
+Los sistemas de IA pueden realizar tareas que normalmente requerirían de inteligencia humana, como el reconocimiento de voz, toma de decisiones, traducción de idiomas y la percepción visual.  El objetivo principal de estos sistemas es inteligenes es pensar, aprender y adaptarse como si fueran humanos.
+
+Para alcanzar este objetivo se hace uso de una rama de la programación de la Inteligencia Artificial conocida como \textbf{Machine Learning} (Aprendizaje Automático) que se centra en el desarrollo de algoritmos que permiten a las computadores \textbf{aprender a partir de datos} y hacer \textbf{predicciones} o \textbf{clasificaciones} basadas en esos datos. Este paradigma añade pasos extra en el proceso de desarrollo, ya que los modelos deben ser entrenados siguiendo ciertos pasos.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{ciclo-machine.png}
+	\caption{Etapas en el entrenamiento de un modelo de ML}
+\end{figure}
+
+En el aprendizaje automático se distinguen 3 fases principales con retroalimentación entre ellas:
+
+\begin{enumerate}
+	\item \textbf{Preparación de los Datos}: consiste en obtener y preparar los datos para entrenar, validar y probar al modelo de Machine Learning. Los datos deben ser relevantes, de calidad y en cantidad suficiente para permitir el aprendizaje automático del modelo. Las principales tareas que comprende son:
+	\begin{itemize}
+		\item \textbf{La Ingesta de Datos}: en esta tarea identifican las fuentes de datos interna y externas. Se recopilan, validan y estructuran los datos para su posterior análisis.
+		\item \textbf{Análisis y Transformación de los Datos}: en esta tarea se analizan los datos y se evalúa su relevancia para el problema planteado, se realizan estudios estadísticos, se tratan los valores perdidos, se identifican posibles \gls{sesgos} y la correlaciones entre datos.
+		\item \textbf{Estudio de Problemas de Aprendizaje Automático}: en esta tarea se identifica el tipo de modelo más necesario (regresión, clasificación o agrupamiento), se selecciona el algoritmo más apropiado y se preparan los datos apropiados para el mismo. 
+		\item \textbf{Transformación y Optimización de los Datos}: suele ser necesaria la transformación de lo datos para el entrenamiento como paso previo, una vez identificadas las características de los mismos.
+	\end{itemize}
+	
+	\item \textbf{Entrenamiento y Ajuste}: en esta fase se entrena el modelo con el algoritmo elegido y el conjunto de datos seleccionado, verificando la idoneidad de los datos de validación. Por último, se optimizan los hiperparámetros del entrenamiento para mejorar los resultados posibles. 
+	
+	\item \textbf{Despliegue y Monitorización}: se realiza el despliegue del sistema garantizando las condiciones de seguridad, disponibilidad y rendimiento. Además se registras la actividad del modelo para llevar un control de su funcionamiento.
+\end{enumerate}
+
+Para ayudar en el proceso de entrenamiento del modelo, tenemos las \textbf{MLOps} (Machine Learning Operations), que son un conjunto de buenas prácticas con el objetivo de facilitar la implementación, el despliegue, la monitorización y el mantenimiento continuo de los modelos de aprendizaje automático en entornos de producción. Esto ayuda a mejorar la eficiencia, escalabilidad, calidad y confiabilidad de los sistemas de machine learning. \cite{aws01}
+
+\subsection{Programación de Inteligencia Artificial}
+La \textbf{Inteligencia Artificial} (IA) tiene aplicaciones en prácticamente todos los sectores, desde la medicina, la astronomía y la agricultura, hasta la industria y el entretenimiento. Su versatilidad y capacidad de abordad una gama muy variada de desafíos la convierte en una herramienta muy poderosa en la resolución de problemas en la sociedad actual. 
+
+Las principales aplicaciones que tiene la IA son:
+
+\begin{itemize}
+	\item \textbf{Clasificación y Reconocimiento de Patrones}: identificar patrones clasificar datos en categorías especificas, como la detección de Spam, la clasificación de imágenes médicas o datos de laboratorio, así como el reconocimiento de voz sistemas de asistentes virtuales.
+	\item \textbf{Predicción y Análisis de Datos}: predecir tendencias y comportamientos según un conjunto de datos histórico, como el análisis predictivo para la toma de decisiones empresariales, la gestión de inventarios, la predicción de la demanda, detección de fraudes financieros o la modelización de fenómenos naturales y la predicción de desastres.
+	\item \textbf{Optimización y Planificación}: encontrar soluciones óptimas para problemas complejos, como la planificación de rutas de entrega, la distribución y almacenamiento de mercancías, asignación de recursos, planificación de horarios, etc.
+	\item \textbf{Recomendación Personalizada}: generar recomendaciones para los usuarios basados en su comportamiento, como la recomendación de contenido en plataformas de streaming, productos en tiendas, contenido en redes sociales, ...etc, con el objetivo de interactuar mejor con los usuarios.
+	\item \textbf{Procesamiento del Lenguaje Natural (NPL)}: generar y comprender texto de forma natural, como en al traducción automática, generación de resúmenes, análisis de sentimientos, extracción de información de documentos o atención del cliente mediante \gls{chatbots}
+	\item \textbf{Visión por Computadora}: detectar y analizar imágenes y vídeos, como en la detección de objetos, el seguimiento de movimiento, reconocimiento facial, inspección automatizada de calidad o conducta autónoma.
+	\item \textbf{Aprendizaje Automático}: desarrollar modelos que aprendan de datos para realizar tareas específicas, como diseñar nuevos fármacos analizando grandes cantidades de datos moleculares, desarrollar materiales prediciendo sus propiedades, diseñar robots de propósito específico o incluso dotarlos de capacidad para adaptarse al entorno.
+	\item \textbf{Generación de Contenido}: crear producción digitales innovadoras, como escenarios virtuales o personajes de videojuegos, contenidos educativos, música, construcción de modelos o simuladores.
+\end{itemize}
+
+Como vemos, la IA tiene un montón de aplicaciones, prácticamente en cualquier sector puede aplicarse de alguna u otra forma, ya sea en la gestión y planificación, o en la generación de contenidos, así como en el análisis de datos, ...etc, siendo, actualmente una de las tecnologías más versátiles que existen.
+
+\subsubsection{Elección del Lenguaje de Programación para IA}
+En la programación de la IA es fundamental la elección del \textbf{lenguaje de programación} en el que vamos a desarrollar el proyecto. Este debe cumplir ciertas \textbf{características}, entre las que encontramos:
+\begin{itemize}
+	\item \textbf{Simplicidad}, para facilitar la escritura y el mantenimiento del código.
+	\item \textbf{Capacidad de prototipado rápido} para generar versiones operativas en fases tempranas del desarrollo. El lenguaje debe ser capaz de ejecutar y probar código de manera ágil. 
+	\item \textbf{Legibilidad}, con un alto nivel de abstracción, que permite escribir código mas cercano al lenguaje y la lógica humana, para facilitar el trabajo colaborativo y la implementación de algoritmos previamente diseñados.
+	\item \textbf{Existencia de bibliotecas y frameworks} para poder acelerar la generación de prototipos mediante la reutilización de código.
+	\item \textbf{Comunidad de desarrollo} amplia que facilite compartir experiencias y soluciones a problemas ya resueltos.
+\end{itemize}
+
+Aunque como se ha comentado la elección del lenguaje de programación va ligada a las necesidades del proyecto y a las restricciones, hay ciertos \textbf{lenguajes} que por sus características son los \textbf{mas usados} en la programación de la IA, como pueden ser:
+
+\begin{itemize}
+	\item \textbf{Python}: en la actualidad es el lenguaje de referencia para la IA. Se ha hecho muy popular en la programación de la IA  debido a su sintaxis simple y legible, su ampliad disponibilidad de bibliotecas y frameworks de aprendizaje automático, como \textbf{TensorFlow}, \textbf{Keras}, \textbf{PyTorch} o \textbf{Scikit-Learn}.
+	\item \textbf{R}: es uno de los lenguajes más utilizados en la estadística y el análisis de datos, lo que lo hace ideal para la investigación en ciencias de datos y aprendizaje automático. Tiene una amplia gama de paquetes y librerías enfocadas en el análisis estadístico y la visualización de datos, siendo una opción muy popular en el modelado predictivo y exploración de datos en IA.
+	\item \textbf{Java}: una de las principales características de Java es su portabilidad, en parte gracias a la Java Virtual Machine (JVM) y la posibilidad de convertir código fuente Java en bytecode. Aunque no es tan empleado como Python o R, es empleado para del desarrollo de sistemas de IA empresariales y aplicación a gran escala, mediante el uso de la librería \textbf{Weka Deeplearning4j}.
+	\item \textbf{C++}: este lenguaje de programación orientado a objetos y compatible con C, ofrece características como soporte de clases, polimorfismo, plantillas y una biblioteca estándar muy potente y flexible. Es conocido por su velocidad y eficiencia, por lo que es usado en aplicaciones de IA que requieren de un rendimiento óptimo, como en sistemas embebidos, procesamiento de señales y visión por computador. Bibliotecas como \textbf{OpenCV} y \textbf{TensorFlow} ofrecen soporte para este lenguaje.
+	\item \textbf{Julia}: este lenguaje quizá es el menos conocido de todos los mencionados, siendo un lenguaje diseñado para el computo científico y numérico, lo que lo hace adecuado para aplicaciones de IA que involucran cálculos intensivos y modelado matemático. Tiene un sintaxis similar a Pytho o R pero con un rendimiento similar a C++.
+\end{itemize}
+
+Estos son los lenguajes más empleados en la programación de IA, pero no los únicos, ya que como hemos dicho, su elección depende mucho del proyecto donde vayamos a emplearlos. Si tienes más curiosidad por otros lenguajes de programación, puedes consultar el indice  \href{https://www.tiobe.com/tiobe-index/}{TIOBE}, que mide la popularidad de los lenguajes de programación. 
+
+\subsubsection{Lenguajes de Marcas e IA}
+
+\newpage
+
+\printglossary	
 
 \newpage
 
