@@ -6,6 +6,8 @@
 \contentsline {paragraph}{\numberline {1.1.2.1}Machine Learning}{9}{paragraph.1.1.2.1}%
 \contentsline {subsection}{\numberline {1.2}Programación de Inteligencia Artificial}{10}{subsection.1.2}%
 \contentsline {subsubsection}{\numberline {1.2.1}Elección del Lenguaje de Programación para IA}{11}{subsubsection.1.2.1}%
-\contentsline {section}{Glosario}{13}{section*.1}%
-\contentsline {section}{\nonumberline Referencias}{14}{section*.2}%
+\contentsline {subsubsection}{\numberline {1.2.2}Lenguajes de Marcas e IA}{12}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Computación en la Nube}{12}{subsubsection.1.2.3}%
+\contentsline {section}{Glosario}{14}{section*.1}%
+\contentsline {section}{\nonumberline Referencias}{15}{section*.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
