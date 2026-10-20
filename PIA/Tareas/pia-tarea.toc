@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción a la Programación de Inteligencia Artificial}{4}{section.1}%
+\contentsline {section}{\nonumberline Referencias}{6}{section*.1}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
