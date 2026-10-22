@@ -68,19 +68,28 @@ Además de este objetivo principal, estaría interesante agregar algunos \textbf
 \begin{itemize}
 	\item \textbf{Integración con Discord}: sería interesante hacer que la aplicación se integrará en el servidor de discord del clan, proporcionando algunas las funcionalidades sin necesidad de acceder a la web.
 	\item \textbf{Perfiles de Equipos Rivales}: además de realizar análisis de las estrategias propias, sería bastante útil que pasando capturas de partidas de otros rivales se analizara las estrategias que llevan acabo elaborando un perfil y almacenándolo para su posterior uso o consulta.
-	\item \textbf{Perfile Personal}: mediante el análisis de los datos de un usuario concreto, elaborar un perfil personal e indicando en que mapas se desempeña mejor, con que armas, en que posiciones, etc, ofreciendo finalmente algunos consejos para mejorar al jugador concreto y almacenándolo, para contrastar con datos futuros y analizar la evolución.
+	\item \textbf{Perfil Personal}: mediante el análisis de los datos de un usuario concreto, elaborar un perfil individual del jugador,  indicando en que mapas se desempeña mejor, con que armas, en que posiciones, etc, ofreciendo finalmente algunos consejos para mejorar el rendimiento en las partidas y almacenando el resultado, para contrastar con datos futuros y analizar la evolución.
 \end{itemize}
 
 \section{Análisis de Riesgos}
+En este apartado vamos a realizar un \textbf{análisis de los riesgos} asociados al proyecto. Dada su naturaleza, podemos encontrar menos riesgos que en otro tipos de proyecto, pero sin estar exento de ellos. 
 
+Los \textbf{principales riesgo} asociados a este proyectos son los siguientes: 
 
-
-
-
-
-\newpage
- 
-\printglossary	
+\begin{itemize}
+	\item \textbf{Riesgos Técnicos}: se han encontrado varios riesgos técnicos que podrían afectar al desempeño de la aplicación y son los siguientes:
+	\begin{itemize}
+		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes proporcionando la utilidad de cada elemento y sus características.
+		
+		\item \textbf{Datos de Entrenamiento Insuficientes}: dada las características de la aplicación, recopilar una cantidad de datos suficiente para que los análisis sean precisos, puede ser problemático. Para \textbf{mitigar} este riesgo, se deberá realizar una buena planificación del entrenamiento, proporcionando bastantes capturas de pantalla, limitando inicialmente, si fuera necesario, el alcance a ciertos elementos de los mapas.
+		
+		\item \textbf{Fiabilidad del análisis}: la distribución de los jugadores y los elementos en el mapa no siempre permiten determinar is una decisión táctica es correcta. Una forma de \textbf{mitigar} este riesgo es mediante la inclusión del contexto de las capturas y la revisión de la conclusión por jugadores experimentados.
+		
+		\item \textbf{Cantidad de capturas y limitación temporal}: si las capturas de una partida están demasiado espaciadas entre ellas, la evaluación de la situación y de los cambios en la partida pueden no ser correctos. Habrá que \textbf{mitigare} este riesgo proporcionando una cantidad suficiente de capturas, preferiblemente cada pocos minutos, parta que el análisis sea más preciso.
+	\end{itemize}
+	
+	\item \textbf{Riesgos económicos}: 
+\end{itemize}
 
 \newpage
 
