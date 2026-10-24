@@ -109,8 +109,59 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 	\end{itemize}
 \end{itemize}
 
-Respecto a los \textbf{riesgos éticos}, dada la naturaleza de la aplicación y que esta se va a implementar para un juego online, no se han detectado riesgos de este tipo.
+Respecto a los \textbf{riesgos éticos}, ya que es una aplicación que se va a utilizar en un videojuego y que trata con información personal de los usuarios, no se han identificado riesgos éticos.
 
+\section{Marco Legal y Uso Responsable de la IA}
+En primer lugar, respecto a la \textbf{Ley de IA de la UE}, y atendiendo al marco regulador, nuestra aplicación se podría clasificar como \textbf{Riesgo Mínimo o Nulo}, ya que se empleará simplemente para su uso en videojuegos, realizando predicciones que solo afectarán a partidas del juego en concreto. Si habría que tener en cuenta que al tener un \textbf{chatbot} existe la obligación de tener ciertas \textbf{medias de transparencia}, en este caso, informar de que las estrategias \textbf{están generadas con IA}, así como mostrar el proceso de razonamiento por el que ha llegado el modelo a esa conclusión.
+
+Respecto al \textbf{Reglamento General de Protección de Datos}, hay que tener en cuenta que \textbf{no se va recabar información personal} sobre los jugadores, ya que estos serán identificados por sus alias dentro del juego. En el caso de que se acabe de implementar la \textbf{integración en discord}, habría que revisar este punto, ya que si es más probable que en las cuentas de discord los usuarios tengan información personal, pero en un principio, esa información no ser´ia necesaria para interactuar con al aplicación desde discord, si seria necesario recolectarla ni tratarla. De igual forma, \textbf{no se van a tratar imágenes de personas}, ya que solo se van a procesador imágenes de mapas del juego.
+
+Respecto al tema de \textbf{sesgos} o \textbf{discriminación} es un tema que, por la naturaleza de la aplicación, no tiene ningún tipo de riesgo asociado y tampoco hay que aplicar ninguna legislación en este aspecto.
+
+Todo esto, por supuesto, teniendo en cuenta el \textbf{funcionamiento planificado} para la aplicación, si en algún momento se decide añadir nuevas funcionalidades, habrá que revisar todos estos aspectos legales y riesgos asociados para realizar los cambios necesarios en la aplicación de la normativa vigente.
+
+\section{Análisis de requisitos}
+En esta actividad vamos a realizar el análisis de \textbf{requisitos de la aplicación}, describiendo tanto los requisitos funcionales como los no funcionales.
+
+\subsubsection{Requisitos Funcionales}
+Los \textbf{requisitos funcionales} que debe cumplir nuestra aplicación son los siguientes:
+\begin{itemize}
+	\item \textbf{RF-1. Entrada de Imágenes}: la aplicación debe aceptar imágenes con mapas tácticos del juego para poder procesarlas y realizar una análisis.
+	\item \textbf{RF-2. Validación de las Capturas}: la aplicación debe validar que las capturas introducidas cumplen con los requisitos establecidos.
+	\item \textbf{RF-3. Identificación de Elementos}: la aplicación debe identificar los diferentes elementos que aparece en el mapa, como soldados, señales, puntos de control, etc.
+	\item \textbf{RF-4. Identificación del Terreno}: la aplicación debe identificar la diferentes elevaciones del terreno de las que se compone el mapa.
+	\item \textbf{RF-5. Análisis de Disposición}: la aplicación debe analizar la posición relativa de los dos equipos y la distribución de jugadores.
+	\item \textbf{RF-6. Análisis Temporal}: la aplicación debe realizar un análisis temporal de la evolución de la partida dadas una serie de capturas que muestren la evolución los dos equipos en el mapa.
+	\item \textbf{RF-7. Datos Adicionales}: la aplicación debe aceptar datos adicionales en formato CSV que le ayudan a realizar el análisis de la partida.
+	\item \textbf{RF-8. Informe de la Partida}: la aplicación debe generar una análisis sobre la partida una vez que haya recopilado todos los datos proporcionados.
+	\item \textbf{RF-9. Sugerencias Bajo Demanda}: la aplicación debe generar sugerencia de mejora en aspectos concretos de la partida cuando se le pregunten sobre ellos, basados en el análisis realizado.
+	\item \textbf{RF-10. Explicación de Conclusiones}: la aplicación debe indicar criterios empleados y el razonamiento llevado a cabo, sin exponer el funcionamiento interno del modelo.
+	\item \textbf{RF-11. Propuesta de Estrategia}: la aplicación debe proponer una estrategia que mejore la empleada en la partida, si es posible, basándose en el análisis realizado.
+	\item \textbf{RF-12. Correcciones y Aprendizaje}: la aplicación debe aceptar correcciones sobre los análisis o estrategias propuestas, almacenándolas para su consulta y posterior uso.
+	\item \textbf{RF-13. Organización de Partidas}: la aplicación debe agrupar y almacenar las capturas y resultados de una partida, manteniendo la asociación con el mapa y el momento temporal.
+	\item \textbf{RD-14. Historial de Partidas}: la aplicación debe de almacenar un historial de las partidas, con sus respectivas capturas, conclusiones y estrategias asociadas.
+	\item \textbf{RF-15. Interfaz Web}: la aplicación debe tener una interfaz web donde proporcione todas las funcionalidades planificadas.
+	\item \textbf{RF-16. Chatbot}: la introducción de información así como la interacción con la aplicación se realizar mediante un chatbot que estará integrado en la interfaz web.
+	\item \textbf{RF-17. Cuentas de Usuario}: los usuarios del clan deberán poderse crear una cuenta para acceder a la aplicación desde la interfaz web.
+	\item \textbf{RF-18. Actualizar Perfil}: los usuarios podrán actualizar la información de su cuenta, como nombre de usuario y contraseña.
+	\item \textbf{RF-19. Eliminar Cuenta}: los usuarios podrán eliminar su cuenta del sistema cuando quieran.
+\end{itemize}
+
+\subsubsection{Requisitos No Funcionales}
+Una vez definidos los requisitos funcionales, vamos a describir los \textbf{requisitos no funcionales}:
+
+\begin{itemize}
+	\item \textbf{RNF-1. Rendimiento}: la aplicación debe procesar todas las capturas y los informes de la forma mas eficiente posible, dados los recursos de los que va a disponer la aplicación.
+	\item \textbf{RFN-2. Tiempo de Respuesta}: aunque no es un elemento clave, ya que los informes no se van a necesitar instantáneamente, se debe establecer un tiempo máximo de 3 minutos para el procesamiento de la información y la realización del análisis.
+	\item \textbf{RNF-3. Precisión}: la aplicación debe tener una precisión del 95\% como mínimo en la detección de elementos del juego.
+	\item \textbf{RNF-4. Escalabilidad}: dado que en un futuro se puede plantear ampliar la base de usuarios otros clanes y jugadores, hay que diseñar e implementar la aplicación de forma que pueda escalar bien.
+	\item \textbf{RFN-5. Usabilidad}: la interfaz web debe ser amigable y que personas sin conocimientos técnicos sean capaces de cargas capturas, generar informes, etc.
+	\item \textbf{RFN-6. Seguridad}: la aplicación deberá garantizar que no se realizan accesos autorizados a las capturas ni los informes mediante mecanismos de control de acceso y autenticación.
+	\item \textbf{RFN-7. Mantenimiento}: debe diseñarse la aplicación de forma modular para que su mantenimiento se sencillo, facilitando la modificación y ampliación de características.
+	\item \textbf{RNF-8. Compatibilidad}: la aplicación debe ser compatible con todos los navegadores más usados, como Chrome, Safari, Firefox ...etc.
+\end{itemize}
+
+\section{Planificación del Proyecto}                                 
 \newpage
 
 \bibliography{citas}
