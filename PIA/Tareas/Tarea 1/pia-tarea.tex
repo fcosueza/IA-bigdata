@@ -77,9 +77,9 @@ En este apartado vamos a realizar un \textbf{análisis de los riesgos} asociados
 Los \textbf{principales riesgo} asociados a este proyectos son los siguientes: 
 
 \begin{itemize}
-	\item \textbf{Riesgos Técnicos}: se han encontrado varios riesgos técnicos que podrían afectar al desempeño de la aplicación y son los siguientes:
+	\item \textbf{Riesgos Técnicos}
 	\begin{itemize}
-		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes proporcionando la utilidad de cada elemento y sus características.
+		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes especificando las características de cada elemento y su uso en el juego.
 		
 		\item \textbf{Datos de Entrenamiento Insuficientes}: dada las características de la aplicación, recopilar una cantidad de datos suficiente para que los análisis sean precisos, puede ser problemático. Para \textbf{mitigar} este riesgo, se deberá realizar una buena planificación del entrenamiento, proporcionando bastantes capturas de pantalla, limitando inicialmente, si fuera necesario, el alcance a ciertos elementos de los mapas.
 		
@@ -88,12 +88,28 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 		\item \textbf{Cantidad de capturas y limitación temporal}: si las capturas de una partida están demasiado espaciadas entre ellas, la evaluación de la situación y de los cambios en la partida pueden no ser correctos. Habrá que \textbf{mitigare} este riesgo proporcionando una cantidad suficiente de capturas, preferiblemente cada pocos minutos, parta que el análisis sea más preciso.
 	\end{itemize}
 	
-	\item \textbf{Riesgos económicos}: 
+	\item \textbf{Riesgos económicos}
 	\begin{itemize}
 		\item \textbf{Coste de la Infraestructura}: la infraestructura para la ejecución de modelos de IA, especialmente orientados a las visión artificial, puede ser costoso. Una de forma de \textbf{mitigar} este riesgo sería usar modelos ya preentrenados y aprovechar recursos gratuitos, antes de contratar infraestructura en la nube.
-		\item \textbf{}
+		\item \textbf{Coste de Servicios de Inteligencia Artificial}: si se usan APIs comerciales en la aplicación el costo puede aumentar rápidamente con el número de peticiones. Para \textbf{mitigar} es riesgo se pueden establecer límites, explorar las opciones gratuitas o valorar le ejecución de modelos locales o en la nube.
+		\item \textbf{Coste de mantenimiento y escalabilidad}: si finalmente se decide ofrecer la aplicación al resto de clanes de la comunidad esto puede tener un incremento sustancial en el coste de mantenimiento del servicios. Se podría \textbf{mitigar} este riesgo planteando la inclusión de otros clanes de la comunidad mediante un servicios de suscripción que cobra los gatos extra generados.
+	\end{itemize}
+	
+	\item \textbf{Riesgos Organizativos}
+	\begin{itemize}
+		\item \textbf{Planificación Inadecuada}: se puede correr el riesgo de no realizar una planificación adecuada del desarrollo del proyecto. Una forma de \textbf{mitigarlo} es siguiendo un correcto ciclo de desarrollo y planificar correctamente cada fase.
+		\item \textbf{Disponibilidad de los Usuarios Colaboradores}: para el correcto entrenamiento y recopilación de datos necesitamos la colaboración de los usuario de la aplicación, para que tomen capturas en situaciones reales de partida. Esto puede resultar en inconvenientes a la hora de organizarse con la gente del clan. Para \textbf{mitigarlo}, deberemos acordar con antelación la colaboración de los miembros del clan, ya sea de todos o de un grupo, para aportar dichas capturas, así como para etiquetar algunos datos y validar los resultados.
+		\item \textbf{Alcance Excesivo}: otro riesgo es que queramos que el proyecto haga mas de lo que realmente puede con el presupuesto y la tecnología que se cuenta. Para \textbf{mitigar} es riesgo, podemos establecer límites claros, dejando en primer lugar los objetivos secundarios al margen y centrándonos en la funcionalidad principal.
+	\end{itemize}
+	
+	\item \textbf{Riesgos con los Datos y Calidad de Predicciones}
+	\begin{itemize}
+		\item \textbf{Recomendaciones tácticas poco efectivas}: puede que el modelo llegue a conclusiones que no son efectivas en las partidas, por diferentes motivos, y que pueden ser contraproducentes para el equipo. Para \textbf{mitigar} estos problemas, se necesitará la validación, por parte de jugadores experimentados, de las estrategias sugeridas, así como proporcionar feedback al sistemas después de aplicar las tácticas sugeridas.
+		\item \textbf{Análisis de rivales poco realista}: los análisis de rivales pueden ser poco realistas o equivocados, llevando a una planificación táctica errónea. Para \textbf{mitigar} este riesgo, se deberán proporcionar todas las capturas he información necesaria sobre los rivales para que realice un perfil táctico más ajustado a la realidad.                  
 	\end{itemize}
 \end{itemize}
+
+Respecto a los \textbf{riesgos éticos}, dada la naturaleza de la aplicación y que esta se va a implementar para un juego online, no se han detectado riesgos de este tipo.
 
 \newpage
 
