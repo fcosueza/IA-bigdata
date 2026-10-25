@@ -227,8 +227,8 @@ Además de la planificación que se ha comentado en el punto anterior, el entren
 \begin{itemize}
 	\item \textbf{Obtención y Preparación de los Datos}: en esta primera fase habría que recopilar y prepara los datos para entrenar al modelo, que se compondría de diferentes tareas:
 	\begin{itemize}
-		\item \textbf{Obtención de las capturas}: en primer lugar deberíamos obtener las \textbf{capturas de los mapas} que van a emplearse en el entrenamiento. Para ello necesitaríamos la colaboración de los usuarios, que pueden proporcionar capturas en situaciones reales del juego, aunque también podría el equipo obtener algunas de los mapas del juego con diferentes señalizaciones.
-		\item \textbf{Etiquetado de las Capturas}: una vez obtenidas las capturas del mapa, se deberán \textbf{etiquetar los elementos} que deben ser \textbf{identificables en el mapa}, como soldados, tanques, marcas, ...etc, para indicarle al modelo cuales son los elementos importantes de dichas capturas.
+		\item \textbf{Obtención de las capturas}: en primer lugar deberíamos obtener las \textbf{capturas de los mapas} que van a emplearse en el entrenamiento. Para ello necesitaríamos la colaboración de los usuarios, que pueden proporcionar capturas en situaciones reales del juego, aunque también podría el equipo obtener algunas de los mapas del juego con diferentes señalizaciones. Así mismo se deberían proporcionar datos de la partida en formato CSV, que ayuden a complementar el análisis.
+		\item \textbf{Etiquetado de los Datos}: una vez obtenidas las capturas del mapa, se deberán \textbf{etiquetar los elementos} que deben ser \textbf{identificables en el mapa}, como soldados, tanques, marcas, ...etc, para indicarle al modelo cuales son los elementos importantes de dichas capturas. Así mismo se debería etiquetar los datos que no estén suficientemente claros en los datos de contexto de la partida.
 		\item \textbf{Procesamiento de imágenes}: si fuera necesario, la imágenes deberán procesarse para \textbf{facilitar su consumo} por parte del \textbf{modelo}.
 	\end{itemize}
 	
@@ -238,12 +238,71 @@ Además de la planificación que se ha comentado en el punto anterior, el entren
 		\item \textbf{Configuración del Modelo}: se deberá configurar el modelo adaptándolo a las clases de elementos que hayamos definido y que queremos que identifique.
 	\end{itemize}
 	
-	\item \textbf{Entrenamiento}: como ya hemos comentado, aunque el modelo este previamente entrenado, necesitará un entrenamiento específico para nuestro propósito, que muy particular, así deberemos realizar:
+	\item \textbf{Entrenamiento}: como ya hemos comentado, aunque el modelo este previamente entrenado, necesitará un entrenamiento específico para nuestro propósito, que es muy particular, así deberemos realizar:
 	\begin{itemize}
-		\item \textbf{Entrenamiento del Modelo}: se le deberán proporcionar al modelo mapas del juego con los elementos que queremos que identifique correctamente etiquetados para que aprenda a identificarlo.
+		\item \textbf{Entrenamiento del Modelo}: se le deberán proporcionar al modelo mapas del juego con los elementos que queremos que identifique correctamente etiquetados para que aprenda a identificarlo, así como datos de contexto.
 		\item \textbf{Ajuste y Optimización}: se deberá ajustar el modelo y los parámetros del entrenamiento para mejorar le precisión de las detecciones en caso de que sea necesario.
 	\end{itemize}
-\end{itemize}             
+	
+	\item \textbf{Evaluación de los Resultados}: una vez realizado el entrenamiento deberemos evaluar cual es el resultado obtenido, el cual podremos dividir en la siguientes tareas:
+	\begin{itemize}
+		\item \textbf{Preparar Dato de Evaluación}: se deberán seleccionar mapas que no se hayan usado para entrenar el modelo para comprobar su entrenamiento.
+		\item \textbf{Evaluación}: con los datos de la evaluación, un miembro del equipo de desarrollo, asistido por un miembro del clan deberán evaluar las respuestas que el modelo al procesar lo mapas. 
+		\item \textbf{Registras y Clasificar Errores}: durante el proceso de evaluación puede ser que se detecten errores en los análisis del modelo, estos errores deberán documentarse y clasificarse 
+		\item \textbf{Mejorar y Evaluar}: una vez detectados los errores deberán ajustarse las instrucciones o los ejemplos, y si fuera necesario, adaptar el modelo.
+	\end{itemize}
+	
+	\item \textbf{Despliegue}: el despliegue del modelo se hará de forma similar al resto de la aplicación, con las siguientes tareas: 
+	\begin{itemize}
+		\item \textbf{Preparación del Entorno}: se deberá configurar el entorno donde se va a desplegar el modelo, ya sea en una infraestructura local o en la nube.
+		\item \textbf{Despliegue del Modelo}: se desplegará el modelo comprobando que funciona correctamente y es accesible.
+		\item \textbf{Documentación del Proceso}: se debe documentar el proceso de despliegue para futuros despliegues o por si el cliente quiere desplegarlo por su cuenta.
+	\end{itemize}
+	
+	\item \textbf{Monitorización}: en esta última etapa se deberá de monitorizar el rendimiento del sistema, estando atento a si aparecen nuevos elementos en el juego y si sería necesario una actualización del modelo. Las principales tareas sería: 
+	\begin{itemize}
+		\item \textbf{Monitorización del Rendimiento}: se tendrá que monitorizar el tiempo de respuestas, el uso de recursos, la disponibilidad, fiabilidad, errores técnicos, ...etc.
+		\item \textbf{Calidad del Análisis y Predicciones}: así mismo se tendrá que monitorizar la calidad de los análisis que realiza y de las estrategias que recomienda para identificar errores o perdida de precisión.
+		\item \textbf{Detección de Cambios en los Datos}: se deberá tener en cuenta si hay cambios en los mapas, por ejemplo, nuevos símbolos, y ver como reacciona el modelo ante estos cambios. 
+		\item \textbf{Actualización}: en caso de que sea necesario se actualizará el modelo para los nuevos patrones, comprobando que el nuevo modelo funciona mejor antes de su despliegue. 
+	\end{itemize}
+\end{itemize}    
+
+\section{Tecnologías para el Desarrollo}
+En este ejercicio vamos a explicar la \textbf{tecnologías} que se van a emplear en la aplicación. Aunque podemos distinguir entre las tecnologías usadas en la aplicación de forma genera y las librerías concretas que se utilizarán para la parte de la IA.
+
+\subsection{Tecnologías Generales}
+En primer lugar, y después de valorar otras tecnologías, se ha decido usar \textbf{Python} como lenguaje principal para la aplicación, ya que es el lenguaje que se va a usar para la programación de la inteligencia artificial y de esta forma tenemos un \textbf{ecosistema común} para todo la aplicación.
+
+Para la parte de \textbf{aplicación web} se usará el framework \textbf{Django}, que nos permitirá realizar toda la aplicación en el mismo framework y usando Python. Para la parte de frontend se usará \textbf{HTML}, \textbf{Javascript}, \textbf{CSS} y \textbf{Django Templates}, mientras que para la parte de backend se empleará \textbf{Python}, dentro del Django todo claro.
+
+Como base de datos se emplearía \textbf{PosgreSQL}, ya que es una base de datos extensamente usada y muy rápida. Además se puede conectar a ella desde Djanjo sin ningún problema.     
+
+Para los diferentes tipos de test, se empleará \textbf{pytest} y \textbf{pytest-django} para las pruebas tanto unitarias como de integración. Además, se utilizará \textbf{Playwright} para las pruebas e2e, así como para probar la aplicación en diferentes navegadores web.
+
+Para el despliegue, se ha decidido utilizar \textbf{Docker}, ya que es una tecnología que nos va a permitir ejecutar la aplicación en cualquier maquina en las mismas condiciones, junto con \textbf{Docker compose} que nos facilitará más aún las labores de despliegue.
+
+Además, se empleará \textbf{clickup} para llevar un control del proyecto y de las tareas que hay que hacer y del tiempo que se le dedican, así como \textbf{Github} (git) para el control de versiones y el desarrollo colaborativo.
+
+Y esto es en lo que se refiere las \textbf{tecnologías generales} de la aplicación, podríamos a ver elegido \textbf{otras alternativas}, como por ejemplo \textbf{Nextjs} para la parte web y \textbf{Typescript}, que son tecnologías que también ofrecen un buen ecosistema y buen desempeño en aplicaciones web, pero ello ya implicaría tener dos entornos de desarrollo diferentes para la parte de la aplicación web y de la inteligencia artificial, de esta forma se unifica todo el desarrollo bajo un mismo entorno.
+
+\subsection{Tecnologías para el Desarrollo de la IA}
+En esta sección vamos a explicar las tecnologías específicas del apartado de inteligencia artificial de nuestra aplicación, sumándose a las ya comentadas en el apartado anterior.
+
+En primer lugar, como ya hemos comentado, el \textbf{lenguaje de programación} será \textbf{Python}, podríamos haber incluido R, por ejemplo, para el análisis estadístico de las partidas o de los datos de contexto, pero ya sería introducir otro lenguaje en la ecuación, complicando el proceso de desarrollo, además de que es algo que se puede solventar con algunas librerías de Python. 
+
+Como \textbf{modelo de inteligencia artificial} se va a emplear el modelo multimodal \textbf{Qwen3-VL}. Se ha optado por un modelo multimodal ya que en caso contrario, se debería usar un modelo para el procesado de imágenes y otro para el análisis de la partida y la elaboración de la estrategias. De esta forma, solo necesitamos un modelo para realizar todo el trabajo. Para \textbf{cargar y ejecutar el modelo} vamos a emplear los \textbf{Transformers} de Hugging Face, un framework que permite cargar el modelo y interactuar con el enviándole prompts.
+
+Para el \textbf{procesamiento de imágenes} vamos a usar \textbf{Pillow}, que nos ayudará a preparar la imágenes para que se puedan procesar. Será el modelo principal el que se encargará de realizar el análisis de imágenes, por lo que en un principio no necesitaríamos más. En el caso de que se necesitara mas preparación para la imagen, se podría valorar OpenCV, pero es una librería más compleja y que en principio no vamos a usar si no es necesario. 
+
+En el aparado de \textbf{análisis estadístico} se empleará \textbf{Pandas} y \textbf{Nuphy}. El primero se usará para preparar los datos para su procesamiento y el segundo para aplicar los cálculos matemáticos y estadísticos necesarios.
+
+Por último se podría usar \textbf{Pydantic} para evaluar las respuestas del modelo, en las diferentes tareas de evaluación que hay durante el proceso de desarrollo.
+             
+\section{Perfiles Profesionales}
+
+
+
 \newpage
 
 \bibliography{citas}
