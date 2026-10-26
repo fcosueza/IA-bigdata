@@ -47,8 +47,7 @@
 
 \begingroup
 \hypersetup{linkcolor=black}
-\listoffigures
-\listoftables
+\listoffigures             
 \endgroup
 
 \newpage
@@ -247,8 +246,8 @@ Además de la planificación que se ha comentado en el punto anterior, el entren
 	\item \textbf{Evaluación de los Resultados}: una vez realizado el entrenamiento deberemos evaluar cual es el resultado obtenido, el cual podremos dividir en la siguientes tareas:
 	\begin{itemize}
 		\item \textbf{Preparar Dato de Evaluación}: se deberán seleccionar mapas que no se hayan usado para entrenar el modelo para comprobar su entrenamiento.
-		\item \textbf{Evaluación}: con los datos de la evaluación, un miembro del equipo de desarrollo, asistido por un miembro del clan deberán evaluar las respuestas que el modelo al procesar lo mapas. 
-		\item \textbf{Registras y Clasificar Errores}: durante el proceso de evaluación puede ser que se detecten errores en los análisis del modelo, estos errores deberán documentarse y clasificarse 
+		\item \textbf{Evaluación}: con los datos de la evaluación, un miembro del equipo de desarrollo, asistido por un miembro del clan deberán evaluar las respuestas que genere el modelo al procesar los mapas. 
+		\item \textbf{Registrar y Clasificar Errores}: durante el proceso de evaluación puede ser que se detecten errores en los análisis del modelo, estos errores deberán documentarse y clasificarse.
 		\item \textbf{Mejorar y Evaluar}: una vez detectados los errores deberán ajustarse las instrucciones o los ejemplos, y si fuera necesario, adaptar el modelo.
 	\end{itemize}
 	
@@ -269,33 +268,33 @@ Además de la planificación que se ha comentado en el punto anterior, el entren
 \end{itemize}    
 
 \section{Tecnologías para el Desarrollo}
-En este ejercicio vamos a explicar la \textbf{tecnologías} que se van a emplear en la aplicación. Aunque podemos distinguir entre las tecnologías usadas en la aplicación de forma genera y las librerías concretas que se utilizarán para la parte de la IA.
+En este ejercicio vamos a explicar la \textbf{tecnologías} que se van a emplear en la aplicación. Aunque podemos distinguir entre las tecnologías usadas en la aplicación de forma general y las librerías concretas que se utilizarán para la parte de la IA.
 
 \subsection{Tecnologías Generales}
 En primer lugar, y después de valorar otras tecnologías, se ha decido usar \textbf{Python} como lenguaje principal para la aplicación, ya que es el lenguaje que se va a usar para la programación de la inteligencia artificial y de esta forma tenemos un \textbf{ecosistema común} para todo la aplicación.
 
-Para la parte de \textbf{aplicación web} se usará el framework \textbf{Django}, que nos permitirá realizar toda la aplicación en el mismo framework y usando Python. Para la parte de frontend se usará \textbf{HTML}, \textbf{Javascript}, \textbf{CSS} y \textbf{Django Templates}, mientras que para la parte de backend se empleará \textbf{Python}, dentro del Django todo claro.
+Para la parte de \textbf{aplicación web} se usará el framework \textbf{Django}, que nos permitirá realizar toda la aplicación en el mismo framework y usando Python. Para la parte de frontend se usará \textbf{HTML}, \textbf{Javascript}, \textbf{CSS} y \textbf{Django Templates}, mientras que para la parte de backend se empleará \textbf{Python} (Django).
 
-Como base de datos se emplearía \textbf{PosgreSQL}, ya que es una base de datos extensamente usada y muy rápida. Además se puede conectar a ella desde Djanjo sin ningún problema.     
+Como base de datos se empleará \textbf{PosgreSQL}, ya que es una base de datos extensamente usada y muy rápida. Además es compatible con Django y se puede manejar perfectamente desde el framework..     
 
 Para los diferentes tipos de test, se empleará \textbf{pytest} y \textbf{pytest-django} para las pruebas tanto unitarias como de integración. Además, se utilizará \textbf{Playwright} para las pruebas e2e, así como para probar la aplicación en diferentes navegadores web.
 
-Para el despliegue, se ha decidido utilizar \textbf{Docker}, ya que es una tecnología que nos va a permitir ejecutar la aplicación en cualquier maquina en las mismas condiciones, junto con \textbf{Docker compose} que nos facilitará más aún las labores de despliegue.
+Para el despliegue, se ha decidido utilizar \textbf{Docker}, ya que es una tecnología que nos va a permitir ejecutar la aplicación en cualquier máquina en las mismas condiciones, junto con \textbf{Docker Compose} que nos facilitará más aún las labores de despliegue.
 
 Además, se empleará \textbf{clickup} para llevar un control del proyecto y de las tareas que hay que hacer y del tiempo que se le dedican, así como \textbf{Github} (git) para el control de versiones y el desarrollo colaborativo.
 
-Y esto es en lo que se refiere las \textbf{tecnologías generales} de la aplicación, podríamos a ver elegido \textbf{otras alternativas}, como por ejemplo \textbf{Nextjs} para la parte web y \textbf{Typescript}, que son tecnologías que también ofrecen un buen ecosistema y buen desempeño en aplicaciones web, pero ello ya implicaría tener dos entornos de desarrollo diferentes para la parte de la aplicación web y de la inteligencia artificial, de esta forma se unifica todo el desarrollo bajo un mismo entorno.
+Y esto es en lo que se refiere las \textbf{tecnologías generales} de la aplicación, podríamos haber elegido \textbf{otras alternativas}, como por ejemplo \textbf{Nextjs} para la parte web y \textbf{Typescript}, que son tecnologías que también ofrecen un buen ecosistema y buen desempeño en aplicaciones web, pero ello ya implicaría tener dos entornos de desarrollo diferentes para la parte de la aplicación web y de la inteligencia artificial, de esta forma se unifica todo el desarrollo bajo un mismo entorno.
 
 \subsection{Tecnologías para el Desarrollo de la IA}
 En esta sección vamos a explicar las tecnologías específicas del apartado de inteligencia artificial de nuestra aplicación, sumándose a las ya comentadas en el apartado anterior.
 
 En primer lugar, como ya hemos comentado, el \textbf{lenguaje de programación} será \textbf{Python}, podríamos haber incluido R, por ejemplo, para el análisis estadístico de las partidas o de los datos de contexto, pero ya sería introducir otro lenguaje en la ecuación, complicando el proceso de desarrollo, además de que es algo que se puede solventar con algunas librerías de Python. 
 
-Como \textbf{modelo de inteligencia artificial} se va a emplear el modelo multimodal \textbf{Qwen3-VL}. Se ha optado por un modelo multimodal ya que en caso contrario, se debería usar un modelo para el procesado de imágenes y otro para el análisis de la partida y la elaboración de la estrategias. De esta forma, solo necesitamos un modelo para realizar todo el trabajo. Para \textbf{cargar y ejecutar el modelo} vamos a emplear los \textbf{Transformers} de Hugging Face, un framework que permite cargar el modelo y interactuar con el enviándole prompts.
+Como \textbf{modelo de inteligencia artificial} se va a emplear el modelo multimodal \textbf{Qwen2.5-VL}. Se ha optado por un modelo multimodal ya que en caso contrario, se debería usar un modelo para el procesado de imágenes y otro para el análisis de la partida y la elaboración de la estrategias. De esta forma, solo necesitamos un modelo para realizar todo el trabajo. Para \textbf{cargar y ejecutar el modelo} vamos a emplear los \textbf{Transformers} de Hugging Face, un framework que permite cargar el modelo y interactuar con el enviándole prompts.
 
 Para el \textbf{procesamiento de imágenes} vamos a usar \textbf{Pillow}, que nos ayudará a preparar la imágenes para que se puedan procesar. Será el modelo principal el que se encargará de realizar el análisis de imágenes, por lo que en un principio no necesitaríamos más. En el caso de que se necesitara mas preparación para la imagen, se podría valorar OpenCV, pero es una librería más compleja y que en principio no vamos a usar si no es necesario. 
 
-En el aparado de \textbf{análisis estadístico} se empleará \textbf{Pandas} y \textbf{Nuphy}. El primero se usará para preparar los datos para su procesamiento y el segundo para aplicar los cálculos matemáticos y estadísticos necesarios.
+En el apartado de \textbf{análisis estadístico} se empleará \textbf{Pandas} y \textbf{Nuphy}. El primero se usará para preparar los datos para su procesamiento y el segundo para aplicar los cálculos matemáticos y estadísticos necesarios.
 
 Por último se podría usar \textbf{Pydantic} para evaluar las respuestas del modelo, en las diferentes tareas de evaluación que hay durante el proceso de desarrollo.
              
@@ -307,16 +306,206 @@ Para llevar a cabo este proyecto necesitaremos un \textbf{conjunto de profesiona
 	
 	\item \textbf{Analista de Datos}: su \textbf{función} principal será la de extraer y preparar los datos para que el modelo pueda entrenarse, además de desarrollar gráficos y representaciones de los datos. Su \textbf{participación} estará ligada al entrenamiento del modelo de IA y concretamente a la obtención y preparación de los datos. \textbf{Aportará} al proyecto sus conocimientos en datos fundamentales para el entrenamiento del modelo.
 	
-	\item \textbf{Ingeniero de IA y Visión por Computador}: sus \textbf{funciones} serían las de entrenar le modelo. Así mismo se encargaría de la integración del modelo en aplicación y de su evaluación. Su \textbf{participación} sería en prácticamente todas las fases del desarrollo, \textbf{aportando} una de los aspecto más importantes de la aplicación que es la preparación e integración del modelo de inteligencia artificial en la aplicación.
+	\item \textbf{Ingeniero de IA y Visión por Computador}: sus \textbf{funciones} serían las de entrenar el modelo. Así mismo se encargaría de la integración del modelo en aplicación y de su evaluación. Su \textbf{participación} sería en prácticamente todas las fases del desarrollo, \textbf{aportando} una de los aspecto más importantes de la aplicación que es la preparación e integración del modelo de inteligencia artificial en la aplicación.
 	
 	\item \textbf{Desarrollador Web FullStack}: será el encargado de desarrollar la parte web de la aplicación. Sus \textbf{funciones} serán las de crear la aplicación web que se encargar de integra el modelo, diseñando la interfaz y creando la lógica necesaria para que la aplicación funcione en la web, como sistemas de autenticación, manejo de la base de datos, etc. \textbf{Participará} especialmente en la fases de diseño, desarrollo, y mantenimiento. Su \textbf{aportación} a la aplicación será crucial, ya que sin la interfaz web y la aplicación que la gestione los usuarios no podrán hacer uso de aplicación.
 	
-	\item \textbf{DevOps}: sus principales \textbf{funciones} serán las de preparar la infraestructura necesaria para poder desarrollar la aplicación y mantenelas. Aunque \textbf{participara} en casi todas las fases del proyecto, en las que estará más implicado sea en la de despliegue, planificación y desarrollo, \textbf{aportando} sus conocimientos sobre infraestructura y permitiendo que el desarrollo transcurra sin problema.
+	\item \textbf{DevOps}: sus principales \textbf{funciones} serán las de preparar la infraestructura necesaria para poder desarrollar la aplicación y mantenerla. Aunque \textbf{participara} en casi todas las fases del proyecto, en las que estará más implicado sera en la de despliegue, planificación y desarrollo, \textbf{aportando} sus conocimientos sobre infraestructura y permitiendo que el desarrollo transcurra sin problema.
 	
-	\item \textbf{Especialista en Calidad (QA)}: la principales \textbf{funciones} serán las de diseñar, elaborar y ejecutar los diferentes tipos de pruebas que vamos emplear en la aplicación. Su \textbf{participación} será principalmente en la fases de pruebas y mantenimiento. Su \textbf{aportación} al proyecto será la de garantizar que la aplicación cumple con los estándares de calidad deseados.          
+	\item \textbf{Especialista en Calidad (QA)}: la principales \textbf{funciones} serán las de diseñar, elaborar y ejecutar los diferentes tipos de pruebas que vamos a emplear en la aplicación. Su \textbf{participación} será principalmente en la fases de pruebas y mantenimiento. Su \textbf{aportación} al proyecto será la de garantizar que la aplicación cumple con los estándares de calidad deseados.
+	
+	\item \textbf{Experto en Estrategia de HLL}: se necesitará un experto que tenga conocimientos sobre la estrategia del juego, su principal\textbf{función} será la de validar las estrategias sugeridas por el modelo y corregirlas en caso de que sea necesario. Su \textbf{participación} será principalmente en las fases de entrenamiento y validación del modelo, \textbf{aportando} sus conocimientos sobre el dominio del problema, en este caso, las estrategias del juego.         
 \end{itemize} 
 
 \section{Caso Práctico - Amazon Rekognition vs Google Cloud Vision}
+En esta última actividad vamos a realizar una comparativa de dos de los principales modelos de visión por computador, como son \textbf{Amazon Rekognition} y \textbf{Google Cloud Vision}. Se seleccionarán una serie de imágenes y se pasarán por los dos modelos, analizando sus respuestas y comparándolas.
+
+\subsection{Comparación Práctica}
+En este apartado se han seleccionado 6 imágenes diferentes y se han procesado con los 2 modelos.  Todas las imágenes han sido descargadas de \href{https://unsplash.com/es}{Unsplash}, ya que la licencia del sitio permite su uso con fines comerciales o no comerciales de forma gratuita \cite{unsplash}. Como detalle, no se va a poner una imagen original, para ahorrar espacio, sino las capturas de la imagen mientras se realizan las pruebas. No obstante, se incluirá un enlace hace la imagen, por si es necesario visualizar el original.
+
+\begin{itemize}
+	\item \textbf{Imagen 1. Retrato}
+	
+	\textbf{Procedencia}: Unsplash\\
+	\textbf{Author}: Jake Nacktos\\
+	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/mujer-con-camisa-blanca-de-cuello-redondo-sonriendo-IF9TK5Uy-KI}{enlace}\\
+	\textbf{Motivo}: La imagen se ha elegido porque es muy simple, y muestra claramente una persona sonriendo, para comprobar la respuestas de los modelos con imágenes sencillas.\\
+	
+	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{retrato-amazon.png}
+		\caption{Retrato analizado por Amazon Rekognition}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{retrato-google.png}
+		\caption{Retrato analizado por Google Cloud Vision}
+	\end{figure}
+	
+	
+	
+	Como podemos ver en los resultados, las dos plataformas \textbf{identifican correctamente} la emoción de la persona como feliz, pero hay diferencias en la información que proporciona cada modelo. Mientras que \textbf{Google Vision} se centra más en elementos faciales, como las cejas, barbilla, ...etc, \textbf{Amazon Rekognition} proporcionar menos detalle sobre estos elementos, pero añade información sobre que se trata de una persona adulta.
+	
+	\item \textbf{Imagen 2. Grupo de Personas}
+	
+	\textbf{Procedencia}: Unsplash\\
+	\textbf{Author}: CDC\\
+	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/familia-lavando-a-un-golden-retriever-en-el-jardin-trasero-SAwxJ8PHY3Q}{enlace}\\
+	\textbf{Motivo}: La imagen ya entraña algo más de dificulta, se ha elegido porque aparecen personas de diferentes edades en una posición no muy normal, con el añadido de que hay una animal.\\
+	
+	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{grupo-amazon.png}
+		\caption{Imagen de grupo analizada por Amazon Rekognition}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.27]{grupo-google.png}
+		\caption{Imagen de grupo analizada por Google Cloud Vision}
+	\end{figure}
+	
+	Una vez realizado el procesado, cada plataforma arroja valores diferentes a la hora de \textbf{identificar menores}. Aunque las dos los han identificado, \textbf{Amazon Rekognition} ofrece un intervalo de confianza del 98.9\%, mientras que \textbf{Google Cloud Vision} ofrece un intervalo del 69\%, por lo que en ese aspecto esta más limitado, y no sería un intervalo de confianza lo suficientemente alto para asegurar, sin lugar a dudas, que hay menores en la imagen.
+	
+	\item \textbf{Imagen 3. Escenas con Múltiples Objetos}
+	
+	\textbf{Procedencia}: Unsplash\\
+	\textbf{Author}: Clay Banks\\
+	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/tres-bicicletas-estacionadas-frente-al-edificio-hwLAI5lRhdM}{enlace}\\
+	\textbf{Motivo}: Se he elegido esta imagen ya que entraña complejidad, con numerosos objetos similares, textos, ..etc. \\
+	
+	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{objetos-amazon.png}
+		\caption{Imagen con múltiples objetos analizada por Amazon Rekognition}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{objetos-google.png}
+		\caption{Imagen con múltiples objetos analizada por Google Cloud Vision}
+	\end{figure}
+	
+	Tras pasar las imágenes se ha realizado una comparativa de diferentes valores concretos:
+	
+	\begin{itemize}
+		\item \textbf{Etiquetas reconocidas}: comparando las 2 plataformas, \textbf{Amazon Rekogition} ha identificado muchas más etiquetas, incluyendo las plantas, las cajas del suelo e incluso una persona dentro de la tienda, mientras que \textbf{Google Cloud Vision} ha estado mucho más limitado en ese aspecto, detectando solo las bicicletas y poco más.
+		\item \textbf{Niveles de Detalle de la Etiqueta}: en este aspecto también ha quedado por encima la plataforma de \textbf{Amazon}, siendo mucho más preciso a la hora de determinar los elementos de cada etiqueta.
+		\item \textbf{Valores de Confianza}: los valores de confianza han sido muchos más altos en la aplicación de \textbf{Amazon}, poniendo como ejemplo la \textbf{bicicleta}, donde Amazon ofrece un 92\% de confianza mientras que \textbf{Google} ofrece un 73\%, algo que se repite en todo en análisis.
+		
+		\item \textbf{Objetos Visibles No Detectados}: en este aspecto, los objetos no detectados por \textbf{Google} han sido muchos, desde las cajas, planta, ..etc. \textbf{Amazon} ha detectado mucho más, aunque hay objetos que ambos no han detectado, como focos de luz, carteles, etc...
+		
+		\item \textbf{Posible Detecciones Incorrectas}: la única detección incorrecta que se ha detectado ha sido la de \textbf{Amazon}, detectando unos carteles con imágenes de personas como personas.
+	\end{itemize}
+	
+	
+	\item \textbf{Imagen 4. Imagen con Texto}
+		
+	\textbf{Procedencia}: Unsplash\\
+	\textbf{Author}: Christopher Stites\\
+	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/una-pila-de-novelas-de-fantasia-sobre-una-mesa-xIB5FvmLESA}{enlace}\\
+	\textbf{Motivo}: Se ha elegido esta imagen ya que incluye el título de diferentes libros, con diferentes colores y tipografías, por lo que puede estar interesante. \\
+	
+	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
+	
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{texto-amazon.png}
+		\caption{Imagen con texto analizada por Amazon Rekognition}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{texto-google.png}
+		\caption{Imagen con texto analizada por Google Cloud Vision}
+	\end{figure}
+	
+	Las \textbf{dos plataformas} han detectado casi todo el texto, pero \textbf{Google Cloud Vision} no ha podido detectar el texto de los últimos 2 libros, mientras que \textbf{Amazon} si lo ha   hecho. Respecto a la localización, las dos muestran el texto en ingles, pero no encuentro en ningún sitio que especifiquen el idioma.
+	
+	Al margen de esto, las \textbf{dos plataformas} han detectado correctamente que se trata de un conjunto de libros. En concreto Google ha incluso incluido el género de alguno de ellos.
+	
+	\item \textbf{Imagen 5. Imagen de Especial Dificultad}  
+	
+	\textbf{Procedencia}: Unsplash\\
+	\textbf{Author}: Pema G. Lama\\
+	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/personas-que-caminan-por-la-calle-durante-la-noche-nrA0Qd8H36M}{enlace}\\
+	\textbf{Motivo}: Esta imagen se ha elegido por su complejidad, ya que aparecen muchas personas y objetos, algunos de ellos parcialmente cubiertos y en condiciones de iluminación no idóneas. \\
+	
+	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{google-tokyo.png}
+		\caption{Imagen compleja analizada por Google}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{amazon-tokyo.png}
+		\caption{Imagen compleja analizada por Amazon Rekognition}
+	\end{figure}       
+	
+	En está imagen es una de las que más diferencia se ha notado entre las plataformas. Aunque \textbf{ambas} han detectado que se trata de un entorno urbano, con rascacielos y luces de neón, el número de objetos detectados por \textbf{Google Cloud Vision} ha sido muy pequeño y con un porcentaje de confianza que no supera el 65\%, siendo capaz de identificar solo a 2 personas. 
+	
+	En cambio \textbf{Amazon Rekognition} ha sido capaz, no solo de identificar a la mayor parte de las personas, algunas en zonas muy oscuras o parcialmente cubiertas, sino otros elementos como coches , camiones, pantallas, etc.
+	
+	\item \textbf{Imagen 6. Caso Relacionado}
+	                                                                                              
+	
+	\textbf{Procedencia}: Propia\\
+	\textbf{Author}: Francisco Sueza Rodríguez\\
+	\textbf{Enlace}: ninguno\\
+	\textbf{Motivo}: Se ha escogido un mapa del juego HLL en plena partida, que sería la imagen principal que deberá analizar el modelo. \\
+	
+		\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{mapa-amazon.png}
+		\caption{Mapa de HLL analizado por Google}
+	\end{figure}
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.28]{mapa-google.png}
+		\caption{Mapa de HLL analizado Amazon Rekognition}
+	\end{figure}
+	
+	Como es de esperar, ninguno de los modelos ha sabido identificar los elementos del mapa, aunque si han identificado ambos que se trata de uno. 
+	
+	Nuestro caso es un problema muy específico, que necesitará de un entrenamiento previo, etiquetando los diferentes elementos del mapa, para que el modelo sea capaz de reconocer todos lo elementos que podemos encontrarnos.           
+\end{itemize}
+
+\subsection{Comparación de Resultados}
+En este apartado vamos a analizar, de forma global, los resultados obtenidos en las seis imágenes analizadas por los dos modelos de visión por computador. 
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	
+	\begin{tabular}{|c|c|}
+		\hline
+		Imágenes & Info. Obtenida        
+		\hline
+		Dato A & aaaaaaaaaaaaaaaaaaaaaa & Dato C & Dato A & Dato B & Dato C & Dato A\\
+		\hline
+		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		\hline
+		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		\hline
+		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		\hline
+		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		\hline
+		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		\hline
+	\end{tabular}
+\end{center}
 
 
 
