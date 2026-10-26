@@ -78,9 +78,7 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 \begin{itemize}
 	\item \textbf{Riesgos Técnicos}
 	\begin{itemize}
-		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes especificando las características de cada elemento y su uso en el juego.
-		
-		\item \textbf{Datos de Entrenamiento Insuficientes}: dada las características de la aplicación, recopilar una cantidad de datos suficiente para que los análisis sean precisos, puede ser problemático. Para \textbf{mitigar} este riesgo, se deberá realizar una buena planificación del entrenamiento, proporcionando bastantes capturas de pantalla, limitando inicialmente, si fuera necesario, el alcance a ciertos elementos de los mapas.
+		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes especificando las características de cada elemento y su uso en el juego.	
 		
 		\item \textbf{Fiabilidad del análisis}: la distribución de los jugadores y los elementos en el mapa no siempre permiten determinar is una decisión táctica es correcta. Una forma de \textbf{mitigar} este riesgo es mediante la inclusión del contexto de las capturas y la revisión de la conclusión por jugadores experimentados.
 		
@@ -413,24 +411,26 @@ En este apartado se han seleccionado 6 imágenes diferentes y se han procesado c
 	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/una-pila-de-novelas-de-fantasia-sobre-una-mesa-xIB5FvmLESA}{enlace}\\
 	\textbf{Motivo}: Se ha elegido esta imagen ya que incluye el título de diferentes libros, con diferentes colores y tipografías, por lo que puede estar interesante. \\
 	
+	
 	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
 	
 	
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{texto-amazon.png}
+		\includegraphics[scale=0.26]{texto-amazon.png}
 		\caption{Imagen con texto analizada por Amazon Rekognition}
 	\end{figure}
 	
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{texto-google.png}
+		\includegraphics[scale=0.26]{texto-google.png}
 		\caption{Imagen con texto analizada por Google Cloud Vision}
 	\end{figure}
 	
 	Las \textbf{dos plataformas} han detectado casi todo el texto, pero \textbf{Google Cloud Vision} no ha podido detectar el texto de los últimos 2 libros, mientras que \textbf{Amazon} si lo ha   hecho. Respecto a la localización, las dos muestran el texto en ingles, pero no encuentro en ningún sitio que especifiquen el idioma.
 	
 	Al margen de esto, las \textbf{dos plataformas} han detectado correctamente que se trata de un conjunto de libros. En concreto Google ha incluso incluido el género de alguno de ellos.
+	
 	
 	\item \textbf{Imagen 5. Imagen de Especial Dificultad}  
 	
@@ -443,17 +443,17 @@ En este apartado se han seleccionado 6 imágenes diferentes y se han procesado c
 	
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{google-tokyo.png}
+		\includegraphics[scale=0.26]{google-tokyo.png}
 		\caption{Imagen compleja analizada por Google}
 	\end{figure}
 	
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{amazon-tokyo.png}
+		\includegraphics[scale=0.26]{amazon-tokyo.png}
 		\caption{Imagen compleja analizada por Amazon Rekognition}
 	\end{figure}       
 	
-	En está imagen es una de las que más diferencia se ha notado entre las plataformas. Aunque \textbf{ambas} han detectado que se trata de un entorno urbano, con rascacielos y luces de neón, el número de objetos detectados por \textbf{Google Cloud Vision} ha sido muy pequeño y con un porcentaje de confianza que no supera el 65\%, siendo capaz de identificar solo a 2 personas. 
+	En está imagen es una de las que más diferencia se ha notado entre las plataformas. Aunque \textbf{ambas} han detectado que se trata de un entorno urbano, con rascacielos y luces de neón, el número de objetos detectados por \textbf{Google Cloud Vision} ha sido muy pequeño y con un porcentaje de confianza que no supera el 65\%, siendo capaz de identificar solso a 2 personas. 
 	
 	En cambio \textbf{Amazon Rekognition} ha sido capaz, no solo de identificar a la mayor parte de las personas, algunas en zonas muy oscuras o parcialmente cubiertas, sino otros elementos como coches , camiones, pantallas, etc.
 	
@@ -467,13 +467,13 @@ En este apartado se han seleccionado 6 imágenes diferentes y se han procesado c
 	
 		\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{mapa-amazon.png}
+		\includegraphics[scale=0.26]{mapa-amazon.png}
 		\caption{Mapa de HLL analizado por Google}
 	\end{figure}
 	
 	\begin{figure}[ht]
 		\centering
-		\includegraphics[scale=0.28]{mapa-google.png}
+		\includegraphics[scale=0.26]{mapa-google.png}
 		\caption{Mapa de HLL analizado Amazon Rekognition}
 	\end{figure}
 	
@@ -483,31 +483,177 @@ En este apartado se han seleccionado 6 imágenes diferentes y se han procesado c
 \end{itemize}
 
 \subsection{Comparación de Resultados}
-En este apartado vamos a analizar, de forma global, los resultados obtenidos en las seis imágenes analizadas por los dos modelos de visión por computador. 
+En este apartado vamos a analizar, de forma global, los resultados obtenidos en las seis imágenes analizadas por los dos modelos de visión por computador. Se va a comprar imagen por imagen mediante la realización de una tabla donde se condensará la información recabada durante los análisis. 
+
+Hubiera sido interesante realizar la sección anterior y esta en una misma, aprovechando las capturas para crear una ficha sobre cada imagen, o haber incluido las imágenes y algo de información, pero por falta de una planificación adecuada no hay espacio restante suficiente, así que se ha optado por realizarlo mediante tablas.
+
+\subsubsection{Imagen 1: Retrato}
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
+		\hline
+		Información Obtenida & Se ha identificado correctamente a la persona, así como el estado de ánimo de esta  & Se ha identificado a la persona correctamente y el estado de animo de ésta \\
+		\hline
+		Det. Correctas & Persona, Estado de Ánimo, Edad & Persona, Estado de Ánimo, Componentes del Rostro \\
+		\hline
+		Info. No Detectada & --------- & --------- \\
+		\hline
+		Errores & ninguno & ninguno \\
+		\hline
+		Valores Confianza & 99\% & 99\% \\
+		\hline
+		Diferencias Servicio & Ha detectado la edad de la persona & Ha detectado elementos del rostro como nariz, mejillas, etc.. \\
+		\hline
+	\end{tabular}
+\end{center} 
+
+\subsubsection{Imagen 2: Grupo de Personas}
 
 \begin{center}
 	\renewcommand{\arraystretch}{1.2}
-	
-	\begin{tabular}{|c|c|}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
 		\hline
-		Imágenes & Info. Obtenida        
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
 		\hline
-		Dato A & aaaaaaaaaaaaaaaaaaaaaa & Dato C & Dato A & Dato B & Dato C & Dato A\\
+		Información Obtenida & Se ha identificado correctamente las personas adultas y niños, así como la mascota y elementos del entorno, como arboles o hierba. & Se ha identificado correctamente las personas adultas, y niños, así como la mascota\\
 		\hline
-		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		Det. Correctas & Adultos, niños, mascota, tipo de mascota y raza, arboles, hierba, ...  &  Adultos, niños, mascota\\
 		\hline
-		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		Info. No Detectada & --------- & --------- \\
 		\hline
-		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		Errores & ninguno & ninguno \\
 		\hline
-		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		Valores Confianza & 98,9\% (niños) & 69\% (niños)\\
 		\hline
-		Dato D & Dato E & Dato F & Dato D & Dato E & Dato F & Dato A\\
+		Diferencias Servicio & Ha detectado más elementos de la imagen, además de detectar a los menores con un valor de confianza más alto. & Ha detectado menos elementos, y los menores los ha detectado con un valor de confianza menor. \\
+		\hline
+	\end{tabular}
+\end{center}  
+
+
+\subsubsection{Imagen 3: Escena con Múltiples Objetos}
+
+                                                                     
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
+		\hline
+		Información Obtenida & Ha identificado buena parte de los elementos del la imagen, aunque no todos & Prácticamente solo ha detectado 2 o 3 elementos en la imagen, obviando la mayoría. \\
+		\hline
+		Det. Correctas & Bicicletas, cajas, personas, calle, acera, plantas, ...   & Bicicletas, calle, acera \\
+		\hline
+		Info. No Detectada & Carteles, focos de luz,  & Personas, plantas, cajas, focos de luz, carteles\\
+		\hline
+		Errores & Ha identificado erróneamente los carteles como personas & ninguno \\
+		\hline
+		Valores Confianza & 95\% (media aprox.) & 79\% (media aprox.) \\
+		\hline
+		Diferencias Servicio & Aunque le han faltado elementos, ha identificado más y con valores de confianza más elevados & En esta imagen ha estado muy limitado, detectando pocos elementos y con valores de confianza más bajos. \\
+		\hline
+	\end{tabular}
+\end{center} 
+
+\subsubsection{Imagen 4: Imagen con Texto}
+
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
+		\hline
+		Información Obtenida & Se ha identificado el texto de los libros en la & Se ha identificado el texto de los libros en la imagen \\
+		\hline
+		Det. Correctas & Libros, Texto & Libros, Texto \\
+		\hline
+		Info. No Detectada & ------------------- & Texto del lomo de los últimos 2 libros de abajo\\
+		\hline
+		Errores & ninguno & ninguno \\
+		\hline
+		Valores Confianza & ----------------- & -------------------- \\
+		\hline
+		Diferencias Servicio & Ha identificado el texto de todos los libros & Le ha faltado identificar el texto de 2 libros, quizás por el contraste o el tamaño de la letra \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection{Imagen 5: Imagen Compleja}
+
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
+		\hline
+		Información Obtenida & Se ha identificado el entorno de la imagen así como muchos elementos de la misma & Se ha identificado el entorno de la imagen, pero pocos elementos de la misma \\
+		\hline
+		Det. Correctas & Entorno urbano, ciudad, carretera, calle, vehículos, mochilas, personas, coches, letreros, texto, altavoces & Entorno urbano, ciudad, noche, electricidad, calle, personas, señales de neon \\
+		\hline
+		Info. No Detectada & Algunas señales  & Personas, mochilas, coches, camiones, altavoces, algunos letreros\\
+		\hline
+		Errores & Ha identificado algunos letreros como personas & ninguno \\
+		\hline
+		Valores Confianza & 95\% (media aprox.) & 85\% (media aprox) \\
+		\hline
+		Diferencias Servicio & Ha identificado la mayor parte de elementos, muchos en malas condiciones lumínicas o semiocultos & No ha identificado muchos elementos, entre ellos personas, que solo ha identificado 2 de las muchas que hay. Tiene especialmente dificultad cuando hay muchos elementos juntos. Un punto a notar, es que ha identificado mucho texto de algunos letreros \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection{Imagen 6: Imagen Relacionada con el Proyecto}
+
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
+		\hline
+		Información Obtenida & Solo se ha identificado que se trata de un mapa &  Solo se ha identificado que se trata de una mapa \\
+		\hline
+		Det. Correctas & Mapa & Mapa \\
+		\hline
+		Info. No Detectada & Ninguno de los elementos que contiene el mapa & Ninguno de los elementos que contiene el mapa \\
+		\hline
+		Errores & ninguno & ninguno \\
+		\hline
+		Valores Confianza & ----------------- & -------------------- \\
+		\hline
+		Diferencias Servicio & No ha habido diferencias entre los dos modelos & No ha habido diferencias entre los dos modelos. \\
 		\hline
 	\end{tabular}
 \end{center}
 
 
+\subsection{Análisis de la Respuesta JSON}
+En este apartado se van a analizar brevemente la \textbf{estructura JSON} generada por los dos modelos como respuesta. Se ha escogido la imagen del grupo de personas, para poder observar bien la respuesta JSON sin demasiados elementos. A grandes rasgos se han identificado 2 estructuras principales dentro del JSON que podemos ver en la siguiente imágenes.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{json-google.png}
+		\caption{Json de Google Cloud Vision}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{json-amazon.png}
+		\caption{JSON de Amazon Rekognition}
+	\end{minipage}
+\end{figure}
+
+Como podemos ver, \textbf{Google Cloud Vision} ofrece más información posicional, pero la estructura es menos clara que en \textbf{Amazon Recognition}.
+
+En este aspecto, \textbf{un programar para automatizar el consumo} de estos archivos JSON sería muy sencillo, ya que prácticamente cualquier lenguaje trae funciones y sintaxis para trabajar con este tipo de archivos, especialmente Javascript o Typescript. Se podría hacer \textbf{serializando el archivo}, \textbf{recorriendo las claves} y almacenando los valores de forma iterativa o incluso convirtiéndolo en una cadena de caracteres.
+
+\subsection{Conclusiones}
+Después de haber realizado la comparación de los dos modelos y teniendo en cuenta los resultados, para nuestro proyecto optaríamos por \textbf{Amazon Rekognition}, ya que ha ofrecido mejores resultados en prácticamente todas las pruebas, con niveles de confianza mayores, además de devolver los resultados en un formato más legible. Evidentemente habría que entrenarlo para nuestro propósito concreto, usando \textbf{Amazon Rekognition Custom Labels}, para que aprendiera a identificar los elementos de nuestro mapa. 
 
 
 
