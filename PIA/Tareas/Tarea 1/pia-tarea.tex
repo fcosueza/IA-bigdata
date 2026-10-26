@@ -85,13 +85,13 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 		
 		\item \textbf{Fiabilidad del análisis}: la distribución de los jugadores y los elementos en el mapa no siempre permiten determinar is una decisión táctica es correcta. Una forma de \textbf{mitigar} este riesgo es mediante la inclusión del contexto de las capturas y la revisión de la conclusión por jugadores experimentados.
 		
-		\item \textbf{Cantidad de capturas y limitación temporal}: si las capturas de una partida están demasiado espaciadas entre ellas, la evaluación de la situación y de los cambios en la partida pueden no ser correctos. Habrá que \textbf{mitigare} este riesgo proporcionando una cantidad suficiente de capturas, preferiblemente cada pocos minutos, parta que el análisis sea más preciso.
+		\item \textbf{Cantidad de capturas y limitación temporal}: si las capturas de una partida están demasiado espaciadas entre ellas, la evaluación de la situación y de los cambios en la partida pueden no ser correctos. Habrá que \textbf{mitigar} este riesgo proporcionando una cantidad suficiente de capturas, preferiblemente cada pocos minutos, parta que el análisis sea más preciso.
 	\end{itemize}
 	
 	\item \textbf{Riesgos económicos}
 	\begin{itemize}
-		\item \textbf{Coste de la Infraestructura}: la infraestructura para la ejecución de modelos de IA, especialmente orientados a las visión artificial, puede ser costoso. Una de forma de \textbf{mitigar} este riesgo sería usar modelos ya previamente entrenados y aprovechar recursos gratuitos, antes de contratar infraestructura en la nube.
-		\item \textbf{Coste de Servicios de Inteligencia Artificial}: si se usan APIs comerciales en la aplicación el costo puede aumentar rápidamente con el número de peticiones. Para \textbf{mitigar} es riesgo se pueden establecer límites, explorar las opciones gratuitas o valorar le ejecución de modelos locales o en la nube.
+		\item \textbf{Coste de la Infraestructura}: la infraestructura para la ejecución de modelos de IA, especialmente orientados a las visión artificial, puede ser costoso. Una forma de \textbf{mitigar} este riesgo sería usar modelos ya previamente entrenados y aprovechar recursos gratuitos, antes de contratar infraestructura en la nube.
+		\item \textbf{Coste de Servicios de Inteligencia Artificial}: si se usan APIs comerciales en la aplicación el costo puede aumentar rápidamente con el número de peticiones. Para \textbf{mitigar} este riesgo se pueden establecer límites, explorar las opciones gratuitas o valorar le ejecución de modelos locales o en la nube.
 		\item \textbf{Coste de mantenimiento y escalabilidad}: si finalmente se decide ofrecer la aplicación al resto de clanes de la comunidad esto puede tener un incremento sustancial en el coste de mantenimiento del servicios. Se podría \textbf{mitigar} este riesgo planteando la inclusión de otros clanes de la comunidad mediante un servicios de suscripción que cobra los gatos extra generados.
 	\end{itemize}
 	
@@ -104,7 +104,7 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 	
 	\item \textbf{Riesgos con los Datos y Calidad de Predicciones}
 	\begin{itemize}
-		\item \textbf{Recomendaciones tácticas poco efectivas}: puede que el modelo llegue a conclusiones que no son efectivas en las partidas, por diferentes motivos, y que pueden ser contraproducentes para el equipo. Para \textbf{mitigar} estos problemas, se necesitará la validación, por parte de jugadores experimentados, de las estrategias sugeridas, así como proporcionar feedback al sistemas después de aplicar las tácticas sugeridas.
+		\item \textbf{Recomendaciones tácticas poco efectivas}: puede que el modelo llegue a conclusiones que no son efectivas en las partidas, por diferentes motivos, y que pueden ser contraproducentes para el equipo. Para \textbf{mitigar} estos problemas, se necesitará la validación, por parte de jugadores experimentados, de las estrategias sugeridas, así como proporcionar feedback al sistemas después de aplicar dichas tácticas.
 		\item \textbf{Análisis de rivales poco realista}: los análisis de rivales pueden ser poco realistas o equivocados, llevando a una planificación táctica errónea. Para \textbf{mitigar} este riesgo, se deberán proporcionar todas las capturas he información necesaria sobre los rivales para que realice un perfil táctico más ajustado a la realidad.                  
 	\end{itemize}
 \end{itemize}
@@ -112,9 +112,9 @@ Los \textbf{principales riesgo} asociados a este proyectos son los siguientes:
 Respecto a los \textbf{riesgos éticos}, ya que es una aplicación que se va a utilizar en un videojuego y que trata con información personal de los usuarios, no se han identificado riesgos éticos.
 
 \section{Marco Legal y Uso Responsable de la IA}
-En primer lugar, respecto a la \textbf{Ley de IA de la UE}, y atendiendo al marco regulador, nuestra aplicación se podría clasificar como \textbf{Riesgo Mínimo o Nulo} \cite{euai}, ya que se empleará simplemente para su uso en videojuegos, realizando predicciones que solo afectarán a partidas del juego en concreto. Si habría que tener en cuenta que al tener un \textbf{chatbot} existe la obligación de tener ciertas \textbf{medias de transparencia}, en este caso, informar de que las estrategias \textbf{están generadas con IA}, así como mostrar el proceso de razonamiento por el que ha llegado el modelo a esa conclusión.
+En primer lugar, respecto a la \textbf{Ley de IA de la UE}, y atendiendo al marco regulador, nuestra aplicación se podría clasificar como \textbf{Riesgo Mínimo o Nulo} \cite{euai}, ya que se empleará simplemente para su uso en videojuegos, realizando predicciones que solo afectarán a partidas del juego en concreto. Si habría que tener en cuenta que al tener un \textbf{chatbot} existe la obligación de tener ciertas \textbf{medidas de transparencia}, en este caso, informando de que las estrategias \textbf{están generadas con IA}, así como mostrando el proceso de razonamiento por el que ha llegado el modelo a esa conclusión.
 
-Respecto al \textbf{Reglamento General de Protección de Datos}, hay que tener en cuenta que \textbf{no se va recabar información personal} sobre los jugadores, ya que estos serán identificados por sus alias dentro del juego. En el caso de que se acabe de implementar la \textbf{integración en discord}, habría que revisar este punto, ya que si es más probable que en las cuentas de discord los usuarios tengan información personal, pero en un principio, esa información no ser´ia necesaria para interactuar con al aplicación desde discord, si seria necesario recolectarla ni tratarla. De igual forma, \textbf{no se van a tratar imágenes de personas}, ya que solo se van a procesador imágenes de mapas del juego.
+Respecto al \textbf{Reglamento General de Protección de Datos}, hay que tener en cuenta que \textbf{no se va recabar información personal} sobre los jugadores, ya que estos serán identificados por sus alias dentro del juego. En el caso de que se acabe de implementar la \textbf{integración en discord}, habría que revisar este punto, ya que si es más probable que en las cuentas de discord los usuarios tengan información personal, pero en un principio, esa información no sería necesaria para interactuar con al aplicación desde discord, ni seria necesario recolectarla ni tratarla. De igual forma, \textbf{no se van a tratar imágenes de personas}, ya que solo se van a procesador imágenes de mapas del juego.
 
 Respecto al tema de \textbf{sesgos} o \textbf{discriminación} es un tema que, por la naturaleza de la aplicación, no tiene ningún tipo de riesgo asociado y tampoco hay que aplicar ninguna legislación en este aspecto.
 
@@ -151,13 +151,13 @@ Los \textbf{requisitos funcionales} que debe cumplir nuestra aplicación son los
 Una vez definidos los requisitos funcionales, vamos a describir los \textbf{requisitos no funcionales}:
 
 \begin{itemize}
-	\item \textbf{RNF-1. Rendimiento}: la aplicación debe procesar todas las capturas y los informes de la forma mas eficiente posible, dados los recursos de los que va a disponer la aplicación.
+	\item \textbf{RNF-1. Rendimiento}: la aplicación debe procesar todas las capturas y los informes de la forma mas eficiente posible, teniendo en cuenta los recursos de los que va a disponer.
 	\item \textbf{RFN-2. Tiempo de Respuesta}: aunque no es un elemento clave, ya que los informes no se van a necesitar instantáneamente, se debe establecer un tiempo máximo de 3 minutos para el procesamiento de la información y la realización del análisis.
 	\item \textbf{RNF-3. Precisión}: la aplicación debe tener una precisión del 95\% como mínimo en la detección de elementos del juego.
-	\item \textbf{RNF-4. Escalabilidad}: dado que en un futuro se puede plantear ampliar la base de usuarios otros clanes y jugadores, hay que diseñar e implementar la aplicación de forma que pueda escalar bien.
-	\item \textbf{RFN-5. Usabilidad}: la interfaz web debe ser amigable y que personas sin conocimientos técnicos sean capaces de cargas capturas, generar informes, etc.
+	\item \textbf{RNF-4. Escalabilidad}: dado que en un futuro se puede plantear ampliar la base de usuarios a otros clanes y jugadores, hay que diseñar e implementar la aplicación de forma que pueda escalar bien.
+	\item \textbf{RFN-5. Usabilidad}: la interfaz web debe ser amigable y que personas sin conocimientos técnicos sean capaces de cargar capturas, generar informes, etc.
 	\item \textbf{RFN-6. Seguridad}: la aplicación deberá garantizar que no se realizan accesos autorizados a las capturas ni los informes mediante mecanismos de control de acceso y autenticación.
-	\item \textbf{RFN-7. Mantenimiento}: debe diseñarse la aplicación de forma modular para que su mantenimiento se sencillo, facilitando la modificación y ampliación de características.
+	\item \textbf{RFN-7. Mantenimiento}: debe diseñarse la aplicación de forma modular para que su mantenimiento sea sencillo, facilitando la modificación y ampliación de características.
 	\item \textbf{RNF-8. Compatibilidad}: la aplicación debe ser compatible con todos los navegadores más usados, como Chrome, Safari, Firefox ...etc.
 \end{itemize}
 
@@ -175,7 +175,7 @@ En esa sección se van a explicar, de forma breve, las principales tareas que se
 	
 	\item \textbf{Planificación}: en esta etapa se va a planificar el resto del proyecto, incluyendo entre otras las siguientes tareas:
 	\begin{itemize}
-		\item \textbf{Planificación de Recursos}: se deberán planificar los diferentes recursos que vamos a emplear en el desarrollo. En nuestro caso necesitaremos \textbf{desarrolladores} tanto para desarrollo web como de inteligencia artificial y de datos. Deberemos planificar el \textbf{hardware} que deberemos emplear y la \textbf{infraestructura} que vamos a usar, si será en la nube o física. Así mismo se deberá planificar los recursos \textbf{software}, incluyendo los \textbf{lenguajes} y \textbf{librerías} que se van a emplear.
+		\item \textbf{Planificación de Recursos}: se deberán planificar los diferentes recursos que vamos a emplear en el desarrollo. En nuestro caso necesitaremos \textbf{desarrolladores} tanto para desarrollo web como de inteligencia artificial y de datos. Deberemos planificar el \textbf{hardware} que vamos a emplear y la \textbf{infraestructura} que vamos a usar, si será en la nube o física. Así mismo se deberán planificar los recursos \textbf{software}, incluyendo los \textbf{lenguajes} y \textbf{librerías} que se van a emplear.
 		\item \textbf{Definición de Tarea}: se definirán las tareas que se van a realizar en cada etapa del desarrollo, incluyendo todas las tareas de diseño de la interfaz web, de programación y entrenamiento del modelo, la política de test que se van a implementar, ...etc.
 		\item \textbf{Estimación de Tiempos}: una vez planificados los recursos de los que disponemos y las tareas que hay que realizar se realizará una estimación del tiempo que nos llevará el desarrollo.		
 	\end{itemize}
@@ -183,7 +183,7 @@ En esa sección se van a explicar, de forma breve, las principales tareas que se
 	\item \textbf{Diseño}: en esta etapa va a ser donde se diseñe nuestra aplicación e incluye:
 	\begin{itemize}
 		\item  \textbf{Diseño de Sistema}: se debe realizar un diseño general del sistema separando la parte web de la parte de inteligencia artificial, realizando un \textbf{diseño modular} que facilite la interacción entre los diferentes elementos. La \textbf{parte web y de IA} deben ser \textbf{independientes} la una de la otra e interaccionar mediante APIs u otro tipo de integración.
-		\item \textbf{Diseño de la Interfaz Web}: se deberá realizar un diseño de la interfaz web de la aplicación, teniendo en cuenta la \textbf{\textbf{usabilidad}}, \textbf{accesibilidad} e implementando las \textbf{\textbf{buenas prácticas}} que faciliten su ampliación y mantenimiento. Se deberán seguir los estándares definidos por la W3C. 
+		\item \textbf{Diseño de la Interfaz Web}: se deberá realizar un diseño de la interfaz web de la aplicación, teniendo en cuenta la \textbf{\textbf{usabilidad}}, \textbf{accesibilidad} e implementando las \textbf{\textbf{buenas prácticas}} que faciliten su ampliación y mantenimiento. Se deberán seguir los estándares definidos por la W3C y la WCAG. 
 		\item \textbf{Diseño de la IA}: esta parte dependerá de si ha seleccionado un modelo previamente entrenado no. En cualquier caso, deberá \textbf{diseñarse la lógica} de la aplicación que se encargara de tratar con la IA y conectarla con la aplicación web.
 		\item \textbf{Diseño de los Test}: se deberá diseñar la política de test que se va implementar, incluyendo los \textbf{test unitarios}, de \textbf{integración} y \textbf{e2e} para la aplicación, así como los específicos para validar el \textbf{modelo de IA}.
 	\end{itemize}
@@ -191,22 +191,22 @@ En esa sección se van a explicar, de forma breve, las principales tareas que se
 	\item \textbf{Desarrollo}: en esta etapa es cuando se va a desarrollar propiamente dicho la aplicación, e incluye entre otras tareas:
 	\begin{itemize}
 		\item \textbf{Instalación de la Herramientas}: se deberán instalar, si no lo están ya, todas las \textbf{herramientas necesarias para el desarrollo}, como entornos de desarrollo, lenguajes de programación, librerías, frameworks,...etc.
-		\item \textbf{Codificación}: en este punto se empezará a codificar tanto la interfaz web como la parte de inteligencia artificial, empleando los lenguajes ya la herramientas que se hayan definido.
-		\item \textbf{Entrenamiento del Modelo}: durante esta etapa, y una vez codificado el modelo, deberá llevar a cabo su \textbf{entrenamiento}, mediante el conjunto de datos que se ha estipulado, tanto de la parte de análisis de imágenes, como de la parte de análisis y realización de estrategias.
+		\item \textbf{Codificación}: en este punto se empezará a codificar tanto la interfaz web como la parte de inteligencia artificial, empleando los lenguajes y las herramientas que se hayan definido.
+		\item \textbf{Entrenamiento del Modelo}: durante esta etapa, y una vez codificado el modelo, deberá llevarse a cabo su \textbf{entrenamiento}, mediante el conjunto de datos que se ha estipulado, tanto de la parte de análisis de imágenes, como de la parte de análisis y realización de estrategias.
 	\end{itemize}
 	
 	\item \textbf{Pruebas}: en esta parte del ciclo de vida se realizarán los test de la aplicación para evaluar su funcionalidad, incluyendo las siguientes tareas:
 	\begin{itemize}
-		\item \textbf{Pruebas Unitarias}: aunque esta tarea se incluye en esta fase, su realización se ha debido de llevar a cabo junto con el desarrollo, ya que \textbf{cada modulo}, componente o función deberá llevar \textbf{asociada una suite de test} unitarios.
+		\item \textbf{Pruebas Unitarias}: aunque esta tarea se incluye en esta fase, su realización se ha debido de llevar a cabo junto con el desarrollo, ya que cada \textbf{modulo}, \textbf{componente} o \textbf{función} deberá llevar \textbf{asociada una suite de test} unitarios.
 		\item \textbf{Pruebas de Integración}: aunque durante el desarrollo ya se habrá implementado un sistema de pruebas de integración dentro de las parte de desarrollo web e IA, se deberán implementar y pasar pruebas para ver la \textbf{integración} de los dos sistemas.
-		\item \textbf{Pruebas E2E}: deberán realizar así mismo \textbf{pruebas de extremo a extremo}, usando algún framework que se habrá definido con anterioridad para ver la integración de todo el sistema desde la perspectiva de un usuario del sistema.
+		\item \textbf{Pruebas E2E}: deberán realizarse así mismo \textbf{pruebas de extremo a extremo}, usando algún framework que se habrá definido con anterioridad para ver la integración de todo el sistema desde la perspectiva de un usuario.
 		\item \textbf{Validación del Modelo}: se deberá probar y validar el modelo, empleando para ello \textbf{imágenes y datos} que no se haya empleado durante su entrenamiento. 
 	\end{itemize}
 	
 	\item \textbf{Despliegue}: una vez codificado el sistema y testeado se podrá realizar su despliegue:
 	\begin{itemize}
 		\item \textbf{Preparación y Configuración de Entorno}: se deberá \textbf{configurar y preparar el entorno} donde se va a desplegar la aplicación, ya sea en la nube o en un arquitectura física, según se haya decidido.
-		\item \textbf{Despliegue del Modelo}: se realizará el despliegue del \textbf{modelo de visión de artificial}, comprobando que funciona correctamente.
+		\item \textbf{Despliegue del Modelo}: se realizará el despliegue del \textbf{modelo de inteligencia artificial}, comprobando que funciona correctamente.
 		\item \textbf{Despliegue de la Aplicación Web}: se desplegará la \textbf{página web} en el entorno que se haya elegido, asegurándose que es accesible y funciona correctamente.
 		\item \textbf{Documentación del Proceso}: se creará \textbf{documentación} del \textbf{proceso de despliegue} que servirá para futuros despliegues tanto para el equipo como para el cliente, en caso de que quiera encargase el del despliegue en otra ocasión. 
 	\end{itemize}
@@ -228,13 +228,13 @@ Además de la planificación que se ha comentado en el punto anterior, el entren
 	\item \textbf{Obtención y Preparación de los Datos}: en esta primera fase habría que recopilar y prepara los datos para entrenar al modelo, que se compondría de diferentes tareas:
 	\begin{itemize}
 		\item \textbf{Obtención de las capturas}: en primer lugar deberíamos obtener las \textbf{capturas de los mapas} que van a emplearse en el entrenamiento. Para ello necesitaríamos la colaboración de los usuarios, que pueden proporcionar capturas en situaciones reales del juego, aunque también podría el equipo obtener algunas de los mapas del juego con diferentes señalizaciones. Así mismo se deberían proporcionar datos de la partida en formato CSV, que ayuden a complementar el análisis.
-		\item \textbf{Etiquetado de los Datos}: una vez obtenidas las capturas del mapa, se deberán \textbf{etiquetar los elementos} que deben ser \textbf{identificables en el mapa}, como soldados, tanques, marcas, ...etc, para indicarle al modelo cuales son los elementos importantes de dichas capturas. Así mismo se debería etiquetar los datos que no estén suficientemente claros en los datos de contexto de la partida.
+		\item \textbf{Etiquetado de los Datos}: una vez obtenidas las capturas del mapa, se deberán \textbf{etiquetar los elementos} que deben ser \textbf{identificables en el mapa}, como soldados, tanques, marcas, ...etc, para indicarle al modelo cuales son los elementos importantes de dichas capturas.
 		\item \textbf{Procesamiento de imágenes}: si fuera necesario, la imágenes deberán procesarse para \textbf{facilitar su consumo} por parte del \textbf{modelo}.
 	\end{itemize}
 	
 	\item \textbf{Selección y/o Configuración del Modelo}: tras preparar los datos, se deberá configurar el modelo que se ha seleccionado:
 	\begin{itemize}
-		\item  \textbf{Selección del Modelo}: se deberá seleccionar un modelo, y si se ha decidido así, que este previamente entrenado, lo que no quiere decir que no haya que entrenarlo para nuestro propósito concreto. Además para las conclusiones. Hay que tener en cuenta que \textbf{si no queremos usar varios modelos}, algunos para el procesamiento de imágenes y otro para la creación de estrategias, deberá ser un \textbf{modelo multimodal}, como por ejemplo \textbf{Qwen2.5-VL}.
+		\item  \textbf{Selección del Modelo}: se deberá seleccionar un modelo, y si se ha decidido así, que este previamente entrenado, lo que no quiere decir que no haya que entrenarlo para nuestro propósito concreto. Hay que tener en cuenta que \textbf{si no queremos usar varios modelos}, algunos para el procesamiento de imágenes y otro para la creación de estrategias, deberá ser un \textbf{modelo multimodal}, como por ejemplo \textbf{Qwen2.5-VL}.
 		\item \textbf{Configuración del Modelo}: se deberá configurar el modelo adaptándolo a las clases de elementos que hayamos definido y que queremos que identifique.
 	\end{itemize}
 	
