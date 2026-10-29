@@ -136,9 +136,68 @@ El usuario hadoop \textbf{se ha creado} durante el proceso de \textbf{instalaci�
 Instala y configura SSH para que el usuario \textbf{hadoop} pueda conectarse sin contraseña mediante clave pública. Prueba \textbf{ssh localhost} y \textbf{ssh nodo1\_iniciales\_26\_27}. Explica por qué Hadoop utiliza SSH.
 
 \subsection{Solución}
+En este ejercicio vamos a configurar SSH. \textbf{Hadoop} necesita ssh ya que este permite la conexión, de forma segura, a todos los nodos de la red distribuida. De esta forma el framework puede realizar operaciones en dichos nodos de forma segura, y aunque nosotros solo vamos a tener un nodo real, vamos a simular una red distribuida, así que necesitamos instalarlo.
+
+No se ha instalado ssh ya que esto se ha realizado durante la instalación. En primer lugar se \textbf{han generado las claves} usando el comando \textbf{ssh-keygen}, para posteriormente introducir la clave en el fichero \textbf{autorized\_keys} y cambiar los permisos para que todo funcione correctamente. A continuación se muestran las capturas con la configuración inicial.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{ssh-gen.png}
+	\caption{Generación de las claves de ssh}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{ssh-file.png}
+	\caption{Contenido del fichero autorized\_keys}
+\end{figure}
+
+Una vez configurado todo, se ha comprobado que funciona correctamente realizando la conexión al sistema empleando los 2 hosts especificados en el enunciado.
 
 
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.46]{ssh-localhost.png}
+	\caption{Conexión mediante ssh a localhost}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.46]{ssh-host.png}
+	\caption{Conexión empleando el host nodo1-fjsr-26-27}
+\end{figure}
+
+\section{Instalación de Apache Hadoop}
+Descarga e instala Apache Hadoop en \textbf{/opt/hadoop}. Configura \textbf{JAVA\_HOME}, \textbf{HADOOP\_HOME}, \textbf{HADOOP\_CONF\_DIR} y \textbf{PATH}. Comprueba la instalación con \textbf{hadoop version}.
+
+\subsection{Solución}
+En este ejercicio vamos a \textbf{instalar Hadoop} y a configurar las variables de entorno para su correcto funcionamiento. Para realizar la instalación, se ha elegido la \textbf{distribución binaria} que podemos encontrar en la \href{https://hadoop.apache.org/releases.html}{página de descargar de Hadoop}, mediante \textbf{wget}, ya que no tenemos interfaz gráfica, y se ha extraído en \textbf{/opt}. En la siguiente captura podemos ver el directorio de instalación de Hadoop.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.46]{hadoop-dir.png}
+	\caption{Directorio de instalación de Hadoop}
+\end{figure}
+
+A continuación se han establecido todas las variables de entorno para que Hadoop pueda funcionar correctamente, lo que se ha hecho incluyéndolas en el fichero \textbf{.bashrc} del directorio home del usuario.  Por último, se ha comprobado que la versión de Hadoop es la correcta, como podemos ver en las siguientes capturas.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.46]{hadoop-env.png}
+	\caption{Valores de las variables de entorno}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.46]{hadoop-ver.png}
+	\caption{Versión de Hadoop instalada}
+\end{figure}
+
+\section{Configuración Pseudo-distribuida}
+Configura \textbf{core-site.xml}, \textbf{hdfs-site.xml}, \textbf{mapred-site.xml} y b para trabajar en modo pseudo-distribuido. Explica la función de cada fichero y justifica \textbf{dfs.replication = 1}.
+
+\subsection{Solución}
 
 
 
