@@ -7,7 +7,7 @@
 \title{
 \vspace{10ex}
 \normalfont \normalsize
-\huge \textbf{Amazon Rekognition vs Google Cloud Vision}
+\huge \textbf{Introducción a Apache Hadoop}
 }
 \author{Francisco Javier Sueza Rodríguez}
 \date{\normalsize\today}
@@ -32,7 +32,7 @@
     \begin{tabular}{l l}
         \textbf{Centro}: & IES Zaidin-Vergeles \\
         \textbf{Curso}: & Inteligencia Artificial y Big Data\\
-        \textbf{Módulo}: & Programación de Inteligencia Artificial\\
+        \textbf{Módulo}: & Big Data Aplicado \\
     \end{tabular}
 \end{center}
 
@@ -52,608 +52,99 @@
 
 \newpage
 
-\section{Propuesta de Proyecto}
-Un \textbf{clan competitivo} del juego Hell Let Loose, un simulador militar de la Segunda Guerra Mundial, esta encontrando \textbf{problemas para desarrollar estrategias efectivas} en sus partidas de liga. Dado que no se encuentra una solución eficiente al problema y resulta bastante complejo el análisis de todo lo que sucede en una partida, se ha decidido crear una aplicación para que \textbf{ayude} en el proceso de \textbf{análisis y toma de decisiones} en la elaboración de la estrategia.
+\section{Creación de la Máquina Virtual}
+Crea en Oracle VirtualBox una máquina virtual con Ubuntu Server 26.04 LTS, 2 procesadores virtuales, 8 GB de RAM, 100 GB de almacenamiento y una configuración de red que permita acceso a Internet y a las interfaces web de Hadoop desde el equipo anfitrión.
 
-Los \textbf{usuarios} de esta aplicación serían los miembros del clan que han encargado el proyecto, aunque se baraja la posibilidad de que el uso de la aplicación se expanda a otros clanes o miembros de la comunidad competitiva de dicho juego.
+\subsection{Solución}
+En este primer ejercicio se va a proceder a instalar \textbf{Ubunut Server 26.04.1} en una máquina virtual de \textbf{VirtualBox}, la cual se ha instalado en el sistema operativo del host, que es una \textbf{Kubuntu 26.04.1}, y se ha creado una imagen usando es especificaciones indicadas.
 
-En este contexto, la \textbf{inteligencia artificial} nos va a aportar una gran capacidad de análisis, tanto de imágenes como de datos, para ayudar en la elaboración de estrategias efectivas que ayuden al clan a ganar sus partidas, o por lo menos a aumentar el rendimiento en éstas.
+En primer lugar se ha creado la imagen con el nombre \textbf{practica1-bda}, esto no estaba especificado en la practica por lo que se ha elegido este para dejar claro su propósito. La imagen se ha creado casi de forma automática, solo especificando algunos datos durante el proceso.
 
-\section{Objetivos}
-El \textbf{objetivo principal}  de la aplicación es realizar el \textbf{análisis de las partidas}, mediante el \textbf{procesamiento de las capturas de pantalla} proporcionados por lo usuarios, así como de los \textbf{datos generados} durante la partida y que se almacenan en formato CSV. Una vez realizado el análisis, deberá \textbf{ayudar en el desarrollo de estrategias} que se adapten a los diferentes mapas y que ayuden al equipo a ser más eficiente en las partidas. Este servicio se proporcionaría mediante un \textbf{chatbot} al que se puede acceder desde una \textbf{interfaz web}.
+Se ha creado el \textbf{usuario hadoop}, tal y como se especificaba en el enunciado, pero la ir a crear le \textbf{hostname} con las indicaciones dadas ha surgido un problema, y es que Linux \textbf{no admite la barra baja} (\_) como carácter para nombrar el hostname, por lo que sea ha sustituido por la barra media. Eso se debe a que según el estándar \cite{rfc01}, no se puede emplear este carácter para el hostname.
 
-Además de este objetivo principal, estaría interesante agregar algunos \textbf{objetivos secundarios}, como pueden ser los siguientes:
+En la siguiente captura se puede ver la configuración general generada después de crear la imagen:
 
-\begin{itemize}
-	\item \textbf{Integración con Discord}: sería interesante hacer que la aplicación se integrará en el servidor de discord del clan, proporcionando algunas las funcionalidades sin necesidad de acceder a la web.
-	\item \textbf{Perfiles de Equipos Rivales}: además de realizar análisis de las estrategias propias, sería bastante útil que pasando capturas de partidas de otros rivales se analizara las estrategias que llevan acabo elaborando un perfil y almacenándolo para su posterior uso o consulta.
-	\item \textbf{Perfil Personal}: mediante el análisis de los datos de un usuario concreto, elaborar un perfil individual del jugador,  indicando en que mapas se desempeña mejor, con que armas, en que posiciones, etc, ofreciendo finalmente algunos consejos para mejorar el rendimiento en las partidas y almacenando el resultado, para contrastar con datos futuros y analizar la evolución.
-\end{itemize}
-
-\section{Análisis de Riesgos}
-En este apartado vamos a realizar un \textbf{análisis de los riesgos} asociados al proyecto. Dada su naturaleza, podemos encontrar menos riesgos que en otro tipos de proyecto, pero sin estar exento de ellos. 
-
-Los \textbf{principales riesgo} asociados a este proyectos son los siguientes: 
-
-\begin{itemize}
-	\item \textbf{Riesgos Técnicos}
-	\begin{itemize}
-		\item \textbf{Precisión en la identificación de elementos}: los modelos podrían no identificar correctamente todos los elementos que aparecen en el mapa, realizando una análisis equivocado lo que afectaría a su función principal. La forma de \textbf{mitigar} este riesgos es proporcionar, durante su entrenamiento, un conjunto de datos e imágenes especificando las características de cada elemento y su uso en el juego.	
-		
-		\item \textbf{Fiabilidad del análisis}: la distribución de los jugadores y los elementos en el mapa no siempre permiten determinar is una decisión táctica es correcta. Una forma de \textbf{mitigar} este riesgo es mediante la inclusión del contexto de las capturas y la revisión de la conclusión por jugadores experimentados.
-		
-		\item \textbf{Cantidad de capturas y limitación temporal}: si las capturas de una partida están demasiado espaciadas entre ellas, la evaluación de la situación y de los cambios en la partida pueden no ser correctos. Habrá que \textbf{mitigar} este riesgo proporcionando una cantidad suficiente de capturas, preferiblemente cada pocos minutos, parta que el análisis sea más preciso.
-	\end{itemize}
-	
-	\item \textbf{Riesgos económicos}
-	\begin{itemize}
-		\item \textbf{Coste de la Infraestructura}: la infraestructura para la ejecución de modelos de IA, especialmente orientados a las visión artificial, puede ser costoso. Una forma de \textbf{mitigar} este riesgo sería usar modelos ya previamente entrenados y aprovechar recursos gratuitos, antes de contratar infraestructura en la nube.
-		\item \textbf{Coste de Servicios de Inteligencia Artificial}: si se usan APIs comerciales en la aplicación el costo puede aumentar rápidamente con el número de peticiones. Para \textbf{mitigar} este riesgo se pueden establecer límites, explorar las opciones gratuitas o valorar le ejecución de modelos locales o en la nube.
-		\item \textbf{Coste de mantenimiento y escalabilidad}: si finalmente se decide ofrecer la aplicación al resto de clanes de la comunidad esto puede tener un incremento sustancial en el coste de mantenimiento del servicios. Se podría \textbf{mitigar} este riesgo planteando la inclusión de otros clanes de la comunidad mediante un servicios de suscripción que cobra los gatos extra generados.
-	\end{itemize}
-	
-	\item \textbf{Riesgos Organizativos}
-	\begin{itemize}
-		\item \textbf{Planificación Inadecuada}: se puede correr el riesgo de no realizar una planificación adecuada del desarrollo del proyecto. Una forma de \textbf{mitigarlo} es siguiendo un correcto ciclo de desarrollo y planificar correctamente cada fase.
-		\item \textbf{Disponibilidad de los Usuarios Colaboradores}: para el correcto entrenamiento y recopilación de datos necesitamos la colaboración de los usuario de la aplicación, para que tomen capturas en situaciones reales de partida. Esto puede resultar en inconvenientes a la hora de organizarse con la gente del clan. Para \textbf{mitigarlo}, deberemos acordar con antelación la colaboración de los miembros del clan, ya sea de todos o de un grupo, para aportar dichas capturas, así como para etiquetar algunos datos y validar los resultados.
-		\item \textbf{Alcance Excesivo}: otro riesgo es que queramos que el proyecto haga mas de lo que realmente puede con el presupuesto y la tecnología que se cuenta. Para \textbf{mitigar} es riesgo, podemos establecer límites claros, dejando en primer lugar los objetivos secundarios al margen y centrándonos en la funcionalidad principal.
-	\end{itemize}
-	
-	\item \textbf{Riesgos con los Datos y Calidad de Predicciones}
-	\begin{itemize}
-		\item \textbf{Recomendaciones tácticas poco efectivas}: puede que el modelo llegue a conclusiones que no son efectivas en las partidas, por diferentes motivos, y que pueden ser contraproducentes para el equipo. Para \textbf{mitigar} estos problemas, se necesitará la validación, por parte de jugadores experimentados, de las estrategias sugeridas, así como proporcionar feedback al sistemas después de aplicar dichas tácticas.
-		\item \textbf{Análisis de rivales poco realista}: los análisis de rivales pueden ser poco realistas o equivocados, llevando a una planificación táctica errónea. Para \textbf{mitigar} este riesgo, se deberán proporcionar todas las capturas he información necesaria sobre los rivales para que realice un perfil táctico más ajustado a la realidad.                  
-	\end{itemize}
-\end{itemize}
-
-Respecto a los \textbf{riesgos éticos}, ya que es una aplicación que se va a utilizar en un videojuego y que trata con información personal de los usuarios, no se han identificado riesgos éticos.
-
-\section{Marco Legal y Uso Responsable de la IA}
-En primer lugar, respecto a la \textbf{Ley de IA de la UE}, y atendiendo al marco regulador, nuestra aplicación se podría clasificar como \textbf{Riesgo Mínimo o Nulo} \cite{euai}, ya que se empleará simplemente para su uso en videojuegos, realizando predicciones que solo afectarán a partidas del juego en concreto. Si habría que tener en cuenta que al tener un \textbf{chatbot} existe la obligación de tener ciertas \textbf{medidas de transparencia}, en este caso, informando de que las estrategias \textbf{están generadas con IA}, así como mostrando el proceso de razonamiento por el que ha llegado el modelo a esa conclusión.
-
-Respecto al \textbf{Reglamento General de Protección de Datos}, hay que tener en cuenta que \textbf{no se va recabar información personal} sobre los jugadores, ya que estos serán identificados por sus alias dentro del juego. En el caso de que se acabe de implementar la \textbf{integración en discord}, habría que revisar este punto, ya que si es más probable que en las cuentas de discord los usuarios tengan información personal, pero en un principio, esa información no sería necesaria para interactuar con al aplicación desde discord, ni seria necesario recolectarla ni tratarla. De igual forma, \textbf{no se van a tratar imágenes de personas}, ya que solo se van a procesador imágenes de mapas del juego.
-
-Respecto al tema de \textbf{sesgos} o \textbf{discriminación} es un tema que, por la naturaleza de la aplicación, no tiene ningún tipo de riesgo asociado y tampoco hay que aplicar ninguna legislación en este aspecto.
-
-Todo esto, por supuesto, teniendo en cuenta el \textbf{funcionamiento planificado} para la aplicación, si en algún momento se decide añadir nuevas funcionalidades, habrá que revisar todos estos aspectos legales y riesgos asociados para realizar los cambios necesarios en la aplicación de la normativa vigente.
-
-\section{Análisis de requisitos}
-En esta actividad vamos a realizar el análisis de \textbf{requisitos de la aplicación}, describiendo tanto los requisitos funcionales como los no funcionales.
-
-\subsection{Requisitos Funcionales}
-Los \textbf{requisitos funcionales} que debe cumplir nuestra aplicación son los siguientes:
-\begin{itemize}
-	\item \textbf{RF-1. Entrada de Imágenes}: la aplicación debe aceptar imágenes con mapas tácticos del juego para poder procesarlas y realizar una análisis.
-	\item \textbf{RF-2. Validación de las Capturas}: la aplicación debe validar que las capturas introducidas cumplen con los requisitos establecidos.
-	\item \textbf{RF-3. Identificación de Elementos}: la aplicación debe identificar los diferentes elementos que aparece en el mapa, como soldados, señales, puntos de control, etc.
-	\item \textbf{RF-4. Identificación del Terreno}: la aplicación debe identificar la diferentes elevaciones del terreno de las que se compone el mapa.
-	\item \textbf{RF-5. Análisis de Disposición}: la aplicación debe analizar la posición relativa de los dos equipos y la distribución de jugadores.
-	\item \textbf{RF-6. Análisis Temporal}: la aplicación debe realizar un análisis temporal de la evolución de la partida dadas una serie de capturas que muestren la evolución los dos equipos en el mapa.
-	\item \textbf{RF-7. Datos Adicionales}: la aplicación debe aceptar datos adicionales en formato CSV que le ayudan a realizar el análisis de la partida.
-	\item \textbf{RF-8. Informe de la Partida}: la aplicación debe generar una análisis sobre la partida una vez que haya recopilado todos los datos proporcionados.
-	\item \textbf{RF-9. Sugerencias Bajo Demanda}: la aplicación debe generar sugerencia de mejora en aspectos concretos de la partida cuando se le pregunten sobre ellos, basados en el análisis realizado.
-	\item \textbf{RF-10. Explicación de Conclusiones}: la aplicación debe indicar criterios empleados y el razonamiento llevado a cabo, sin exponer el funcionamiento interno del modelo.
-	\item \textbf{RF-11. Propuesta de Estrategia}: la aplicación debe proponer una estrategia que mejore la empleada en la partida, si es posible, basándose en el análisis realizado.
-	\item \textbf{RF-12. Correcciones y Aprendizaje}: la aplicación debe aceptar correcciones sobre los análisis o estrategias propuestas, almacenándolas para su consulta y posterior uso.
-	\item \textbf{RF-13. Organización de Partidas}: la aplicación debe agrupar y almacenar las capturas y resultados de una partida, manteniendo la asociación con el mapa y el momento temporal.
-	\item \textbf{RD-14. Historial de Partidas}: la aplicación debe de almacenar un historial de las partidas, con sus respectivas capturas, conclusiones y estrategias asociadas.
-	\item \textbf{RF-15. Interfaz Web}: la aplicación debe tener una interfaz web donde proporcione todas las funcionalidades planificadas.
-	\item \textbf{RF-16. Chatbot}: la introducción de información así como la interacción con la aplicación se realizar mediante un chatbot que estará integrado en la interfaz web.
-	\item \textbf{RF-17. Cuentas de Usuario}: los usuarios del clan deberán poderse crear una cuenta para acceder a la aplicación desde la interfaz web.
-	\item \textbf{RF-18. Actualizar Perfil}: los usuarios podrán actualizar la información de su cuenta, como nombre de usuario y contraseña.
-	\item \textbf{RF-19. Eliminar Cuenta}: los usuarios podrán eliminar su cuenta del sistema cuando quieran.
-\end{itemize}
-
-\subsection{Requisitos No Funcionales}
-Una vez definidos los requisitos funcionales, vamos a describir los \textbf{requisitos no funcionales}:
-
-\begin{itemize}
-	\item \textbf{RNF-1. Rendimiento}: la aplicación debe procesar todas las capturas y los informes de la forma mas eficiente posible, teniendo en cuenta los recursos de los que va a disponer.
-	\item \textbf{RFN-2. Tiempo de Respuesta}: aunque no es un elemento clave, ya que los informes no se van a necesitar instantáneamente, se debe establecer un tiempo máximo de 3 minutos para el procesamiento de la información y la realización del análisis.
-	\item \textbf{RNF-3. Precisión}: la aplicación debe tener una precisión del 95\% como mínimo en la detección de elementos del juego.
-	\item \textbf{RNF-4. Escalabilidad}: dado que en un futuro se puede plantear ampliar la base de usuarios a otros clanes y jugadores, hay que diseñar e implementar la aplicación de forma que pueda escalar bien.
-	\item \textbf{RFN-5. Usabilidad}: la interfaz web debe ser amigable y que personas sin conocimientos técnicos sean capaces de cargar capturas, generar informes, etc.
-	\item \textbf{RFN-6. Seguridad}: la aplicación deberá garantizar que no se realizan accesos autorizados a las capturas ni los informes mediante mecanismos de control de acceso y autenticación.
-	\item \textbf{RFN-7. Mantenimiento}: debe diseñarse la aplicación de forma modular para que su mantenimiento sea sencillo, facilitando la modificación y ampliación de características.
-	\item \textbf{RNF-8. Compatibilidad}: la aplicación debe ser compatible con todos los navegadores más usados, como Chrome, Safari, Firefox ...etc.
-\end{itemize}
-
-\section{Planificación del Proyecto}     
-En esta actividad vamos a planificar todo el \textbf{proceso de desarrollo de proyecto}, diferenciando entre las \textbf{tareas} que se deben realizar en el \textbf{ciclo de desarrollo} y las que se deben realizar para el \textbf{entrenamiento y despliegue del modelo de IA}.
-
-\subsection{Tareas Generales del Proyecto}
-En esa sección se van a explicar, de forma breve, las principales tareas que se deberán realizar en cada fase del ciclo de desarrollo de nuestra aplicación.    
-\begin{itemize}
-	\item \textbf{Análisis}: en esta etapa se deberá realizar un análisis exhaustivo del problema que se quiere solucionar, de las diferentes tareas en las que se va a descomponer, ...etc. Entre otras, las principales tareas serán:
-	\begin{itemize}
-		\item \textbf{Descripción del problema}: descripción detallada del problema que se pretende abordar, explicando las \textbf{dificultades para realizar estrategias} en el juego, como se va a abordar la generación de estrategias mediante la lectura de mapas, los problemas que nos podemos encontrar con esta aproximación, el uso de modelos de Inteligencia Artificial especializados en la visión por computador, ...etc.
-		\item \textbf{Análisis de Requisitos}: esta tarea consistirá en definir todos los \textbf{requisitos funcionales} de nuestra aplicación, teniendo en cuenta las necesidades de los usuarios finales. Además de definirán los \textbf{requisitos no funcionales} de la aplicación. No vamos a entrar demasiado en este punto porque acabamos de definir los principales en el punto anterior.
-	\end{itemize}
-	
-	\item \textbf{Planificación}: en esta etapa se va a planificar el resto del proyecto, incluyendo entre otras las siguientes tareas:
-	\begin{itemize}
-		\item \textbf{Planificación de Recursos}: se deberán planificar los diferentes recursos que vamos a emplear en el desarrollo. En nuestro caso necesitaremos \textbf{desarrolladores} tanto para desarrollo web como de inteligencia artificial y de datos. Deberemos planificar el \textbf{hardware} que vamos a emplear y la \textbf{infraestructura} que vamos a usar, si será en la nube o física. Así mismo se deberán planificar los recursos \textbf{software}, incluyendo los \textbf{lenguajes} y \textbf{librerías} que se van a emplear.
-		\item \textbf{Definición de Tarea}: se definirán las tareas que se van a realizar en cada etapa del desarrollo, incluyendo todas las tareas de diseño de la interfaz web, de programación y entrenamiento del modelo, la política de test que se van a implementar, ...etc.
-		\item \textbf{Estimación de Tiempos}: una vez planificados los recursos de los que disponemos y las tareas que hay que realizar se realizará una estimación del tiempo que nos llevará el desarrollo.		
-	\end{itemize}
-	
-	\item \textbf{Diseño}: en esta etapa va a ser donde se diseñe nuestra aplicación e incluye:
-	\begin{itemize}
-		\item  \textbf{Diseño de Sistema}: se debe realizar un diseño general del sistema separando la parte web de la parte de inteligencia artificial, realizando un \textbf{diseño modular} que facilite la interacción entre los diferentes elementos. La \textbf{parte web y de IA} deben ser \textbf{independientes} la una de la otra e interaccionar mediante APIs u otro tipo de integración.
-		\item \textbf{Diseño de la Interfaz Web}: se deberá realizar un diseño de la interfaz web de la aplicación, teniendo en cuenta la \textbf{\textbf{usabilidad}}, \textbf{accesibilidad} e implementando las \textbf{\textbf{buenas prácticas}} que faciliten su ampliación y mantenimiento. Se deberán seguir los estándares definidos por la W3C y la WCAG. 
-		\item \textbf{Diseño de la IA}: esta parte dependerá de si ha seleccionado un modelo previamente entrenado no. En cualquier caso, deberá \textbf{diseñarse la lógica} de la aplicación que se encargara de tratar con la IA y conectarla con la aplicación web.
-		\item \textbf{Diseño de los Test}: se deberá diseñar la política de test que se va implementar, incluyendo los \textbf{test unitarios}, de \textbf{integración} y \textbf{e2e} para la aplicación, así como los específicos para validar el \textbf{modelo de IA}.
-	\end{itemize}
-	
-	\item \textbf{Desarrollo}: en esta etapa es cuando se va a desarrollar propiamente dicho la aplicación, e incluye entre otras tareas:
-	\begin{itemize}
-		\item \textbf{Instalación de la Herramientas}: se deberán instalar, si no lo están ya, todas las \textbf{herramientas necesarias para el desarrollo}, como entornos de desarrollo, lenguajes de programación, librerías, frameworks,...etc.
-		\item \textbf{Codificación}: en este punto se empezará a codificar tanto la interfaz web como la parte de inteligencia artificial, empleando los lenguajes y las herramientas que se hayan definido.
-		\item \textbf{Entrenamiento del Modelo}: durante esta etapa, y una vez codificado el modelo, deberá llevarse a cabo su \textbf{entrenamiento}, mediante el conjunto de datos que se ha estipulado, tanto de la parte de análisis de imágenes, como de la parte de análisis y realización de estrategias.
-	\end{itemize}
-	
-	\item \textbf{Pruebas}: en esta parte del ciclo de vida se realizarán los test de la aplicación para evaluar su funcionalidad, incluyendo las siguientes tareas:
-	\begin{itemize}
-		\item \textbf{Pruebas Unitarias}: aunque esta tarea se incluye en esta fase, su realización se ha debido de llevar a cabo junto con el desarrollo, ya que cada \textbf{modulo}, \textbf{componente} o \textbf{función} deberá llevar \textbf{asociada una suite de test} unitarios.
-		\item \textbf{Pruebas de Integración}: aunque durante el desarrollo ya se habrá implementado un sistema de pruebas de integración dentro de las parte de desarrollo web e IA, se deberán implementar y pasar pruebas para ver la \textbf{integración} de los dos sistemas.
-		\item \textbf{Pruebas E2E}: deberán realizarse así mismo \textbf{pruebas de extremo a extremo}, usando algún framework que se habrá definido con anterioridad para ver la integración de todo el sistema desde la perspectiva de un usuario.
-		\item \textbf{Validación del Modelo}: se deberá probar y validar el modelo, empleando para ello \textbf{imágenes y datos} que no se haya empleado durante su entrenamiento. 
-	\end{itemize}
-	
-	\item \textbf{Despliegue}: una vez codificado el sistema y testeado se podrá realizar su despliegue:
-	\begin{itemize}
-		\item \textbf{Preparación y Configuración de Entorno}: se deberá \textbf{configurar y preparar el entorno} donde se va a desplegar la aplicación, ya sea en la nube o en un arquitectura física, según se haya decidido.
-		\item \textbf{Despliegue del Modelo}: se realizará el despliegue del \textbf{modelo de inteligencia artificial}, comprobando que funciona correctamente.
-		\item \textbf{Despliegue de la Aplicación Web}: se desplegará la \textbf{página web} en el entorno que se haya elegido, asegurándose que es accesible y funciona correctamente.
-		\item \textbf{Documentación del Proceso}: se creará \textbf{documentación} del \textbf{proceso de despliegue} que servirá para futuros despliegues tanto para el equipo como para el cliente, en caso de que quiera encargase el del despliegue en otra ocasión. 
-	\end{itemize}
-	
-	\item \textbf{Mantenimiento}: en esta etapa, con el sistema ya funcionando, se realizará el mantenimiento de la aplicación que puede incluir algunas de la siguientes tareas:
-	\begin{itemize}
-		\item \textbf{Corrección de Errores}: durante esta etapa podrán \textbf{identificar errores} en la aplicación web y corregirlos, desarrollando parches que puedan ser instalados.
-		\item \textbf{Monitorización y Correcciones del Modelo}: se deberá \textbf{evaluar el funcionamiento modelo} de inteligencia artificial, monitorizando su funcionamiento y realizando correcciones si fuera necesario.
-		\item \textbf{Implementación de Nuevas Funcionalidades}: se podrán \textbf{implementar nuevas funcionalidades}, ya sea por decisión del equipo o porque el cliente las solicite. En nuestro claro, podría plantearse la implementación de los objetivos secundarios definidos al inicio de este documento.
-	\end{itemize}
-\end{itemize}    
-
-Hay que tener en cuenta que estas tareas son una aproximación, y que pueden surgir nuevas tareas durante el proceso de desarrollo, ya sea por imprevistos, características que no se han tenido en cuenta, limitaciones que vayan surgiendo, etc.
-
-\subsection{Entrenamiento y Despliegue del/los Modelos}
-Además de la planificación que se ha comentado en el punto anterior, el entrenamiento y despliegue del modelo de inteligencia artificial requiere de pasos extra que se van a detallar en esta sección. 
-
-\begin{itemize}
-	\item \textbf{Obtención y Preparación de los Datos}: en esta primera fase habría que recopilar y prepara los datos para entrenar al modelo, que se compondría de diferentes tareas:
-	\begin{itemize}
-		\item \textbf{Obtención de las capturas}: en primer lugar deberíamos obtener las \textbf{capturas de los mapas} que van a emplearse en el entrenamiento. Para ello necesitaríamos la colaboración de los usuarios, que pueden proporcionar capturas en situaciones reales del juego, aunque también podría el equipo obtener algunas de los mapas del juego con diferentes señalizaciones. Así mismo se deberían proporcionar datos de la partida en formato CSV, que ayuden a complementar el análisis.
-		\item \textbf{Etiquetado de los Datos}: una vez obtenidas las capturas del mapa, se deberán \textbf{etiquetar los elementos} que deben ser \textbf{identificables en el mapa}, como soldados, tanques, marcas, ...etc, para indicarle al modelo cuales son los elementos importantes de dichas capturas.
-		\item \textbf{Procesamiento de imágenes}: si fuera necesario, la imágenes deberán procesarse para \textbf{facilitar su consumo} por parte del \textbf{modelo}.
-	\end{itemize}
-	
-	\item \textbf{Selección y/o Configuración del Modelo}: tras preparar los datos, se deberá configurar el modelo que se ha seleccionado:
-	\begin{itemize}
-		\item  \textbf{Selección del Modelo}: se deberá seleccionar un modelo, y si se ha decidido así, que este previamente entrenado, lo que no quiere decir que no haya que entrenarlo para nuestro propósito concreto. Hay que tener en cuenta que \textbf{si no queremos usar varios modelos}, algunos para el procesamiento de imágenes y otro para la creación de estrategias, deberá ser un \textbf{modelo multimodal}, como por ejemplo \textbf{Qwen2.5-VL}.
-		\item \textbf{Configuración del Modelo}: se deberá configurar el modelo adaptándolo a las clases de elementos que hayamos definido y que queremos que identifique.
-	\end{itemize}
-	
-	\item \textbf{Entrenamiento}: como ya hemos comentado, aunque el modelo este previamente entrenado, necesitará un entrenamiento específico para nuestro propósito, que es muy particular, así deberemos realizar:
-	\begin{itemize}
-		\item \textbf{Entrenamiento del Modelo}: se le deberán proporcionar al modelo mapas del juego con los elementos que queremos que identifique correctamente etiquetados para que aprenda a identificarlo, así como datos de contexto.
-		\item \textbf{Ajuste y Optimización}: se deberá ajustar el modelo y los parámetros del entrenamiento para mejorar le precisión de las detecciones en caso de que sea necesario.
-	\end{itemize}
-	
-	\item \textbf{Evaluación de los Resultados}: una vez realizado el entrenamiento deberemos evaluar cual es el resultado obtenido, el cual podremos dividir en la siguientes tareas:
-	\begin{itemize}
-		\item \textbf{Preparar Dato de Evaluación}: se deberán seleccionar mapas que no se hayan usado para entrenar el modelo para comprobar su entrenamiento.
-		\item \textbf{Evaluación}: con los datos de la evaluación, un miembro del equipo de desarrollo, asistido por un miembro del clan deberán evaluar las respuestas que genere el modelo al procesar los mapas. 
-		\item \textbf{Registrar y Clasificar Errores}: durante el proceso de evaluación puede ser que se detecten errores en los análisis del modelo, estos errores deberán documentarse y clasificarse.
-		\item \textbf{Mejorar y Evaluar}: una vez detectados los errores deberán ajustarse las instrucciones o los ejemplos, y si fuera necesario, adaptar el modelo.
-	\end{itemize}
-	
-	\item \textbf{Despliegue}: el despliegue del modelo se hará de forma similar al resto de la aplicación, con las siguientes tareas: 
-	\begin{itemize}
-		\item \textbf{Preparación del Entorno}: se deberá configurar el entorno donde se va a desplegar el modelo, ya sea en una infraestructura local o en la nube.
-		\item \textbf{Despliegue del Modelo}: se desplegará el modelo comprobando que funciona correctamente y es accesible.
-		\item \textbf{Documentación del Proceso}: se debe documentar el proceso de despliegue para futuros despliegues o por si el cliente quiere desplegarlo por su cuenta.
-	\end{itemize}
-	
-	\item \textbf{Monitorización}: en esta última etapa se deberá de monitorizar el rendimiento del sistema, estando atento a si aparecen nuevos elementos en el juego y si sería necesario una actualización del modelo. Las principales tareas sería: 
-	\begin{itemize}
-		\item \textbf{Monitorización del Rendimiento}: se tendrá que monitorizar el tiempo de respuestas, el uso de recursos, la disponibilidad, fiabilidad, errores técnicos, ...etc.
-		\item \textbf{Calidad del Análisis y Predicciones}: así mismo se tendrá que monitorizar la calidad de los análisis que realiza y de las estrategias que recomienda para identificar errores o perdida de precisión.
-		\item \textbf{Detección de Cambios en los Datos}: se deberá tener en cuenta si hay cambios en los mapas, por ejemplo, nuevos símbolos, y ver como reacciona el modelo ante estos cambios. 
-		\item \textbf{Actualización}: en caso de que sea necesario se actualizará el modelo para los nuevos patrones, comprobando que el nuevo modelo funciona mejor antes de su despliegue. 
-	\end{itemize}
-\end{itemize}    
-
-\section{Tecnologías para el Desarrollo}
-En este ejercicio vamos a explicar la \textbf{tecnologías} que se van a emplear en la aplicación. Aunque podemos distinguir entre las tecnologías usadas en la aplicación de forma general y las librerías concretas que se utilizarán para la parte de la IA.
-
-\subsection{Tecnologías Generales}
-En primer lugar, y después de valorar otras tecnologías, se ha decido usar \textbf{Python} como lenguaje principal para la aplicación, ya que es el lenguaje que se va a usar para la programación de la inteligencia artificial y de esta forma tenemos un \textbf{ecosistema común} para todo la aplicación.
-
-Para la parte de \textbf{aplicación web} se usará el framework \textbf{Django}, que nos permitirá realizar toda la aplicación en el mismo framework y usando Python. Para la parte de frontend se usará \textbf{HTML}, \textbf{Javascript}, \textbf{CSS} y \textbf{Django Templates}, mientras que para la parte de backend se empleará \textbf{Python} (Django).
-
-Como base de datos se empleará \textbf{PosgreSQL}, ya que es una base de datos extensamente usada y muy rápida. Además es compatible con Django y se puede manejar perfectamente desde el framework..     
-
-Para los diferentes tipos de test, se empleará \textbf{pytest} y \textbf{pytest-django} para las pruebas tanto unitarias como de integración. Además, se utilizará \textbf{Playwright} para las pruebas e2e, así como para probar la aplicación en diferentes navegadores web.
-
-Para el despliegue, se ha decidido utilizar \textbf{Docker}, ya que es una tecnología que nos va a permitir ejecutar la aplicación en cualquier máquina en las mismas condiciones, junto con \textbf{Docker Compose} que nos facilitará más aún las labores de despliegue.
-
-Además, se empleará \textbf{clickup} para llevar un control del proyecto y de las tareas que hay que hacer y del tiempo que se le dedican, así como \textbf{Github} (git) para el control de versiones y el desarrollo colaborativo.
-
-Y esto es en lo que se refiere las \textbf{tecnologías generales} de la aplicación, podríamos haber elegido \textbf{otras alternativas}, como por ejemplo \textbf{Nextjs} para la parte web y \textbf{Typescript}, que son tecnologías que también ofrecen un buen ecosistema y buen desempeño en aplicaciones web, pero ello ya implicaría tener dos entornos de desarrollo diferentes para la parte de la aplicación web y de la inteligencia artificial, de esta forma se unifica todo el desarrollo bajo un mismo entorno.
-
-\subsection{Tecnologías para el Desarrollo de la IA}
-En esta sección vamos a explicar las tecnologías específicas del apartado de inteligencia artificial de nuestra aplicación, sumándose a las ya comentadas en el apartado anterior.
-
-En primer lugar, como ya hemos comentado, el \textbf{lenguaje de programación} será \textbf{Python}, podríamos haber incluido R, por ejemplo, para el análisis estadístico de las partidas o de los datos de contexto, pero ya sería introducir otro lenguaje en la ecuación, complicando el proceso de desarrollo, además de que es algo que se puede solventar con algunas librerías de Python. 
-
-Como \textbf{modelo de inteligencia artificial} se va a emplear el modelo multimodal \textbf{Qwen2.5-VL}. Se ha optado por un modelo multimodal ya que en caso contrario, se debería usar un modelo para el procesado de imágenes y otro para el análisis de la partida y la elaboración de la estrategias. De esta forma, solo necesitamos un modelo para realizar todo el trabajo. Para \textbf{cargar y ejecutar el modelo} vamos a emplear los \textbf{Transformers} de Hugging Face, un framework que permite cargar el modelo y interactuar con el enviándole prompts.
-
-Para el \textbf{procesamiento de imágenes} vamos a usar \textbf{Pillow}, que nos ayudará a preparar la imágenes para que se puedan procesar. Será el modelo principal el que se encargará de realizar el análisis de imágenes, por lo que en un principio no necesitaríamos más. En el caso de que se necesitara mas preparación para la imagen, se podría valorar OpenCV, pero es una librería más compleja y que en principio no vamos a usar si no es necesario. 
-
-En el apartado de \textbf{análisis estadístico} se empleará \textbf{Pandas} y \textbf{Nuphy}. El primero se usará para preparar los datos para su procesamiento y el segundo para aplicar los cálculos matemáticos y estadísticos necesarios.
-
-Por último se podría usar \textbf{Pydantic} para evaluar las respuestas del modelo, en las diferentes tareas de evaluación que hay durante el proceso de desarrollo.
-             
-\section{Perfiles Profesionales}
-Para llevar a cabo este proyecto necesitaremos un \textbf{conjunto de profesionales}, de diferentes áreas del desarrollo de software, para llevar el proyecto hasta el final. Los principales roles que se necesitarán son los siguientes: 
-
-\begin{itemize}
-	\item \textbf{Jefe de Proyecto}: sería el encargado de gestionar el proyecto en general, siendo sus principales \textbf{funciones} las de definir el alcance, asegurarse que se van completando los objetivos y controlando los recursos del proyecto. Sería además el encargado de seleccionar que tecnologías se van a usar y de la planificación general del proyecto, \textbf{participando} en todas las fases del proyecto y \textbf{aportando} la organización y recursos necesarios para su desarrollo.
-	
-	\item \textbf{Analista de Datos}: su \textbf{función} principal será la de extraer y preparar los datos para que el modelo pueda entrenarse, además de desarrollar gráficos y representaciones de los datos. Su \textbf{participación} estará ligada al entrenamiento del modelo de IA y concretamente a la obtención y preparación de los datos. \textbf{Aportará} al proyecto sus conocimientos en datos fundamentales para el entrenamiento del modelo.
-	
-	\item \textbf{Ingeniero de IA y Visión por Computador}: sus \textbf{funciones} serían las de entrenar el modelo. Así mismo se encargaría de la integración del modelo en aplicación y de su evaluación. Su \textbf{participación} sería en prácticamente todas las fases del desarrollo, \textbf{aportando} una de los aspecto más importantes de la aplicación que es la preparación e integración del modelo de inteligencia artificial en la aplicación.
-	
-	\item \textbf{Desarrollador Web FullStack}: será el encargado de desarrollar la parte web de la aplicación. Sus \textbf{funciones} serán las de crear la aplicación web que se encargar de integra el modelo, diseñando la interfaz y creando la lógica necesaria para que la aplicación funcione en la web, como sistemas de autenticación, manejo de la base de datos, etc. \textbf{Participará} especialmente en la fases de diseño, desarrollo, y mantenimiento. Su \textbf{aportación} a la aplicación será crucial, ya que sin la interfaz web y la aplicación que la gestione los usuarios no podrán hacer uso de aplicación.
-	
-	\item \textbf{DevOps}: sus principales \textbf{funciones} serán las de preparar la infraestructura necesaria para poder desarrollar la aplicación y mantenerla. Aunque \textbf{participara} en casi todas las fases del proyecto, en las que estará más implicado sera en la de despliegue, planificación y desarrollo, \textbf{aportando} sus conocimientos sobre infraestructura y permitiendo que el desarrollo transcurra sin problema.
-	
-	\item \textbf{Especialista en Calidad (QA)}: la principales \textbf{funciones} serán las de diseñar, elaborar y ejecutar los diferentes tipos de pruebas que vamos a emplear en la aplicación. Su \textbf{participación} será principalmente en la fases de pruebas y mantenimiento. Su \textbf{aportación} al proyecto será la de garantizar que la aplicación cumple con los estándares de calidad deseados.
-	
-	\item \textbf{Experto en Estrategia de HLL}: se necesitará un experto que tenga conocimientos sobre la estrategia del juego, su principal\textbf{función} será la de validar las estrategias sugeridas por el modelo y corregirlas en caso de que sea necesario. Su \textbf{participación} será principalmente en las fases de entrenamiento y validación del modelo, \textbf{aportando} sus conocimientos sobre el dominio del problema, en este caso, las estrategias del juego.         
-\end{itemize} 
-
-\section{Caso Práctico - Amazon Rekognition vs Google Cloud Vision}
-En esta última actividad vamos a realizar una comparativa de dos de los principales modelos de visión por computador, como son \textbf{Amazon Rekognition} y \textbf{Google Cloud Vision}. Se seleccionarán una serie de imágenes y se pasarán por los dos modelos, analizando sus respuestas y comparándolas.
-
-\subsection{Comparación Práctica}
-En este apartado se han seleccionado 6 imágenes diferentes y se han procesado con los 2 modelos.  Todas las imágenes han sido descargadas de \href{https://unsplash.com/es}{Unsplash}, ya que la licencia del sitio permite su uso con fines comerciales o no comerciales de forma gratuita \cite{unsplash}. Como detalle, no se va a poner una imagen original, para ahorrar espacio, sino las capturas de la imagen mientras se realizan las pruebas. No obstante, se incluirá un enlace hace la imagen, por si es necesario visualizar el original.
-
-\begin{itemize}
-	\item \textbf{Imagen 1. Retrato}
-	
-	\textbf{Procedencia}: Unsplash\\
-	\textbf{Author}: Jake Nacktos\\
-	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/mujer-con-camisa-blanca-de-cuello-redondo-sonriendo-IF9TK5Uy-KI}{enlace}\\
-	\textbf{Motivo}: La imagen se ha elegido porque es muy simple, y muestra claramente una persona sonriendo, para comprobar la respuestas de los modelos con imágenes sencillas.\\
-	
-	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.28]{retrato-amazon.png}
-		\caption{Retrato analizado por Amazon Rekognition}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.28]{retrato-google.png}
-		\caption{Retrato analizado por Google Cloud Vision}
-	\end{figure}
-	
-	
-	
-	Como podemos ver en los resultados, las dos plataformas \textbf{identifican correctamente} la emoción de la persona como feliz, pero hay diferencias en la información que proporciona cada modelo. Mientras que \textbf{Google Vision} se centra más en elementos faciales, como las cejas, barbilla, ...etc, \textbf{Amazon Rekognition} proporcionar menos detalle sobre estos elementos, pero añade información sobre que se trata de una persona adulta.
-	
-	\item \textbf{Imagen 2. Grupo de Personas}
-	
-	\textbf{Procedencia}: Unsplash\\
-	\textbf{Author}: CDC\\
-	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/familia-lavando-a-un-golden-retriever-en-el-jardin-trasero-SAwxJ8PHY3Q}{enlace}\\
-	\textbf{Motivo}: La imagen ya entraña algo más de dificulta, se ha elegido porque aparecen personas de diferentes edades en una posición no muy normal, con el añadido de que hay una animal.\\
-	
-	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.28]{grupo-amazon.png}
-		\caption{Imagen de grupo analizada por Amazon Rekognition}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.27]{grupo-google.png}
-		\caption{Imagen de grupo analizada por Google Cloud Vision}
-	\end{figure}
-	
-	Una vez realizado el procesado, cada plataforma arroja valores diferentes a la hora de \textbf{identificar menores}. Aunque las dos los han identificado, \textbf{Amazon Rekognition} ofrece un intervalo de confianza del 98.9\%, mientras que \textbf{Google Cloud Vision} ofrece un intervalo del 69\%, por lo que en ese aspecto esta más limitado, y no sería un intervalo de confianza lo suficientemente alto para asegurar, sin lugar a dudas, que hay menores en la imagen.
-	
-	\item \textbf{Imagen 3. Escenas con Múltiples Objetos}
-	
-	\textbf{Procedencia}: Unsplash\\
-	\textbf{Author}: Clay Banks\\
-	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/tres-bicicletas-estacionadas-frente-al-edificio-hwLAI5lRhdM}{enlace}\\
-	\textbf{Motivo}: Se he elegido esta imagen ya que entraña complejidad, con numerosos objetos similares, textos, ..etc. \\
-	
-	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.28]{objetos-amazon.png}
-		\caption{Imagen con múltiples objetos analizada por Amazon Rekognition}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.28]{objetos-google.png}
-		\caption{Imagen con múltiples objetos analizada por Google Cloud Vision}
-	\end{figure}
-	
-	Tras pasar las imágenes se ha realizado una comparativa de diferentes valores concretos:
-	
-	\begin{itemize}
-		\item \textbf{Etiquetas reconocidas}: comparando las 2 plataformas, \textbf{Amazon Rekogition} ha identificado muchas más etiquetas, incluyendo las plantas, las cajas del suelo e incluso una persona dentro de la tienda, mientras que \textbf{Google Cloud Vision} ha estado mucho más limitado en ese aspecto, detectando solo las bicicletas y poco más.
-		\item \textbf{Niveles de Detalle de la Etiqueta}: en este aspecto también ha quedado por encima la plataforma de \textbf{Amazon}, siendo mucho más preciso a la hora de determinar los elementos de cada etiqueta.
-		\item \textbf{Valores de Confianza}: los valores de confianza han sido muchos más altos en la aplicación de \textbf{Amazon}, poniendo como ejemplo la \textbf{bicicleta}, donde Amazon ofrece un 92\% de confianza mientras que \textbf{Google} ofrece un 73\%, algo que se repite en todo en análisis.
-		
-		\item \textbf{Objetos Visibles No Detectados}: en este aspecto, los objetos no detectados por \textbf{Google} han sido muchos, desde las cajas, planta, ..etc. \textbf{Amazon} ha detectado mucho más, aunque hay objetos que ambos no han detectado, como focos de luz, carteles, etc...
-		
-		\item \textbf{Posible Detecciones Incorrectas}: la única detección incorrecta que se ha detectado ha sido la de \textbf{Amazon}, detectando unos carteles con imágenes de personas como personas.
-	\end{itemize}
-	
-	
-	\item \textbf{Imagen 4. Imagen con Texto}
-		
-	\textbf{Procedencia}: Unsplash\\
-	\textbf{Author}: Christopher Stites\\
-	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/una-pila-de-novelas-de-fantasia-sobre-una-mesa-xIB5FvmLESA}{enlace}\\
-	\textbf{Motivo}: Se ha elegido esta imagen ya que incluye el título de diferentes libros, con diferentes colores y tipografías, por lo que puede estar interesante. \\
-	
-	
-	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
-	
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{texto-amazon.png}
-		\caption{Imagen con texto analizada por Amazon Rekognition}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{texto-google.png}
-		\caption{Imagen con texto analizada por Google Cloud Vision}
-	\end{figure}
-	
-	Las \textbf{dos plataformas} han detectado casi todo el texto, pero \textbf{Google Cloud Vision} no ha podido detectar el texto de los últimos 2 libros, mientras que \textbf{Amazon} si lo ha   hecho. Respecto a la localización, las dos muestran el texto en ingles, pero no encuentro en ningún sitio que especifiquen el idioma.
-	
-	Al margen de esto, las \textbf{dos plataformas} han detectado correctamente que se trata de un conjunto de libros. En concreto Google ha incluso incluido el género de alguno de ellos.
-	
-	
-	\item \textbf{Imagen 5. Imagen de Especial Dificultad}  
-	
-	\textbf{Procedencia}: Unsplash\\
-	\textbf{Author}: Pema G. Lama\\
-	\textbf{Enlace}: \href{https://unsplash.com/es/fotos/personas-que-caminan-por-la-calle-durante-la-noche-nrA0Qd8H36M}{enlace}\\
-	\textbf{Motivo}: Esta imagen se ha elegido por su complejidad, ya que aparecen muchas personas y objetos, algunos de ellos parcialmente cubiertos y en condiciones de iluminación no idóneas. \\
-	
-	A continuación se muestran las capturas con la imagen procesada en los dos modelos:
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{google-tokyo.png}
-		\caption{Imagen compleja analizada por Google}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{amazon-tokyo.png}
-		\caption{Imagen compleja analizada por Amazon Rekognition}
-	\end{figure}       
-	
-	En está imagen es una de las que más diferencia se ha notado entre las plataformas. Aunque \textbf{ambas} han detectado que se trata de un entorno urbano, con rascacielos y luces de neón, el número de objetos detectados por \textbf{Google Cloud Vision} ha sido muy pequeño y con un porcentaje de confianza que no supera el 65\%, siendo capaz de identificar solso a 2 personas. 
-	
-	En cambio \textbf{Amazon Rekognition} ha sido capaz, no solo de identificar a la mayor parte de las personas, algunas en zonas muy oscuras o parcialmente cubiertas, sino otros elementos como coches , camiones, pantallas, etc.
-	
-	\item \textbf{Imagen 6. Caso Relacionado}
-	                                                                                              
-	
-	\textbf{Procedencia}: Propia\\
-	\textbf{Author}: Francisco Sueza Rodríguez\\
-	\textbf{Enlace}: ninguno\\
-	\textbf{Motivo}: Se ha escogido un mapa del juego HLL en plena partida, que sería la imagen principal que deberá analizar el modelo. \\
-	
-		\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{mapa-amazon.png}
-		\caption{Mapa de HLL analizado por Google}
-	\end{figure}
-	
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[scale=0.26]{mapa-google.png}
-		\caption{Mapa de HLL analizado Amazon Rekognition}
-	\end{figure}
-	
-	Como es de esperar, ninguno de los modelos ha sabido identificar los elementos del mapa, aunque si han identificado ambos que se trata de uno. 
-	
-	Nuestro caso es un problema muy específico, que necesitará de un entrenamiento previo, etiquetando los diferentes elementos del mapa, para que el modelo sea capaz de reconocer todos lo elementos que podemos encontrarnos.           
-\end{itemize}
-
-\subsection{Comparación de Resultados}
-En este apartado vamos a analizar, de forma global, los resultados obtenidos en las seis imágenes analizadas por los dos modelos de visión por computador. Se va a comprar imagen por imagen mediante la realización de una tabla donde se condensará la información recabada durante los análisis. 
-
-Hubiera sido interesante realizar la sección anterior y esta en una misma, aprovechando las capturas para crear una ficha sobre cada imagen, o haber incluido las imágenes y algo de información, pero por falta de una planificación adecuada no hay espacio restante suficiente, así que se ha optado por realizarlo mediante tablas.
-
-\subsubsection{Imagen 1: Retrato}
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Se ha identificado correctamente a la persona, así como el estado de ánimo de esta  & Se ha identificado a la persona correctamente y el estado de animo de ésta \\
-		\hline
-		Det. Correctas & Persona, Estado de Ánimo, Edad & Persona, Estado de Ánimo, Componentes del Rostro \\
-		\hline
-		Info. No Detectada & --------- & --------- \\
-		\hline
-		Errores & ninguno & ninguno \\
-		\hline
-		Valores Confianza & 99\% & 99\% \\
-		\hline
-		Diferencias Servicio & Ha detectado la edad de la persona & Ha detectado elementos del rostro como nariz, mejillas, etc.. \\
-		\hline
-	\end{tabular}
-\end{center} 
-
-\subsubsection{Imagen 2: Grupo de Personas}
-
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Se ha identificado correctamente las personas adultas y niños, así como la mascota y elementos del entorno, como arboles o hierba. & Se ha identificado correctamente las personas adultas, y niños, así como la mascota\\
-		\hline
-		Det. Correctas & Adultos, niños, mascota, tipo de mascota y raza, arboles, hierba, ...  &  Adultos, niños, mascota\\
-		\hline
-		Info. No Detectada & --------- & --------- \\
-		\hline
-		Errores & ninguno & ninguno \\
-		\hline
-		Valores Confianza & 98,9\% (niños) & 69\% (niños)\\
-		\hline
-		Diferencias Servicio & Ha detectado más elementos de la imagen, además de detectar a los menores con un valor de confianza más alto. & Ha detectado menos elementos, y los menores los ha detectado con un valor de confianza menor. \\
-		\hline
-	\end{tabular}
-\end{center}  
-
-
-\subsubsection{Imagen 3: Escena con Múltiples Objetos}
-
-                                                                     
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Ha identificado buena parte de los elementos del la imagen, aunque no todos & Prácticamente solo ha detectado 2 o 3 elementos en la imagen, obviando la mayoría. \\
-		\hline
-		Det. Correctas & Bicicletas, cajas, personas, calle, acera, plantas, ...   & Bicicletas, calle, acera \\
-		\hline
-		Info. No Detectada & Carteles, focos de luz,  & Personas, plantas, cajas, focos de luz, carteles\\
-		\hline
-		Errores & Ha identificado erróneamente los carteles como personas & ninguno \\
-		\hline
-		Valores Confianza & 95\% (media aprox.) & 79\% (media aprox.) \\
-		\hline
-		Diferencias Servicio & Aunque le han faltado elementos, ha identificado más y con valores de confianza más elevados & En esta imagen ha estado muy limitado, detectando pocos elementos y con valores de confianza más bajos. \\
-		\hline
-	\end{tabular}
-\end{center} 
-
-\subsubsection{Imagen 4: Imagen con Texto}
-
-
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Se ha identificado el texto de los libros en la & Se ha identificado el texto de los libros en la imagen \\
-		\hline
-		Det. Correctas & Libros, Texto & Libros, Texto \\
-		\hline
-		Info. No Detectada & ------------------- & Texto del lomo de los últimos 2 libros de abajo\\
-		\hline
-		Errores & ninguno & ninguno \\
-		\hline
-		Valores Confianza & ----------------- & -------------------- \\
-		\hline
-		Diferencias Servicio & Ha identificado el texto de todos los libros & Le ha faltado identificar el texto de 2 libros, quizás por el contraste o el tamaño de la letra \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\subsubsection{Imagen 5: Imagen Compleja}
-
-
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Se ha identificado el entorno de la imagen así como muchos elementos de la misma & Se ha identificado el entorno de la imagen, pero pocos elementos de la misma \\
-		\hline
-		Det. Correctas & Entorno urbano, ciudad, carretera, calle, vehículos, mochilas, personas, coches, letreros, texto, altavoces & Entorno urbano, ciudad, noche, electricidad, calle, personas, señales de neon \\
-		\hline
-		Info. No Detectada & Algunas señales  & Personas, mochilas, coches, camiones, altavoces, algunos letreros\\
-		\hline
-		Errores & Ha identificado algunos letreros como personas & ninguno \\
-		\hline
-		Valores Confianza & 95\% (media aprox.) & 85\% (media aprox) \\
-		\hline
-		Diferencias Servicio & Ha identificado la mayor parte de elementos, muchos en malas condiciones lumínicas o semiocultos & No ha identificado muchos elementos, entre ellos personas, que solo ha identificado 2 de las muchas que hay. Tiene especialmente dificultad cuando hay muchos elementos juntos. Un punto a notar, es que ha identificado mucho texto de algunos letreros \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\subsubsection{Imagen 6: Imagen Relacionada con el Proyecto}
-
-
-\begin{center}
-	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-		\hline
-		\textbf{Característica} & \textbf{Amazon Rekognition} & \textbf{Google Cloud Vision} \\
-		\hline
-		Información Obtenida & Solo se ha identificado que se trata de un mapa &  Solo se ha identificado que se trata de una mapa \\
-		\hline
-		Det. Correctas & Mapa & Mapa \\
-		\hline
-		Info. No Detectada & Ninguno de los elementos que contiene el mapa & Ninguno de los elementos que contiene el mapa \\
-		\hline
-		Errores & ninguno & ninguno \\
-		\hline
-		Valores Confianza & ----------------- & -------------------- \\
-		\hline
-		Diferencias Servicio & No ha habido diferencias entre los dos modelos & No ha habido diferencias entre los dos modelos. \\
-		\hline
-	\end{tabular}
-\end{center}
-
-
-\subsection{Análisis de la Respuesta JSON}
-En este apartado se van a analizar brevemente la \textbf{estructura JSON} generada por los dos modelos como respuesta. Se ha escogido la imagen del grupo de personas, para poder observar bien la respuesta JSON sin demasiados elementos. A grandes rasgos se han identificado 2 estructuras principales dentro del JSON que podemos ver en la siguiente imágenes.
-
-\begin{figure}[htbp]
+\begin{figure}[ht]
 	\centering
-	\begin{minipage}[b]{0.48\linewidth}
-		\centering
-		\includegraphics[width=\linewidth]{json-google.png}
-		\caption{Json de Google Cloud Vision}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[b]{0.48\linewidth}
-		\centering
-		\includegraphics[width=\linewidth]{json-amazon.png}
-		\caption{JSON de Amazon Rekognition}
-	\end{minipage}
+	\includegraphics[scale=0.32]{virtual-config-gen.png}
+	\caption{Configuración General de la Imagen}
+\end{figure}
+	
+Después de realizar la configuración general, se ha elegido el \textbf{número de CPUs} que queremos que tenga la imagen, que este caos han sido 2, y la \textbf{cantidad de RAM} que va a tener la máquina virtual, que va a ser un total de \textbf{8 GB}, tal y como se especifica en el enunciado.
+
+En la siguiente captura, tomada durante el proceso de creación, se puede ver esta información:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.32]{virtual-config-cpu.png}
+	\caption{Configuración de CPU/RAM de la Imagen}
 \end{figure}
 
-Como podemos ver, \textbf{Google Cloud Vision} ofrece más información posicional, pero la estructura es menos clara que en \textbf{Amazon Recognition}.
+También se ha seleccionado \textbf{100 GB de almacenamiento}, como podemos ver en la primera captura. El resto de la configuración se ha creado de forma automática, durante el proceso de creación de la imagen, como por ejemplo, el adaptador de red que se usa. En la siguiente captura, podemos ver la configuración creada tanto del Almacenamiento como de red:
 
-En este aspecto, \textbf{un programar para automatizar el consumo} de estos archivos JSON sería muy sencillo, ya que prácticamente cualquier lenguaje trae funciones y sintaxis para trabajar con este tipo de archivos, especialmente Javascript o Typescript. Se podría hacer \textbf{serializando el archivo}, \textbf{recorriendo las claves} y almacenando los valores de forma iterativa o incluso convirtiéndolo en una cadena de caracteres.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.32]{virtual-config-red.png}
+	\caption{Configuración del Alamacenamiento y de Red de la Imagen}
+\end{figure}
 
-\subsection{Conclusiones}
-Después de haber realizado la comparación de los dos modelos y teniendo en cuenta los resultados, para nuestro proyecto optaríamos por \textbf{Amazon Rekognition}, ya que ha ofrecido mejores resultados en prácticamente todas las pruebas, con niveles de confianza mayores, además de devolver los resultados en un formato más legible. Evidentemente habría que entrenarlo para nuestro propósito concreto, usando \textbf{Amazon Rekognition Custom Labels}, para que aprendiera a identificar los elementos de nuestro mapa. 
+Como podemos ver, ha configuración la conexión de red automáticamente con \textbf{NAT}, así como el controlador SATA para el almacenamiento.
+
+Una vez realizada la configuración, se ha \textbf{instalado Ubuntu Server} en la máquina virtual. Una vez realizada la instalación, se ha \textbf{iniciado Ubuntu Server} por primera, como podemos ver a continuación:
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.32]{virtual-config-init.png}
+	\caption{Primer inicio de Ubuntu Server}
+\end{figure}
+
+\section{Configuración del Nombre del Equipo y Preparación del Sistemas}
+Configura el nombre del nodo con el formato \textbf{nodo1\_iniciales\_26\_27}, compruébalo con \textbf{hostname} y \textbf{hostnamectl}, actualiza el sistema, verifica la conectividad e instala Java. Explica por qué Hadoop necesita Java y la función de \textbf{JAVA\_HOME}.
+
+\subsection{Solución}
+Como se comentaba en el punto anterior, \textbf{ni Linux}, \textbf{ni VirtualBox permiten} los nombres de host con \textbf{guiones bajos}, así que se ha optado por reemplazar los guiones bajos por guiones medios, para evitar conflictos. En la siguiente captura, podemos ver la ejecución de los comandos \textbf{hostname} y \textbf{hostnamectl}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.32]{hostname.png}
+	\caption{Ejecución de los comandos hostname y hostnamectl}
+\end{figure}
+
+A continuación se ha actualizado el sistemas, empleando el comando \textbf{sudo apt-get update} y se ha procedido a instalar Java, mediante los paquetes \textbf{default-jre} y \textbf{default-jdk}, que se han instalado sin problemas. En la siguiente captura, podemos ver la versión instalada de Java:
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.32]{java-install.png}
+	\caption{Versión de Java instalada}
+\end{figure}
+
+El motivo por que Hadoop es porque \textbf{esta desarrollado en Java}, especialmente las librerías principales del proyecto, aunque hay otros lenguajes que se incluyen en otras aplicaciones del ecosistemade Hadoop \cite{ibm01}. Respecto a \textbf{JAVA\_HOME}, es una variable de entorno importante, ya que apunta al \textbf{entorno de ejecución de JAVA}, o \textbf{JRE} (Java Runtime Environment).
+
+\section{Creación del Usuario Hadoop}
+Crea el usuario \textbf{hadoop}, su directorio personal, configura los permisos necesarios y accede con dicho usuario. El prompt debe tener un formato similar a \textbf{hadoop@nodo1\_abs\_26\_27:~\$}.
+
+\subsection{Solución}
+El usuario hadoop \textbf{se ha creado} durante el proceso de \textbf{instalación}, por lo que no ha sido necesario crearlo ahora, aunque hubiera sido sencillo usando el comando \textbf{adduser}, pero no ha sido necesario. En la siguiente captura se puede ver el prompt correcto.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{user.png}
+	\caption{Prompt con el usuario y el hostname}
+\end{figure}
+
+\section{Configuración de SSH}
+Instala y configura SSH para que el usuario \textbf{hadoop} pueda conectarse sin contraseña mediante clave pública. Prueba \textbf{ssh localhost} y \textbf{ssh nodo1\_iniciales\_26\_27}. Explica por qué Hadoop utiliza SSH.
+
+\subsection{Solución}
+
+
+
+
+
+
+
+
+
 
 
 
