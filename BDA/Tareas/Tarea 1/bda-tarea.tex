@@ -198,15 +198,236 @@ A continuación se han establecido todas las variables de entorno para que Hadoo
 Configura \textbf{core-site.xml}, \textbf{hdfs-site.xml}, \textbf{mapred-site.xml} y b para trabajar en modo pseudo-distribuido. Explica la función de cada fichero y justifica \textbf{dfs.replication = 1}.
 
 \subsection{Solución}
+En este ejercicio vamos a \textbf{configurar hadoop} para porder trabajar en modo pseudo-distribuido. Para ello vamos a modificar una serie de archivos que nos permitirán trabajar de este modo. Los ficheros y sus configuraciones son los siguientes: 
+
+\begin{itemize}
+	\item \textbf{core-site.xml}: contiene la configuración general de Hadoop y los parámetros comunes a todos sus componentes. En la siguiente captura podemos ver sus parámetros:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.58]{config-core.png}
+		\caption{Configuración core-site.xml}
+	\end{figure}
+	
+	\item \textbf{hdfs-site.xml}: contiene la configuración del sistema de ficheros HDFS. 
+	
+	En este archivo es donde hemos configurado la opción \textbf{dfs.replication} con valor 1. Esto se ha realizado así ya que esta configuración se utiliza para indicar a Hadoop \textbf{cuantas replicas} debe tener de cada bloque de datos. Por norma genera, cuando tenemos varios nodos suele haber varias replicas, por si falla alguna, pero como aquí solo tenemos un nodo solo podremos tener 1 replica de cada bloque de datos.
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.60]{config-hdfs.png}
+		\caption{Configuración hdfs-site.xml}
+	\end{figure}
+	
+	\item \textbf{mapred-site.xml}: este archivo permite configurar el MapReduce, que permite dividir los trabajos en tareas y ejecutarlas de forma distribuida. Los valores que hemos configurado se pueden ver en la siguiente captura:
+	
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.48]{config-map.png}
+		\caption{Configuración mapred-site.xml}
+	\end{figure}
+	
+	\item \textbf{yarn-site.xml}: contiene la configuración de YARN, el sistema encargado de gestionar los recursos del la red de nodos y coordinar la ejecución de las aplicaciones. 	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.44]{config-yarn.png}
+		\caption{Configuración yarn-site.xml}
+	\end{figure}
+\end{itemize}
+
+\section{Formateo y Puesta en marcha de HDFS y YARN}
+Formatea el NameNode, inicia HDFS y YARN y comprueba los procesos mediante jps. Deben aparecer, según la configuración, \textbf{NameNode}, \textbf{DataNode}, \textbf{SecondaryNameNode}, \textbf{ResourceManager} y \textbf{NodeManager}. 
+
+\subsection{Solución}
+En es ejercicio vamos a formatear el namenode, para poder iniciar HDFS y así mismo vamos a iniciar también YARN, comprobado que no esta funcionando correctamente, como podemos ver en las siguientes capturas.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.40]{init-format.png}
+	\caption{Formateo del namenode}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.52]{init-jps.png}
+	\caption{Procesos mostrados con jps}
+\end{figure}
+
+\section{Interfaces web de Hadoop}
+Accede a la interfaz del NameNode en \textbf{http://IP\_DEL\_NODO:9870} y a YARN ResourceManager en \textbf{http://IP\_DEL\_NODO:8088}. Explica brevemente qué información ofrece cada interfaz.
+
+\subsection{Solución}
+En este ejercicio nos hemos conectado a las dos interfaces web que proporciona, tanto \textbf{NameNode} como \textbf{YARN}. Ya que en la máquina virtual tenemos instalada \textbf{Ubuntu Server}, que no viene con entorno gráfico por defecto, se ha realizar la conexión desde el sistema host, configurando los puertos desde la máquina virtual. Las 2 interfaces ofrecen información diferente y permiten realizar cosa diferentes, como vemos a continuación:
+
+\begin{itemize}
+	\item \textbf{Interfaz de NameNode}: esta interfaz nos permite acceder a información y gestionar el sistema de archivos HDFS, viendo el estado general, el número de nodos, se ha habido errores, consultar los logs, ...etc. En la siguiente captura podemos ver la interfaz.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.35]{web-node.png}
+		\caption{Interfaz web de NameNode}
+	\end{figure}
+	
+	\item \textbf{Interfaz de YARN}: por otro lado, la interfaz de YARN nos permite gestionar los recursos de la red de nodos y de las aplicaciones que se ejecutan en ellas, visualizando estadísticas, aplicaciones, planificación, ...etc. La interfaz es la siguiente:
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[scale=0.35]{web-yarn.png}
+		\caption{Interfaz web de YARN}
+	\end{figure}
+\end{itemize}
+
+\section{Sistemas de almacenamiento Big Data}
+Redacta una explicación de 300-500 palabras sobre HDFS, NameNode, DataNode, bloques, replicación, diferencias con un sistema de ficheros tradicional, escalabilidad y ventajas de aumentar el número de nodos. Relaciónalo con la instalación realizada.
+
+\subsection{Solución}
+\textbf{HDFS} (Hadoop Distributed File System) es el sistema de archivos que usa Apache Hadoop, un sistema de archivos distribuido diseñado para almacenar grandes cantidades de información repartidas entre diferentes equipos o nodos. Su objetivo principal es ofrecer un sistema escalable y eficiente, a la par que tolerante a fallos, capaz de trabajar con grandes cantidades de datos de forma eficiente.
+
+Este sistema de archivos se basa principalmente en dos componentes: \textbf{NameNode} y \textbf{DataNode}. El \textbf{NameNode} es el encargado de gestionar la \textbf{metainformación} de los archivos, es decir, información sobre donde se ubican los archivos, que permisos tienen, los directorios, etc. Mientas que por otro lado, \textbf{DataNode} se encarga de almacenar la información que contienen los archivos propiamente dicha, así como de gestionar la operaciones de lectura y escritura.
+
+La unidad en la que se almacenan los archivos en los DataNodes son los \textbf{bloques}. Un archivo se divide en diferentes bloques que pueden ser almacenados en diferentes nodos, incluso el mismo bloque en varios nodos, utilizando lo se que conoce como \textbf{replicación}, una técnica que usa Hadoop para que un mismo bloque se almacene en diferentes nodos, de esta forma, se consigue un sistema, muy tolerante a fallos, ya que si un nodo deja de estar disponible, por ejemplo, se podrá recuperar desde otro nodo esa misma información. 
+
+Esta arquitectura favorece la \textbf{escalabilidad horizontal} del sistema, ya que simplemente añadiendo más nodos podemos expandirlo, permitiendo que la cantidad de datos que se pueden almacenar en el sistema aumente, en este aspecto, \textbf{aumentar el número de nodos} beneficia la distribución de carga en el sistema, así como la tolerancia a fallos, ya que podemos tener los bloques copiados en más nodos, además de facilitar el crecimiento de la estructura en general. 
+
+Esto, es \textbf{muy diferente} a un \textbf{sistemas de archivos tradicional}, ya que estos sistemas almacenan toda la información en un mismo ordenar, mientras que HDFS lo hace un multitud de nodos o equipos.
+
+En \textbf{nuestra instalación} no disponemos de varios equipos, por eso hemos realizado una configuración \textbf{pseudo-distribuida}, que aunque todo se ejecuta en una misma máquina, se mantienen los procesos separados, simulando su ejecución en diferentes nodos. Además, hemos indicado la opción \textbf{dfs.replication = 1}, ya que solo disponemos de una DataNode, y no tiene dinciar que se mantengan copias de los bloques en otros nodos.
+
+\section{Creación de la Estructura HDFS}
+Crea en HDFS \textbf{/datos}, \textbf{/datos/entrada}, \textbf{/datos/csv}, \textbf{/datos/json} y \textbf{/resultados}. Comprueba la estructura con \textbf{hdfs dfs -ls /} y \textbf{hdfs dfs -ls /datos}.
+
+\subsection{Solución}
+En este ejercicio se han creado los directorios pedidos empleando el comando \textbf{hdfs dfs -mkdir}. Este comando no creo directorios en el sistema de archivos del SO, sino dentro de HDFS. En la siguiente captura se puede ver la estructura de archivos creados.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.65]{estruct.png}
+	\caption{Estructura de archivos en HDFS}
+\end{figure}
+
+\section{Preparación del conjunto de datos}
+Utiliza el fichero \textbf{ventas.csv} suministrado, que contiene 100 registros más una cabecera. Identifica sus campos y comprueba el número de líneas mediante \textbf{wc -l ventas.csv}.
+
+\subsection{Solución}
+En primer lugar se ha comprobado que el fichero tiene las líneas que debe tener, como podemos ver en la siguiente captura.
 
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.65]{ventas-lineas.png}
+	\caption{Conteo de líneas del archivo ventas.csv}
+\end{figure}
+
+Además, ha abierto el fichero \textbf{ventas.csv}, viendo que los campos que tiene son: \textbf{id}, \textbf{fecha}, \textbf{provincia}, \textbf{categoría}, \textbf{producto}, \textbf{cantidad} y \textbf{precio}, como podemos ver.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.70]{ventas.png}
+	\caption{Archivo ventas.csv}
+\end{figure}
+
+\section{Ingestión de los Datos}
+Realiza la ingestión del fichero local en HDFS usando y explicando comandos como \textbf{hdfs dfs -put}, \textbf{hdfs dfs -copyFromLocal},\textbf{ hdfs dfs -ls} y \textbf{hdfs dfs -cat}. Explica la diferencia entre \textbf{put} y \textbf{copyFromLocal}.
+
+\subsection{Solución}
+En este ejercicio hemos realizado la \textbf{ingestión de los datos}. Esto consiste en pasar los datos, en nuestro caso por lotes, al sistema de archivos HDFS. En primer lugar, hemos copiado los archivos a la máquina virtual, empleando ssh. Se han copiado tanto los archivos ventas.csv como ventas.json, así ya lo tenemos para el próximo ejercicio. En la siguiente captura, se muestran los 2 archivos en el directorio home del usuario hadoop.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{ingesta-local.png}
+	\caption{Archivos locales de datos}
+\end{figure}
+
+Una vez copiados los archivos, hemos usado el comando \textbf{hdfs dfs -put} para copiarlos al sistema HDFS. Tanto este comando como \textbf{hdfs dfs -copyFromLocal} son muy parecidos, la diferencia es que mientras que \textbf{copyFromLocal} esta restringido a archivos locales, mientras que \textbf{put} puede realizar la copia desde otras fuentes, pero en la práctica, son iguales. 
+
+Para comprobar si el archivo estaba en el sistema de ficheros HDFS, hemos usado el comando \textbf{hdfs dfs -ls}. Es comando es \textbf{similar a ls de Unix/Linux}, es un comando que se limita a listar los elementos que hay en un directorio. De igual manera, para ver el contenido del fichero se ha usado \textbf{hdfs dfs -cat}, este comando, al igual que el \textbf{comanto cat de Linux}, concatena un fichero o un stream a la salida estándar, lo que en la práctica muestra el contenido de un fichero de texto o los bytes de un fichero binario. En la siguiente captura podemos ver la salida de estos dos comando. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.60]{ingesta-ls.png}
+	\caption{Uso de cat y ls en HDFS}
+\end{figure}
+
+La \textbf{salida de cat se a limitado a 10 líneas}, para que se puedan ver los dos comandos en la captura pero demostrando su funcionamiento.
+
+\section{Análisis de formatos de Almacenamiento}
+Trabaja con \textbf{ventas.csv} y su equivalente \textbf{ventas.json}. Compara estructura, tamaño, legibilidad, tipado, datos anidados, facilidad de procesamiento y casos de uso. Comprueba tamaños con \textbf{ls -lh} y \textbf{hdfs dfs -du -h /datos}. Justifica qué formato elegirías para este caso.
+
+\subsection{Solución}
+En ese ejercicio se va a realizar una comparación entre los dos formatos en los que nos encontramos los datos en nuestra tarea, a saber, \textbf{CSV} y \textbf{JSON}. 
+
+En primer lugar habría que hablar de \textbf{CSV} (Comma Separated Values), un formato antiguo y muy simple que consta simplemente de un \textbf{conjunto de valores}, agrupados por filas (o no), \textbf{separados por una coma}. Se puede incluir una cabecera si se quiere especificar que representa cada valor. Tiene la ventaja de que es \textbf{muy simple }y ocupa \textbf{poco espacio}. En la siguiente captura podemos ver el contenido de nuestro archivo como ejemplo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.60]{formatos-csv.png}
+	\caption{Contenido del fichero en formato CSV}
+\end{figure}
+
+Por otro lado tenemos a \textbf{JSON} (JavaScript Object Notation), un formato que surge del lenguaje de programación Javascript, ampliamente usado, y que se compone de pares \textbf{clave/valor}, de una forma estructura. Este formato, se estructura en \textbf{objetos}, que se pueden anidar los objetos, además de incluir arrays de valores. Aunque es un formato que ocupa más espacio, es más \textbf{fácil de leer para los humanos} y de procesar, ya que cada valor tiene asociado una clave. En la siguiente captura podemos ver un ejemplo con nuestro archivo ventos.json.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.60]{formatos-json.png}
+	\caption{Contenido del fichero en formato JSON}
+\end{figure}
+
+Como podemos ver, cada uno de los \textbf{formatos }tiene su \textbf{ventajas}, cuando la cantidad de datos no es muy grande y no pude haber variaciones, o cuando el espacio de almacenamiento es crítico, \textbf{CSV} puede ser una buena opción, aunque como podemos comprobar, esta mucho más limitado, el espacio que ocupa la misma información es 1/3 de lo que ocupa esa misma información en formato json, como podemos ver en la siguiente captura, donde se muestra el tamaño de los directorios donde se encuentra los respectivos archivos.
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.60]{formatos-size.png}
+	\caption{Tamaño de los archivos CSV y JSON en local y dentro de HDFS}
+\end{figure}
+
+Personalmente, y \textbf{dado el volumen} de datos y que estos son \textbf{relativamente simples}, escogería \textbf{CSV} como formato, a pesar de que soy un firme defensor de JSON, pero creo que sería más adecuado para nuestro propósito.
+
+\section{Comprobación de almacenamiento físico en HDFS}
+Desde la interfaz web del NameNode localiza \textbf{ventas.csv} e identifica tamaño, número de bloques, identificador de bloque, DataNode y factor de replicación. Relaciona los valores con \textbf{hdfs-site.xml}.
+
+\subsection{Solución}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.40]{fisico.png}
+	\caption{Información del fichero ventas.csv en la interfaz web de NameNode}
+\end{figure}
+
+En este ejercicios vamos a comprobar el espacio físico que ocupa nuestro fichero ventas.csv en el sistema de archivos HDFS. Para comprobarlo, podemos consultar la \textbf{interfaz web de NameNode}, y utilizando los utilidad \textbf{Browse the file system} buscar el archivo y ver su información.
+
+Como podemos ver en la captura que la interfaz nos da información de los \textbf{permisos}, \textbf{propietario}, \textbf{ultima modificación}, \textbf{replicación}, \textbf{tamaño de bloque} y el \textbf{nombre}. El \textbf{tamaño} del archivo es de \textbf{4.87KB}, es no ocupa ni un 1\% de un bloque, que como podemos ver tienen un tamaño de 128MB. Pulsando en el fichero, podemos ver el resto de datos que se nos piden, como podemos ver en la siguiente captura.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.50]{fisico-2.png}
+	\caption{Detalle el fichero ventas.csv en la interfaz web de NameNode}
+\end{figure}
+
+En esta ventana, podemos ver el nombre del nodo, \textbf{nodo1-fjsr-26-27}, así como su ID, su tamaño, ..etc. Como podemos ver, el \textbf{factor de replicación}, que aparece en la primera captura, esta \textbf{establecido en 1}, que exactamente el valor que hemos configurado en el fichero \textbf{hdfs-site.xml}.
+
+\section{Procesamiento de los datos}
+Obtén: (1) total de registros, (2) operaciones por provincia, (3) importe total por provincia usando \textbf{cantidad * precio}, (4) operaciones por categoría y (5) provincia con mayor volumen económico.
+
+\subsection{Solución}
+Para este ejercicio, debemos obtener diferentes datos de nuestro archivo. Dado que aún no he visto nada de Python, y ciertamente yo no he programado nunca, se va a usar, como se ha sugerido en el foro \textbf{AWK}, un comando con el si estoy más familiarizado, ya que soy usuarios de Linux desde hace muchos años, y para mostrar los datos y realizar todo de forma más "elegante", se va integrar en un script de Bash. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.38]{procesamiento-script.png}
+	\caption{Script de bash para procesar los datos}
+\end{figure}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.38]{procesamiento-resultado.png}
+	\caption{Resultado del procesamiento de los datos.}
+\end{figure}
 
-
-
+Como podemos ver el script es bastante simple, simplemente \textbf{ejecutamos una acción} cada vez que estamos en una \textbf{línea por debajo de la cabecera} (NR > 1), que suele consistir en crear un array cuyos índices sean los elementos que queremos contar y los valores el valor en sí mismo. Después de acabar (bloque END), procesamos el array el mostramos y los resultados.
+ 
 \newpage
 
 \bibliography{citas}
