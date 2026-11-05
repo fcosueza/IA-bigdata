@@ -190,6 +190,86 @@ Las \textbf{metodologías para Big Data} nos permiten realizar diversas operacio
 	\item Usar esos modelos para realizar predicciones a utilizar en sistemas automáticos.
 	\item Crear visualizaciones y cuadros de mando usando tanto los propios datos como los modelos creados con ellos.
 \end{itemize}
+
+Como vemos, hay muchas operaciones que podemos realizar en los sistemas de Big Data. Estas operaciones, nos ofrecen un conjunto de \textbf{beneficios}, entre los que podemos destacar:
+
+\begin{itemize}
+	\item Generar registros mas detallados mediante la integración desde diversas fuentes.
+	\item Optimizar las operaciones de instituciones y empresas.
+	\item Identificar nuevos mercados.
+	\item Realizar predicciones basándonos en los modelos generados por los datos.
+	\item Detectar casos de fraude e impagos.
+	\item Dar soporte a la toma de decisiones.
+	\item Realizar descubrimientos científicos.
+	\item Ayudar a los médicos a detectar enfermedades en los pacientes.
+\end{itemize}
+
+\paragraph{Desde los Eventos al Valor}
+~\\\\
+\-\ \-\ \-\ El tratamiento de los datos a través de diversas capas de procesamiento nos permite llegar desde los eventos que generaron esos datos hasta la sabiduría que nos permite tomar mejores decisiones. El camino que recorren en ese proceso los datos es el siguiente:
+
+\begin{enumerate}
+	\item \textbf{Eventos}: en nuestro mundo se producen diferentes tipos de eventos, como una estación meteorológica que toma datos, una cámara que captura una foto o alguien que realizar un pago con tarjeta.
+	\item \textbf{Datos}: estos eventos se reflejan, de algún modo, generándose los datos que pueden ser almacenados en registros de bases de datos o ficheros para su posterior uso.
+	\item \textbf{Información}: cuando le damos contexto a los datos y los organizamos de algún modo lógico, tenemos información, como los distintos registros del pago con una tarjeta almacenados. 
+	\item \textbf{Conocimiento}: si tratamos la información, dándole un significado, podemos obtener conocimiento, por ejemplo, generando modelos mediante los cuales se puede representar la realidad y que pueden ser usados para realizar predicciones.
+	\item \textbf{Sabiduría}: si una vez teniendo el conocimiento generado añadimos el entendimiento necesario para saber como utilizarlo, podemos considerar esto sabiduría.
+	\item \textbf{Valor}: si realizamos acciones basándonos en esta sabiduría, esas acciones serán mejores que las podemos realizar sin basarnos en los datos, consiguiendo entonces valor añadido.
+\end{enumerate} 
+
+A pesar de que dentro de las tecnologías de Big Data se suele englobar lo relacionado con obtener valor del dato, en la práctica son la Minería de Datos y al Ciencia de Datos las disciplinas que terminan de obtener el valor.
+
+La \textbf{Minería de Datos} es una rama de la Inteligencia Artificial que emplea técnicas de aprendizaje automático para obtener valor de los datos, mientras que la \textbf{Ciencia de Datos} en el fondo es la misma minería de datos pero haciendo énfasis en que se realiza en entornos de Big Data.
+
+A pesar de ello, puedes encontrar estos términos siendo empleados de forma equivalente.
+
+\subsection{Clusters de Computadoras}
+Un \textbf{cluster de computadoras} es un conjunto de computadoras conectados entre si mediante una red para trabajar de forma conjunta como una única unidad resolviendo cargas de trabajo de forma conjunta. 
+
+Históricamente los clusters se construían empleando computadoras especializadas muy costosa, sin embargo, mas adelante han ido apareciendo diferentes frameworks o plataformas de computación distribuida que emplean computadoras de us común, gracias al aumento de sus prestaciones.
+
+El uso de clusters ofrece ventajas respecto al uso de computadoras individuales. Dichas ventajas son las siguientes:
+
+\begin{itemize}
+	\item \textbf{Alto Rendimiento}
+	
+	\textbf{Cada elemento del cluster} es una \textbf{computadora completa}, con sus recursos propios (memoria, procesador y almacenamiento), las cargas de trabajo susceptibles de paralelización puede acelerarse dividiéndose en subtareas y distribuyéndose para que sean ejecutadas en diferentes nodos. Esto permite resolver problemas más complejos en menos tiempo.
+	
+	\item \textbf{Alta Disponibilidad}
+	
+	Cuando uno nodo o un conjunto de ellos falla, se pueden tomar medidas para garantizar la \textbf{disponibilidad de los servicios} o \textbf{datos} que hay en esas máquinas. Esto se lleva acabo arrancado de nuevo el nodo, utilizando otro para suplirlo o respondiendo a las peticiones desde otros nodos.
+	
+	\item \textbf{Equilibrado de Cargas}: 
+	
+	El equilibrado se consigue mediante algoritmos específicos que \textbf{distribuyen la carga} de trabajo entre los diversos nodos del clúster para evitar cuellos de botella. Tales cuellos de botella se producen cuando el envío de trabajos a nodos sobrecargados aumenta la latencia media con la que tales trabajos son finalizados. 
+	
+	Para ello, se realiza una \textbf{monitorización del estado de carga} de cada nodo y se decide para cada paquete de trabajo a que nodo enviarlo, atendiendo al tamaño del trabajo, la carga del nodo y la potencia de procesamiento de cada nodo. 
+	
+	\item \textbf{Escalabilidad}
+	
+	Gracias a que el cluster está formado por un \textbf{número indeterminado de nodos}, no solo conseguimos una mayor potencia de cálculo, sino que podemos \textbf{incrementar esta potencia} de cálculo \textbf{añadiendo nuevos nodos}. Es decir, la potencia de cálculo del cluster es ampliable. 
+	
+	Esta característica es muy deseable para sistemas de Big Data, ya que desaparece la necesidad de una estimación de potencia necesaria a priori. Con un cluster escalable podemos comenzar con un número determinado de nodos he ir ampliando según se vaya necesitando. 
+	
+	Podemos encontrar dos tipos de escalado diferente:
+	
+	\begin{itemize}
+		\item \textbf{Escalado Vertical (scale-in)}
+		
+		Es el que se consigue mejorando las características hardware de las computadoras donde se están ejecutando las cargas de trabajo. Este escalado esta limitado por las especificaciones hardware de los nodos que componen el cluster. 
+		
+		\item \textbf{Escalado Horizontal (scale-out)}
+		
+		Es el que se consigue añadiendo más nodos al cluster. Es el escalado que realmente más influye en la escalabilidad de los dos.
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{Conceptos de Almacenamiento de Datos}
+En este apartado vamos a ver diferentes \textbf{conceptos fundamentales} del \textbf{almacenamiento de datos}. Veremos lo que son las base de datos relacionales, lo que es un dataset o un almacén de datos. Así mismo veremos las algunos conceptos teóricos con las propiedades ACID o el teorema de CAP.
+
+\subsubsection{Bases de Datos Relacionales}
+
 \newpage
  
 \printglossary	
