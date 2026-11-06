@@ -224,7 +224,7 @@ La \textbf{Minería de Datos} es una rama de la Inteligencia Artificial que empl
 A pesar de ello, puedes encontrar estos términos siendo empleados de forma equivalente.
 
 \subsection{Clusters de Computadoras}
-Un \textbf{cluster de computadoras} es un conjunto de computadoras conectados entre si mediante una red para trabajar de forma conjunta como una única unidad resolviendo cargas de trabajo de forma conjunta. 
+Un \textbf{clúster de computadoras} es un conjunto de computadoras conectados entre si mediante una red para trabajar de forma conjunta como una única unidad resolviendo cargas de trabajo de forma conjunta. 
 
 Históricamente los clusters se construían empleando computadoras especializadas muy costosa, sin embargo, mas adelante han ido apareciendo diferentes frameworks o plataformas de computación distribuida que emplean computadoras de us común, gracias al aumento de sus prestaciones.
 
@@ -269,6 +269,178 @@ El uso de clusters ofrece ventajas respecto al uso de computadoras individuales.
 En este apartado vamos a ver diferentes \textbf{conceptos fundamentales} del \textbf{almacenamiento de datos}. Veremos lo que son las base de datos relacionales, lo que es un dataset o un almacén de datos. Así mismo veremos las algunos conceptos teóricos con las propiedades ACID o el teorema de CAP.
 
 \subsubsection{Bases de Datos Relacionales}
+Una base de datos relacional es una \textbf{almacén de información} que almacena registros dentro de tablas. Estas \textbf{tablas} están compuestas de filas (registros) y de columnas (atributos). Para cada tabla se define un \textbf{esquema}, en el cual se define que atributos tiene cada registro y de que tipo son. 
+
+Gracias a la \textbf{uniformidad de los datos} que hay en cada tabla, los motores de bases de datos relacionales pueden ofrecer un altísimo rendimiento a la hora de realizar búsquedas. Tales búsquedas pueden realizarse en una tabla o en varias, a través de las relaciones existentes entre las diferentes tablas.
+
+Una de las características clave de las bases de datos relacionales para su alto rendimiento es su capacidad de generar índices sobre columnas de tablas, lo que acelerá tanto la búsqueda de elementos dentro de la tabla como en el enlazado de registros de las distintas tablas que están relacionadas.
+
+Hay que tener en cuenta que las bases de datos relacionales \textbf{no están preparadas} para distribuir tablas entre diferentes nodos o servidores, por lo que \textbf{no son las solución más idónea para Big Data}, ya que limitan la escalabilidad del sistema.
+
+
+\subsubsection{Dataset}
+Un \textbf{dataset} es una colección de datos que guardan una cierta relación entre ellos. Suelen \textbf{almacenarse} en ficheros planos, como CSV, XML o JSON, aunque también pueden hacerlo en bases de datos, o en archivos multimedia. Algunos ejemplos de dataset son:
+
+\begin{itemize}
+	\item Una colección de tweets.
+	\item Una colección de posts.
+	\item Una colección de imágenes.
+	\item La serie de registros de una base de datos relacional.
+	\item La sucesión de medidas de una estación meteorológica.
+\end{itemize}
+
+\subsubsection{Almacén de Datos}
+Un almacén de datos es un \textbf{repositorio central de datos} a nivel institucional o empresarial, dentro del cual se almacenan tanto datos actuales como históricos.
+
+Se emplean tanto para la \textbf{inteligencia de negocio} (BI) como para realizar consultas analíticas, por lo que además de tener tablas relacionales, también suele incluir \gls{OLAP}.
+
+Por norma general sus datos son cargados periódicamente desde sus fuentes mediante procesos de tipo \gls{ETL}. Esto significa que la información que contienen es por lo general \textbf{una instantánea }del estado general de los datos en un \textbf{determinado momento}, por lo que es un almacenamiento que no se va emplear para el uso de transacciones, sino para inteligencia de negocios o analítica.
+
+\subsubsection{ACID}
+ACID es el \textbf{principio fundamental de diseño} de las bases de datos de que se crean para el uso transaccional. Esta formado por 4 características de obligado cumplimiento, correspondiendo cada una de ellas al las letras del acrónimo:
+
+\begin{itemize}
+	\item \textbf{Atomicidad} (Atomicy):
+	
+	La automicidad implica que las operaciones realizadas sobre la base de datos o bien tienen éxito, o fallan por completo. Por ejemplo, si una transacción consiste en escribir dos registros y la primera inserción es exitosa pero la segunda falla, el motor de la base de datos no consolida la primera operación.
+	
+	\item \textbf{Consistencias} (consistency)
+	
+	La consistencia nos asegura que la base de datos siempre es vista desde fuera en un estado consistente, comprobando siempre que los datos cumplen con los esquemas y restricciones de las tablas antes de escribirlos en ellas. Gracias a esto, cualquier base de datos en un estado consistente, sigue en este estado después de una transacción. 
+	
+	\item \textbf{Aislamiento} (isolation)
+	
+	El aislamiento nos asegura que el resultado de una transacción no es visible por otras operaciones hasta que se ha completado. Esto significa que si una transacción consiste en insertar 2 registros, ningún otro usuario podrá hacer una selección donde solo aparezca el primero de ellos. Verá ambos si la transacción ha finalizado o ninguno en caso contrario.
+	
+	\item \textbf{Durabilidad} (durability)
+	
+	La durabilidad nos asegura que los resultados escritos en la base de datos sin permanentes. Esto implica que tales estructuras no se pierden en caso de que la maquina se apague tras realizar una transacción, lo cual se consigue almacenando la información en un sistema de almacenamiento no volátil.
+\end{itemize} 
+
+Este tipo de gestión realiza un control pesimistas de la \gls{concurrencia}, dando por hecho que cualquier problema que pueda ocurrir, ocurrirá tarde o temprano, por poco probable que sea.
+
+Para conseguirlo, el motor de la base de datos bloque registros o incluso tablas enteras en determinados momentos para asegurar la consistencia de los datos. 
+
+\subsubsection{Teorema CAP}
+El \textbf{teorema CAP}, también conocido como \textbf{conjetura de Brewer}, establece que una base de datos distribuida sólo puede cumplir como máximo con 2 de las 3 siguientes propiedades:
+
+\begin{itemize}
+	\item \textbf{Consistencia} (Consistency)
+	
+	Todos los nodos de la red ven los mismos datos al mismo tiempo. Cualquier lectura realizada siempre muestra el estado posterior a la ultima escritura realizada o un error. Es decir, la base de datos tiene permitido devolver un error en caso de no pueda devolver el estado más actual.
+	
+	\item \textbf{Disponibilidad} (Avaibility)
+	
+	Toda petición recibe una respuesta no errónea, sin la garantía de que el estado observado sea el correspondiente a la última escritura en algún nodo de la base da datos.
+	
+	\item \textbf{Tolerancia al Particionamiento} (Partition tolerance)
+	
+	El sistema sigue funcionando y produciendo respuestas aún en caso de que se haya perdido la conexión con/entre algunos nodos, lo cual implica qeu se pueden recibir lecturas desde unos nodos que no incluyan información escrita en otros.
+\end{itemize}
+
+En otras palabras, el teorema implica que \textbf{nunca se puede cumplir A+B+C}, sino que habría que escoger entre C+A, C+P o A+P, a la hora de diseñar una base de datos distribuida. Esto también implica que a la hora de seleccionar una base de datos distribuida en primer lugar tendremos que decidir cuales de las 3 características estamos dispuestos a prescindir, y asegurarnos de que la base de datos cumple con las 2 características de las cuales no prescindimos.
+
+Para demostrar la razón por la que sólo 2 de las propiedades de las 3 del teorema de CAP se pueden cumplir a la vez en una base de datos distribuida tenemos que contemplar los siguiente escenarios:
+
+\begin{itemize}
+	\item Si se requiere \textbf{consistencia} (C) y \textbf{disponibilidad}  (A), los nodos necesitan estar comunicados para asegurar la consistencia y poder devolver siempre respuestas que no sean error. Por lo tanto, asegurar la tolerancia del particionamiento (P) no es posible, ya que no se puede garantizar que no haya fallos de red entre los nodos.
+	
+	\item Si se quiere \textbf{consistencia} (C) y \textbf{tolerancia} (P), los nodos no pueden mantenerse disponibles (A) durante el tiempo necesario hasta que termine el particionamiento y vuelva a alcanzarse un estado consistente (C) entre ellos.
+	
+	\item Si se quiere \textbf{disponibilidad} (A) y \textbf{tolerancia al particionamiento} (P), entonces la consistencia (C) no es posible debido a la necesidad de comunicación entre los nodos para que ésta se mantenga. En otras palabras, si se quiere mantener disponible la base datos en momentos de particionamiento, es obligatorio aceptar lecturas inconsistentes.
+	
+\end{itemize}
+
+
+\subsubsection{BASE}
+BASE es un principio de diseño de bases de datos basado en las restricciones impuestas por el teorema de CAP, y típicamente empleado por muchas implementaciones de bases de datos distribuidas. El acrónimo vienen de los principios que rigen esta estrategia de diseño:
+
+\begin{itemize}
+	\item \textbf{Básicamente disponible} (basically available)
+	
+	Significa que la bases de datos siempre responde a las solicitudes recibidas, ya sea con una respuesta exitosa o con una notificación de error, aún en caso de que se produzca el particionamiento entre los nodos. En determinadas ocasiones, esto implica recibir lectoras desde nodos donde no se han registrado las últimas escrituras, por lo que el resultado no es consistente.
+	
+	\item \textbf{Estado Blando} (soft state)
+	
+	Implica que la base de datos puede encontrarse en un estado inconsistente cuando se realiza una lectura. De modo, que se puede realizar 2 veces la misma lectura y recibir resultados diferentes, a pesar de que no haya habido ninguna lectura entre ellas.
+	
+	En otras palabras, en cada momento sólo tenemos cierta probabilidad de estar viendo el estado final de la base de datos, porque puede haber escrituras que aún no se hayan consolidado en el nodo sobre al que se realiza la lectura.
+	
+	\item \textbf{Eventualmente consistente} (eventually consistency)
+	
+	Significa que tras cada escritura, la consistencia solo se logra cuando el cambio se ha propagado por todos los nodos. Durante el tiempo que tarda en producirse la consistencia, observamos el estado blando en la base de datos.
+\end{itemize}
+
+Por norma general, una base de datos que \textbf{conforme a la filosofía BASE} prefiere la \textbf{disponibilidad} antes que la consistencia, es decir, desde el punto de vista del teorema CAP, A+P.
+
+\subsection{Conceptos de Procesamiento de Datos}
+Una vez vistos los conceptos de almacenamiento, en esta sección vamos a ver los \textbf{conceptos de procesamiento de datos} relacionados con el Big Data y que es importante conocer. Entre otros, veremos el procesamiento en paralelo y distribuido, estrategias de procesamiento de datos, OLTP, OLAP y el principio de SCV.
+
+\subsubsection{Procesamiento en Paralelo}
+El procesamiento en paralelo tiene que ver con las capacidad de los sistemas operativos modernos de realizar varias tareas al mismo tiempo. 
+
+Los \textbf{sistemas multitarea} existen desde mucho tiempo antes de que comenzasen a aparecer los procesadores multihilo o las placas base multiprocesador. Para ello, se cuenta con un gestor de procesos que se encarga de repartir el tiempo de ejecución de los diversos procesos que se estén ejecutando en el sistema.
+
+Gracias a la aparición de las placas base multiprocesador, los sistemas operativos instalados en las máquinas con tales placas pudieron tener hardware disponible como para poder realizar más de una tarea al mismo tiempo.
+
+Más adelante, con la aparición de los \textbf{procesadores multihilo} y \textbf{multinúcleo}, por fin la multitarea pudo llegar al usuario convencional. Mientas que los \textbf{procesadores multinúcleo} contienen varios procesadores, los \textbf{multihilo} son capaceas de atender más de un hilo de ejecución, permitiendo al segundo utilizar recursos que no se estén empleando en ese momento. Puede darse la situación de 2 procesos puedan requerir usar el mismos recurso al mismo tiempo, por lo que habrá fracciones de tiempo en los que un hilo se quedará parado. 
+
+Es decir, que \textbf{no es equivalente} un procesador con 2 núcleos y 4 hilos a un procesador con 4 núcleos.
+
+Cuando la \textbf{tareas} que se están ejecutando \textbf{son independientes}, por ejemplo reproducir un video y ejecutar un editor de textos, no existe ningún problema de paralelización entre ellas. 
+
+El \textbf{problema en cuanto a parelización} aparece cuando tenemos una \textbf{tarea muy compleja} y necesitamos dividirla en distintas subtareas independientes, lo cual siempre no es posible. 
+
+En este aspecto, cabe destacar \textbf{2 tipos de tareas} diferentes, respecto a la paralelización:
+
+\begin{itemize}
+	\item \textbf{Tarea Paralelizable}: son tareas que se pueden paralelizar sin problema, por ejemplo, si nos piden sumar mil millones de numeros, podemos separar esos números en tantos paquetes como queramos y ejecutar un proceso para cada uno de ellos en un procesador multinúcleo.
+	
+	\item \textbf{Tarea no Paralelizable}: son tareas que no se pueden paralelizar por su naturaleza, por ejemplo, tareas que requieren el resultado de un paso anterior paras poder usarlo en el siguiente, ya que aun separando la tarea en subtareas, una de ellas deberá esperar a que la anterior acabe, no habiendo un modo eficiente de paralelizarla.
+\end{itemize}
+
+\subsubsection{Procesamiento Distribuido}
+El \textbf{procesamiento distribuido} esta muy relacionado con el procesamiento en paralelo, con la distinción de que en este caso, en vez de usar diferente hilos o procesadores dentro de una misma máquina, se lleva a cabo en distintas máquinas que se comunican en red formando un \textbf{clúster}.
+
+A su vez, estás máquinas podrán tener \textbf{varios núcleos}, con lo que el procesamiento no solo se hace distribuido en nodos, sino que dentro de cada nodo se puede procesar en paralelo. Esto añade complejidad al sistema a la hora de determinar el modo eficiente de aprovechar este doble paralelismo. Afortunadamente, gracias a los \textbf{frameworks de Big Data} que podemos encontrar en el mercado, esta gestión se realiza de forma automática.
+
+Hay que entender que para el los diferentes nodos e hilos puedan llevar a cabo su trabajo de forma eficiente tiene que haber diferentes métodos de comunicación entre los distintos procesos que se están ejecutando en paralelo. Toda comunicación de datos necesita su tiempo, algo que hay que tener en cuenta a la hora de diseñar un sistema de Big Data.
+
+Dentro de los diferentes \textbf{tipos de comunicación} entre procesos que podemos encontrar en un sistema Big Data tenemos los siguientes:
+
+\begin{itemize}
+	\item \textbf{Comunicación dentro de la misma máquina}
+	
+	Es el caso de comunicación más rápido posible, ya que los datos no necesitan ser enviados por red, sino que los procesos se pueden intercambiar información a trabes de los recursos de la propia máquina, como la memoria RAM, sistema de ficheros o una base de datos.
+	
+	\item \textbf{Comunicación entre dos máquinas dentro del mismo switch}
+	
+	La comunicación entre máquinas a través de una red de comunicaciones siempre es varios ordenes de magnitud más lenta que si se realiza entre procesos de una misma máquina, ya que es necesario enviarla a través de la interfaz de red, usando los protocolos de comunicación que correspondan, y la otra máquina tiene que leer la información recibida desde su propia red.
+	
+	Aunque es más lento, es tipo de comunicación es \textbf{obligatoria} en entornos de Big Data, los cuales se basan en el uso de distintos nodos dentro de un clúster.
+	
+	Llegados a este punto, el modo más rápido de comunicación es que sean nodos \textbf{conectados al mismo switch}, ya que en ese caso la información necesita hacer un menor número de saltos entre elementos de red.
+	
+	\item \textbf{Comunicación fuera del switch}
+	
+	Cuanto más saltos entre switch necesite dar la información entre un nodo y otro mayor será el tiempo de comunicación. 
+	
+	El número de \textbf{entradas de un switch es limitado}, por lo que por norma general los servidores dentro de un mismo rack suelen estar conectados mediante un switch, pero están conectados mediante otro switch a otros racks, implementándose una \textbf{jerarquía de switches}. El software que gestiona la infraestructura del clúster se configura con información acerca de esta jerarquía que se ha utilizado a la hora de realizar las conexiones físicas, de modo que pueda tomar las mejores decisiones a la hora de emplazar tanto datos como procesado en los nodos.
+	
+	\item \textbf{Comunicación fuera del CPD}
+	
+	Los nodos de un clúster estarán típicamente dentro del mismo CPD (Centro de Procesado de Datos), pero los \textbf{datos}, por norma general, \textbf{no se generan dentro de CPD}, sino fuera de éste, por lo que hace falta hacerlos llegar al clúster. De igual modo pasa con los resultados obtenidos en el CPD. 
+	
+	Esta comunicación se realiza a una velocidad muy inferior al resto de comunicaciones que hemos visto.
+\end{itemize}
+
+\subsubsection{Estrategias de Procesamiento de Datos}
+En los entornos de Big Data se emplean diferentes \textbf{estrategias para el procesamiento de datos}, las cuales se escogen según la cantidad y naturaleza de los mismos, así como las necesidades de la actividad que se esté realizando. Estas estrategias son:
+
+
+
+
+
 
 \newpage
  
