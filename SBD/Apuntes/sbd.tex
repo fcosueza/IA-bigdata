@@ -437,6 +437,75 @@ Dentro de los diferentes \textbf{tipos de comunicación} entre procesos que pode
 \subsubsection{Estrategias de Procesamiento de Datos}
 En los entornos de Big Data se emplean diferentes \textbf{estrategias para el procesamiento de datos}, las cuales se escogen según la cantidad y naturaleza de los mismos, así como las necesidades de la actividad que se esté realizando. Estas estrategias son:
 
+\begin{itemize}
+	\item \textbf{Por lotes}
+	
+	En este tipo de procesamiento se reúne y almacena un grupo de datos para procesarlos todos juntos \cite{aws02}.El \textbf{procesamiento por lotes} (del ingles batch) se realiza sin la necesidad de producir respuestas a corto plazo. Pueden tardar en ejecutarse horas o incluso días. Se emplea mayormente para trabajo de analítica con gran cantidad de datos, en ocasiones, todos los disponibles para la tarea en cuestión.
+	
+	\item \textbf{Transaccional}
+	
+	En este tipo de procesamiento el tiempo de respuesta es muy importante, y es de obligatorio cumplimiento que éste sea muy corto, por lo que los datos se procesan al instante y se genera un respuesta de igual forma. 
+	
+	Este tipo de procesamiento es importante cuando se realizan transacciones. Debido a las restricciones en el tiempo de respuesta, este tipo de procesamiento no puede afectar a un gran volumen de datos.
+	
+	\item \textbf{En tiempo real}
+	
+	Al igual que en el caso anterior, esta estrategia requiere que el tiempo de respuestas sea incluso más corto. Se emplea en analíticas interactivas, en las que un usuario humano ésta consultando estadísticas acerca de los datos. 
+	
+	Para poder realizarse con gran volumen de datos suelen emplear un subsistema OLAP, que veremos más adelante, en muchas ocasiones almacenadas en memoria. 
+	
+	En muchas ocasiones escucharemos que el procesamiento transaccional ocurre en "en tiempo real", lo que es totalmente cierto. En otras palabras, "tiempo real" puede en la práctica emplearse tanto para procesamiento analítico como para actividades transaccionales.
+	
+	\item \textbf{Streaming}
+	
+	En procesamiento en sreaming tiene mucho que ver con el procesamiento en tiempo real porque debe tener un tiempo de respuesta muy corto, sin embargo, en este caso la clave es que debe \textbf{producirse a la velocidad} a la que se recibe el \textbf{flujo de entrada}, de ahí lo de streaming. 
+	
+	Esto añada complejidad extra a los sistemas que han de diseñarse para ser capaces de procesar/analizar datos en streaming. Esto se debe a que las estructuras de datos en las que se mantiene al información necesaria para realizar la analítica deben ser capaces de actualizarse a medida que llegan nuevos datos. Por ello, la información necesita sera almacenada en memoria, lo que limita el tamaño máximo de datos que pueden tratarse a la vez. 
+\end{itemize}
+
+\subsection{OLTP}
+
+Empleamos el acrónimo \textbf{OLTP (Online Transaction Processing) }para designar un sistema que esta orientado a transacciones, por lo que trata con los datos operacionales del día a día, relacionados con acciones que necesitan realizarse en tiempo real.
+
+Tales transacciones son por lo general realizadas contra bases de datos relacionales, incluyendo sólo acciones sencillas (insetar, actulizar, seleccionar y eliminar) sin ningún tipo de analítica, gracias a lo cual se consiguen tiempos de respuesta inferiores a un segundo, de modo que el sistema sea usable sin producir tiempos de espera desagradables para los usuarios. 
+
+\subsubsection{OLAP}
+
+Se emplea el acrónimo \textbf{OLAP (On-Line Analytical Processing)} para designar a un sistema que esta orientado a procesar consultas de tipo analítico en tiempo real. Es tipo de sistemas son parte integral de la 
+inteligencia de negocio (BI) y la minería de datos, usándose en \textbf{todos los niveles de la analítica de datos}. 
+
+Almacenan los datos ne bases de datos mutidimensionales, llamadas en ocasiones \textbf{cubos OLAP}, altamente optimizadas para poder responder en muy poco tiempo a consultas complejas que afectan a lo que en el mundo relacional serían varias tablas. Para obtener tal rendimiento, esta bases de datos \textbf{guardan los datos denormalizados}. En ocasiones se mantienen en la memoria RAM de la máquina que ejecuta el sistema, lo cual implica, como ya hemos comentado, que limita el tamaño de los datos a tratar. 
+
+\subsection{Principio SCV}
+Mientras que el teorema CAP tiene que ver con el almacenamiento de datos distribuidos, el \textbf{principio SCV} esta relacionado con el \textbf{procesamiento distribuido} de los datos. Es decir, no tiene que ver con la escritura o lectura de los datos, sino con el procesamiento que se realiza sobre ellos dentro de los nodos de un sistema de procesamiento distribuido. 
+
+De modo similar a lo que ocurría con el teorema CAP, el principio SCV establece que un sistema de procesamiento distribuido solo puede soportar como máximo \textbf{2 de las siguientes 3 características}:
+
+\begin{itemize}
+	\item \textbf{Velocidad} (Speed)
+	
+	Se refiere a cuanto \textbf{tarda en procesarse los datos} desde el momento que son recibidos en el sistema analítico. Por lo general se excluye el tiempo que se tarda en capturar los datos, considerando sólo lo que se tarda en en generar la estadística o ejecutar el algoritmo en cuestión.
+	
+	Esta velocidad es más alta si estamos ante un sistema de analítica en tiempo real que si se trata de un sistema por lotes.
+	
+	\item \textbf{Consistencia} (Consistency)
+	
+	Se refiere en este caso a la precisión de los resultados de la analítica. Tal \textbf{precisión} depende de si para la analítica se utilizan todos los datos disponibles (precisión alta) o si por el contrario se emplean técnicas de muestreo para seleccionar solo un subconjunto de éstos con la intención de producir resultados en menor tiempo, pero de menor precisión.
+	
+	\item \textbf{Volumen} (Volume)
+	
+	Se refiera a la \textbf{cantidad de datos que pueden ser procesadas}. Hay que tener en cuenta que en entornos Big Data, el alto volumen de datos es una característica siempre presente. 
+\end{itemize}
+
+De igual modo que hicimos con el teorema CAP<, nos fijaremos en una serie de escenarios para mostrar que no podemos conseguir  un sistema que cumpla a la vez las 3 características:
+
+\begin{itemize}
+	\item Si se requiere \textbf{velocidad} (S) y \textbf{consistencia} (C), no podemos procesar un volumen (V) alto de datos, ya que esto aumenta el tiempo de respuestas.
+	\item Si se quiere \textbf{consistencia} (C) y poder procesar \textbf{grandes volumenes de datos} (V), no es posible realizar el procesado a una alta velocidad (V).
+	\item Si necesitamos procesar una \textbf{volumen gran de datos} (V) a una \textbf{alta velocidad} (V), entonces necesitaremos emplear técnicas de muestreo para seleccionar solo subconjuntos de datos, lo cual producirá un resultado no consistente (C). 
+\end{itemize}
+
+Como vemos, la analogía entre el teorema CAP y el principio SCV es muy similar, simplemente se aplican a diferentes paradigmas, uno al almacenamiento y otro al procesamiento.
 
 
 
