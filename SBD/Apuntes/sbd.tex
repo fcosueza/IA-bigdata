@@ -507,9 +507,78 @@ De igual modo que hicimos con el teorema CAP<, nos fijaremos en una serie de esc
 
 Como vemos, la analogía entre el teorema CAP y el principio SCV es muy similar, simplemente se aplican a diferentes paradigmas, uno al almacenamiento y otro al procesamiento.
 
+\subsection{Arquitectura por Capas de Big Data}
+Al margen de que durante el proceso de diseño y desarrollo de cada proyecto de Big Data pueda optarse por la arquitectura que más convenga, de modo generalizado se emplea una arquitectura según la cual el flujo de datos va pasando por una serie de capas. Estas capas son:
+
+\begin{itemize}
+	\item \textbf{Capa de Ingestión}
+	
+	Como primer paso, los datos se obtiene de diferentes fuentes con las cuales debemos conectarnos de alguna forma. Hay que tener en cuenta que la mayoría de fuentes existen previamente al sistema de Big Data, por lo que será el sistema el que deberá adaptarse a ellas. 
+	
+	\item \textbf{Capa de Colección}
+	
+	Una vez que se recolectan e interpretan todos los datos viene el momento de integrarlos y darles una estructura adecuada. Hay que tener en cuenta que las fuentes de datos pueden ser muchas y de naturaleza muy diversa, cada una emitiendo la información en un formato diferente, de modo que hay que unificarlos como un único conjunto de datos con sentido y dejarlos listos para su utilización.
+	
+	\item \textbf{Capa de Almacenamiento}
+	
+	Esta gran cantidad de datos, que da origen al concepto de Big Data, debe ser almacenada, para lo cual se emplean sistemas de almacenamiento distribuido especialmente diseñados para ellos.
+	
+	\item \textbf{Capa de Procesamiento}
+	
+	Es la capa que provee de infraestructura a la siguiente capa para poder tratar con la esta gran cantidad de datos. Es decir, facilita el procesamiento, ya sea por lotes, streamin, tiempo real, ...etc, pero únicamente hace lo que le esta pidiendo la capa de consulta y análisis.
+	
+	\item \textbf{Capa de Consultar y Analítica}
+	
+	Es la capa en la que se comienza a dar valor al dato, realizando la estadística, algoritmia o análisis que se considere oportuno, para ello siempre basándose en la capa previa de procesamiento.
+	
+	\item \textbf{Capa de Visualización}
+	
+	Es la capa con la que interacciona el usuario final, el cual puede consultar reportes estadísticos o acceder a cuadros de mandos interactivos con diversas visualizaciones y controles desde donde puede decidir que información quiere ver y como quiere verla. Desde esta capa es, por norma general, donde se toman las decisiones de negocio.
+	
+	\item \textbf{Capa de Seguridad}
+	
+	Capa transversal que da soporte a todo lo relacionado con la seguridad en los datos empleando métodos tanto físicos como de software. Incluye protección ante el ataque o uso malintencionado tanto desde dentro como desde fuera.
+	
+	\item \textbf{Capa de Monitorización}
+	
+	Capa transversas que da soporte a todo lo relacionado con la monitorización tanto de los datos como del propio sistema. La monitorización incluye auditoría, testo, gestión y control de modo que los datos empleados sean correctos y frescos. Tal monitorización es una parte importante de la gobernanza de datos.
+\end{itemize}
+
+Como vemos, el sistema por capas ayuda a distinguir entre los diferentes procesos de análisis de datos en Big Data, pudiendo tratar cada etapa de forma independiente. Como hemos comentado, ya depende de cada proyecto seguir esta arquitectura o adaptarla a sus necesidades concretas, aunque podemos considerar está el estándar.
+
+Para ver la arquitectura de forma más gráfica, se incluye la siguiente captura.
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.20]{capas-bigdata.png}
+	\caption{Capas de un sistema Big Data}
+\end{figure}
 
+\subsection{Panorama del Big Data}
+Hablamos de panorama de Big Data (del ingles "The Big Data Lanscape") para referirnos a las diversas herramientas y utilidades que se pueden emplear para desarrollar proyectos de Big Data, muchas veces categorizadas según la capa de procesamiento a la que pertenece o según el tipo de actividad que realizan. 
+
+Desde los inicios del Big Data diversos autores han ido creando collages, unos mas detallados que otros, tratando de captura la riqueza de tal panorama. Aquí podemos ver uno de ejemplo, aunque si buscamos "big data lanscape" en nuestro navegador, podemos ver cientos de imágenes relativas al tema.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.30]{bigdata-landscape.png}
+	\caption{Panorama del Big Data}
+\end{figure}
+
+Al margen de esta imagen concreta, en la mayoría podemos encontrar, entre otras cosas, las siguiente tecnologías:
+
+\begin{itemize}
+	\item \textbf{Hadoop} como la plataforma pionera del Big Data, enfocada al trabajo por lotes.
+	\item Una gran \textbf{variedad de herramientas} pertenecientes al ecosistema de Hadoop, diseñada cada una de ellas para una función dentro de las distintas fases que componen el trabajo con los datos.
+	\item \textbf{Spark}, como plataforma enfocada a procesamiento en tiempo real, capaz de interactuar con muchas de las herramientas ya disponibles en el ecosistema Hadoop.
+	\item Bases de datos \textbf{NoSQL} y \textbf{NewSQL} como soluciones de almacenamiento para necesidades y casos específicos.
+	\item Diversas \textbf{herramientas analíticas}, las pueden se pueden a su vez subclasificar.
+	\item Diversas \textbf{herramientas de visualización}.
+	\item Diversas \textbf{aplicaciones específicas} se nutre de o interactúan con alguna herramienta ya comentada.
+ \end{itemize}
+ 
+ Hay que tener en cuenta, que actualmente, el Big Data esta ampliando su campo de aplicación y realizando una transición, ya que además de seguir empleándose en ámbitos empresariales, esta siendo extensivamente usado en el campo de la \textbf{Inteligencia Artificial} y el \textbf{Machine Learning}, preparando los datos para entrenar modelos de IA o para que los sistemas predictivos puedan tratar con ellos.
 
 \newpage
  
